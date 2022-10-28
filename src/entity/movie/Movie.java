@@ -1,3 +1,5 @@
+package entity.movie;
+
 public class Movie {
 
 	private String title;

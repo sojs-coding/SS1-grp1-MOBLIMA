@@ -1,4 +1,5 @@
 package controller;
+import entity.booking.*;
 
 public class BookingManager {
 

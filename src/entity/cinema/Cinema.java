@@ -1,10 +1,12 @@
+package entity.cinema;
+
 public class Cinema {
 
 	private CinemaClass cinemaClass;
 	/**
 	 * Contains 3 Characters
 	 */
-	private Char[] code;
+	private char[] code;
 
 	public void getCinemaLayout() {
 		// TODO - implement Cinema.getCinemaLayout

@@ -1,5 +1,6 @@
+package entity.booking;
 public enum PersonAge {
-	Adult,
-	Senior Citizen,
-	Child
+	ADULT,
+	SENIOR_CITIZEN,
+	CHILD
 }

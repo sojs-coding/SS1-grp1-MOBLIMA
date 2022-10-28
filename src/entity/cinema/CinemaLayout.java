@@ -1,3 +1,5 @@
+package entity.cinema;
+
 public class CinemaLayout {
 
 	private int height;

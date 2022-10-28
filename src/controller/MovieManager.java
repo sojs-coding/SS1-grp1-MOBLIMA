@@ -1,12 +1,13 @@
 package controller;
 
+import entity.movie.Movie;
 public class MovieManager {
 
 	/**
 	 * 
 	 * @param movie
 	 */
-	public Bool addMovie(Movie movie) {
+	public boolean addMovie(Movie movie) {
 		// TODO - implement MovieManager.addMovie
 		throw new UnsupportedOperationException();
 	}
@@ -15,7 +16,7 @@ public class MovieManager {
 	 * 
 	 * @param id
 	 */
-	public Bool removeMovie(int id) {
+	public boolean removeMovie(int id) {
 		// TODO - implement MovieManager.removeMovie
 		throw new UnsupportedOperationException();
 	}

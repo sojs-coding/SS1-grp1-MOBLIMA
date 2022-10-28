@@ -1,3 +1,5 @@
+package entity.cinema;
+
 public class SingleSeat extends CinemaObject {
 
 	public void displaySeat() {
@@ -5,7 +7,7 @@ public class SingleSeat extends CinemaObject {
 		throw new UnsupportedOperationException();
 	}
 
-	public Bool occupy() {
+	public boolean occupy() {
 		// TODO - implement SingleSeat.occupy
 		throw new UnsupportedOperationException();
 	}

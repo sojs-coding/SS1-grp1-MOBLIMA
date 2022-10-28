@@ -1,6 +1,8 @@
+package entity.movie;
+
 public enum ShowingStatus {
-	Coming Soon,
-	Preview,
-	Now Showing,
-	End Of Showing
+	COMING_SOON,
+	PREVIEW,
+	NOW_SHOWING,
+	END_OF_SHOWING
 }

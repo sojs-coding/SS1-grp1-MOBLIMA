@@ -1,3 +1,4 @@
+package entity.booking;
 public class Payment {
 
 	private String tid;

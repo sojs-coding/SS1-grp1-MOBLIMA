@@ -1,13 +1,15 @@
+package entity.cinema;
+
 public abstract class CinemaObject {
 
-	private Bool occupied;
+	private boolean occupied;
 
 	public void displaySeat() {
 		// TODO - implement CinemaObject.displaySeat
 		throw new UnsupportedOperationException();
 	}
 
-	public Bool occupy() {
+	public boolean occupy() {
 		// TODO - implement CinemaObject.occupy
 		throw new UnsupportedOperationException();
 	}

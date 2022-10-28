@@ -1,5 +1,7 @@
+package entity.cinema;
+
 public enum CinemaClass {
-	Platinum Movie Suites,
-	Silver Movie Suites,
-	Bronze Movie Suites
+	PLATINUM_MOVIE_SUITES,
+	SILVER_MOVIE_SUITES,
+	BRONZE_MOVIE_SUITES
 }

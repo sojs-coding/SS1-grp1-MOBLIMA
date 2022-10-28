@@ -1,5 +1,7 @@
+package entity.movie;
+
 public enum MovieType {
-	3D,
-	Blockbuster,
-	2D
+	MOVIE3D,
+	BLOCKBUSTER,
+	MOVIE2D
 }
