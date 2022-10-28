@@ -1,5 +1,3 @@
-package entity;
-
 public class Payment {
 
 	private String tid;

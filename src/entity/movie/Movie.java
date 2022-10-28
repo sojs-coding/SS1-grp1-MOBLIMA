@@ -1,5 +1,3 @@
-package entity.movie;
-
 public class Movie {
 
 	private String title;
@@ -7,5 +5,7 @@ public class Movie {
 	private String synopsis;
 	private float overallRating;
 	private MovieType type;
+	private String director;
+	private String[] casts;
 
 }

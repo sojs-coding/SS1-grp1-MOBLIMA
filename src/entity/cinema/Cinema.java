@@ -1,5 +1,3 @@
-package entity.cinema;
-
 public class Cinema {
 
 	private CinemaClass cinemaClass;
@@ -9,7 +7,7 @@ public class Cinema {
 	private Char[] code;
 
 	public void getCinemaLayout() {
-		// TODO - implement entity.Cinema.Cinema.getCinemaLayout
+		// TODO - implement Cinema.getCinemaLayout
 		throw new UnsupportedOperationException();
 	}
 

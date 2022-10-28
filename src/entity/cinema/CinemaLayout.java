@@ -1,5 +1,3 @@
-package entity.cinema;
-
 public class CinemaLayout {
 
 	private int height;
@@ -10,7 +8,7 @@ public class CinemaLayout {
 	private CinemaObject[] layout;
 
 	public void displayLayout() {
-		// TODO - implement entity.Cinema.CinemaLayout.displayLayout
+		// TODO - implement CinemaLayout.displayLayout
 		throw new UnsupportedOperationException();
 	}
 
@@ -20,7 +18,7 @@ public class CinemaLayout {
 	 * @param row
 	 */
 	public void occupy(int column, int row) {
-		// TODO - implement entity.Cinema.CinemaLayout.occupy
+		// TODO - implement CinemaLayout.occupy
 		throw new UnsupportedOperationException();
 	}
 
@@ -30,12 +28,12 @@ public class CinemaLayout {
 	 * @param row
 	 */
 	public void free(int column, int row) {
-		// TODO - implement entity.Cinema.CinemaLayout.free
+		// TODO - implement CinemaLayout.free
 		throw new UnsupportedOperationException();
 	}
 
 	public void confirm() {
-		// TODO - implement entity.Cinema.CinemaLayout.confirm
+		// TODO - implement CinemaLayout.confirm
 		throw new UnsupportedOperationException();
 	}
 

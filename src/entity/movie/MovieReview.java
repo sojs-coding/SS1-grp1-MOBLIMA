@@ -1,5 +1,3 @@
-package entity.movie;
-
 public class MovieReview {
 
 	private String review;

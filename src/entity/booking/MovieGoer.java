@@ -1,5 +1,3 @@
-package entity;
-
 public class MovieGoer {
 
 	private String name;
@@ -8,6 +6,5 @@ public class MovieGoer {
 	 */
 	private Char[] mobile;
 	private String email;
-	private int age;
 
 }

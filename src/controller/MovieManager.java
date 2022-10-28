@@ -1,4 +1,4 @@
-import entity.movie.Movie;
+package controller;
 
 public class MovieManager {
 
@@ -26,6 +26,15 @@ public class MovieManager {
 	 */
 	public Movie getMovie(int id) {
 		// TODO - implement MovieManager.getMovie
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param movie
+	 */
+	public void searchMovie(String movie) {
+		// TODO - implement MovieManager.searchMovie
 		throw new UnsupportedOperationException();
 	}
 

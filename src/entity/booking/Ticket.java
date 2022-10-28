@@ -1,7 +1,6 @@
-package entity;
-
 public class Ticket {
 
 	private int seatId;
+	private PersonAge age;
 
 }

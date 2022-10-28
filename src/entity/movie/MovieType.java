@@ -1,4 +1,5 @@
 public enum MovieType {
 	3D,
-	Blockbuster
+	Blockbuster,
+	2D
 }
