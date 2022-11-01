@@ -1,6 +1,6 @@
 package controller;
 
-import entity.cinema.CinemaShowtime;
+import entity.cinema.Showtime;
 
 public class CinemaShowtimeManager {
 
@@ -8,7 +8,7 @@ public class CinemaShowtimeManager {
 	 * 
 	 * @param showtime
 	 */
-	public void addShowtime(CinemaShowtime showtime) {
+	public void addShowtime(Showtime showtime) {
 		// TODO - implement CinemaShowtimeManager.addShowtime
 		throw new UnsupportedOperationException();
 	}
