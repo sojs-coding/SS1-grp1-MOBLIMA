@@ -7,14 +7,14 @@ public class CoupleSeat extends CinemaObject {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean occupy() {
-		// TODO - implement CoupleSeat.occupy
-		throw new UnsupportedOperationException();
-	}
-
-	public void free() {
-		// TODO - implement CoupleSeat.free
-		throw new UnsupportedOperationException();
-	}
+//	public boolean occupy() {
+//		// TODO - implement CoupleSeat.occupy
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void free() {
+//		// TODO - implement CoupleSeat.free
+//		throw new UnsupportedOperationException();
+//	}
 
 }

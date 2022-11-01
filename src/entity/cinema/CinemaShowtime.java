@@ -11,4 +11,9 @@ public class CinemaShowtime {
 	public LocalDateTime getDateTime() {
 		return datetime;
 	}
+
+	CinemaShowtime(LocalDateTime datetime, CinemaLayout cinemaLayout) {
+		this.datetime = datetime;
+		this.cinemaLayout = cinemaLayout;
+	}
 }

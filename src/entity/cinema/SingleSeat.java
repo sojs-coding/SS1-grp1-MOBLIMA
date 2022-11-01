@@ -7,14 +7,14 @@ public class SingleSeat extends CinemaObject {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean occupy() {
-		// TODO - implement SingleSeat.occupy
-		throw new UnsupportedOperationException();
-	}
-
-	public void free() {
-		// TODO - implement SingleSeat.free
-		throw new UnsupportedOperationException();
-	}
+//	public boolean occupy() {
+//		// TODO - implement SingleSeat.occupy
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void free() {
+//		// TODO - implement SingleSeat.free
+//		throw new UnsupportedOperationException();
+//	}
 
 }
