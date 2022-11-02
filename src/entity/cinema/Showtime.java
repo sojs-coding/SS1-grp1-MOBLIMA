@@ -4,10 +4,11 @@ import entity.booking.PersonAge;
 import entity.booking.Ticket;
 import entity.movie.Movie;
 
+import java.io.Serializable;
 import java.time.LocalDateTime; // Import the LocalDateTime class
 
 
-public class Showtime {
+public class Showtime implements Serializable {
 
 	private LocalDateTime datetime;
 	private Layout layout;
@@ -38,5 +39,9 @@ public class Showtime {
 
 	public void displaySeating() {
 		layout.displayLayout();
+	}
+
+	public Cinema getCinema() {
+		return cinema;
 	}
 }

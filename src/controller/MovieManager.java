@@ -1,15 +1,24 @@
 package controller;
 
 import entity.movie.Movie;
-public class MovieManager {
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class MovieManager implements Serializable {
+
+	private ArrayList<Movie> movies;
+
+	public MovieManager() {
+		movies = new ArrayList<Movie>();
+	}
 
 	/**
 	 * 
 	 * @param movie
 	 */
-	public boolean addMovie(Movie movie) {
-		// TODO - implement MovieManager.addMovie
-		throw new UnsupportedOperationException();
+	public void addMovie(Movie movie) {
+		movies.add(movie);
 	}
 
 	/**
@@ -26,8 +35,12 @@ public class MovieManager {
 	 * @param id
 	 */
 	public Movie getMovie(int id) {
-		// TODO - implement MovieManager.getMovie
-		throw new UnsupportedOperationException();
+		try {
+			return movies.get(id);
+		} catch (IndexOutOfBoundsException e) {
+			System.out.printf("No movie at index %d", id);
+		}
+		return null;
 	}
 
 	/**

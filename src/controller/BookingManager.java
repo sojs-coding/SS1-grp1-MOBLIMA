@@ -1,8 +1,10 @@
 package controller;
 import entity.booking.*;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class BookingManager {
+public class BookingManager implements Serializable {
 
 	private ArrayList<Booking> bookings = new ArrayList<Booking>();
 	/**

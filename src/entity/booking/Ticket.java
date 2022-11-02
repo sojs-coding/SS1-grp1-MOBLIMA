@@ -1,5 +1,8 @@
 package entity.booking;
-public class Ticket {
+
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
 
 	private int row;
 	private int column;

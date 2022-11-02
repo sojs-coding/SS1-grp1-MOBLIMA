@@ -1,5 +1,8 @@
 package entity.booking;
-public class MovieGoer {
+
+import java.io.Serializable;
+
+public class MovieGoer implements Serializable {
 
 	private String name;
 	/**

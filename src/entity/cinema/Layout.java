@@ -1,4 +1,7 @@
 package entity.cinema;
+
+import java.io.Serializable;
+
 /**
  Represents the Layout of a Cinema.
  A layout shall only be part of 1 Cinema.
@@ -6,7 +9,7 @@ package entity.cinema;
  @version 1.1
  @since 2022-10-31
  */
-public class Layout {
+public class Layout implements Serializable {
 	/**
 	 * The total length of the layout on the x-axis
 	 */

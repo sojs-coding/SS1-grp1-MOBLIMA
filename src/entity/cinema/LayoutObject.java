@@ -1,4 +1,7 @@
 package entity.cinema;
+
+import java.io.Serializable;
+
 /**
  Represents an object in a cinemaLayout.
  A CinemaObject is kept in only 1 cinemaLayout.
@@ -6,7 +9,7 @@ package entity.cinema;
  @version 1.1
  @since 2022-10-31
  */
-public class LayoutObject {
+public class LayoutObject implements Serializable {
 	/**
 	 * The occupancy of each
 	 */

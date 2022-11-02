@@ -1,5 +1,7 @@
 package entity.cinema;
 
+import java.io.Serializable;
+
 /**
  Represents a Cinema part of the Cineplex brand.
  A Cinema is only under 1 Cineplex
@@ -7,7 +9,7 @@ package entity.cinema;
  @version 1.1
  @since 2022-10-31
  */
-public class Cinema {
+public class Cinema implements Serializable {
 
 	/**
 	 * The Class of the Cinema
@@ -18,7 +20,7 @@ public class Cinema {
 	 * A code specific to this Cinema
 	 * code should only contain 3 Characters
 	 */
-	private char[] code;
+	public char[] code;
 
 	/**
 	 * The layout the Cinema uses
@@ -33,6 +35,9 @@ public class Cinema {
 		this.code = code;
 
 		this.layout = layout;
+	}
+	public char[] getCode() {
+		return code;
 	}
 	/**
 	 * Instantiates a CinemaLayout based on the Cinema

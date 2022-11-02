@@ -1,14 +1,15 @@
 package entity.cinema;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  Represents Cineplex
  @author Samuel Ong
- @version 1.1
+ @version 1.2
  @since 2022-10-31
  */
-public class Cineplex {
+public class Cineplex implements Serializable {
 
 	/**
 	 * The name of the Cinema company
@@ -33,6 +34,26 @@ public class Cineplex {
 	 */
 	public void addCinema(Cinema cinema) {
 		cinemas.add(cinema);
+	}
+
+	public Cinema getCinema(int id) {
+		try {
+			return cinemas.get(id);
+		} catch (IndexOutOfBoundsException e) {
+			System.out.printf("No cinema at index %d", id);
+		}
+		return null;
+	}
+
+	public Cinema findCinema(char[] code) {
+		for (int i = 0; i < cinemas.size(); i++) {
+			String strCode = new String(cinemas.get(i).getCode());
+			String other = new String(code);
+			if (strCode.equals((other))) {
+				return cinemas.get(i);
+			}
+		}
+		return null;
 	}
 }
 

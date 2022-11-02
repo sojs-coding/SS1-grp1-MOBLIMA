@@ -2,7 +2,9 @@ package entity.booking;
 
 import entity.cinema.Showtime;
 
-public class Booking {
+import java.io.Serializable;
+
+public class Booking implements Serializable {
     private Showtime central;
     private MovieGoer user;
     private Payment payment;

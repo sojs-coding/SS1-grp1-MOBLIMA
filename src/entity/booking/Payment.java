@@ -1,8 +1,10 @@
 package entity.booking;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class Payment{
+public class Payment implements Serializable {
 
 	/*XXXYYYYMMDDhhmm */
 	private String tid;
