@@ -1,15 +1,15 @@
 package entity.booking;
 
-import entity.cinema.CinemaShowtime;
+import entity.cinema.Showtime;
 
 public class Booking {
-    private CinemaShowtime central;
+    private Showtime central;
     private MovieGoer user;
     private Payment payment;
     private Ticket ticket;
     private int id;
 
-    public Booking(CinemaShowtime central,MovieGoer user, Payment payment, Ticket ticket, int id){
+    public Booking(Showtime central,MovieGoer user, Payment payment, Ticket ticket, int id){
         this.central = central;
         this.user = user;
         this.payment = payment;
@@ -41,7 +41,7 @@ public class Booking {
         return ticket;
     }
 
-    public CinemaShowtime getCentral() {
+    public Showtime getCentral() {
         return central;
     }
 
@@ -61,7 +61,7 @@ public class Booking {
         this.ticket = ticket;
     }
 
-    public void setCentral(CinemaShowtime central) {
+    public void setCentral(Showtime central) {
         this.central = central;
     }
 }
