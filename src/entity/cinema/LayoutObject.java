@@ -19,6 +19,8 @@ public class LayoutObject {
 	 * Size of the object
 	 */
 	private int size;
+	private int row;
+	private int column;
 	LayoutObject(boolean isOccupied, char displayChar, int size) {
 		this.occupied = isOccupied;
 		this.displayChar = displayChar;

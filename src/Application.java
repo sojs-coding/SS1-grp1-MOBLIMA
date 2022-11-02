@@ -1,10 +1,15 @@
+import entity.booking.PersonAge;
 import entity.cinema.*;
+import entity.movie.Movie;
+
+import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
         System.out.printf("Welcome to my moviplex!\n");
         Cineplex gvJurong = new Cineplex();
-        Layout layout = new Layout(5,5);
+        Layout layout = new Layout(3,5);
         layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -17,16 +22,24 @@ public class Application {
 
         Cinema cinema = new Cinema("JR1".toCharArray(), layout);
         gvJurong.addCinema(cinema);
-
-        Layout layout1 = cinema.cloneCinemaLayout();
-        layout1.occupy(0, 1);
-        layout1.occupy(2,1);
-
-        layout.displayLayout();
-        layout1.displayLayout();
-
-        layout = new Layout(5,5);
-        cinema = new Cinema("JR2".toCharArray(), layout);
-        gvJurong.addCinema(cinema);
+        Movie movie = new Movie();
+        Showtime showtime = new Showtime(LocalDateTime.now(), cinema, movie);
+        Scanner sc = new Scanner(System.in);
+        int column = -1;
+        int row = -1;
+        String userInput = "Y";
+        while (userInput != "N") {
+            showtime.displaySeating();
+            System.out.printf("Row : ");
+            userInput = sc.nextLine();
+            row = Integer.parseInt(userInput);
+            System.out.printf("Column : ");
+            userInput = sc.nextLine();
+            column = Integer.parseInt(userInput);
+            showtime.produceTicket(PersonAge.CHILD, row, column);
+            showtime.displaySeating();
+            System.out.printf("Would you like to buy more? (Y/N) ");
+            userInput = sc.nextLine();
+        }
     }
 }

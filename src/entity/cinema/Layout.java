@@ -39,8 +39,9 @@ public class Layout {
 		layout = new LayoutObject[row][column];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
-				if (other.layout[i][j] != null) {
-					layout[i][j] = new LayoutObject(other.layout[i][j]);
+				if (other.hasObject(i, j)) {
+					setObject(i, j, other.layout[i][j]);
+					j += other.layout[i][j].getSize() - 1;
 				}
 			}
 		}
@@ -50,10 +51,16 @@ public class Layout {
 	 * Displays the layout using the Cinema objects in the layout
 	 */
 	public void displayLayout() {
+		System.out.printf("  ");
+		for (int j = 0; j < column; j++) {
+			System.out.printf("%d", j);
+		}
+		System.out.println();
 		for (int i = 0; i < row; i++) {
+			System.out.printf("%d|", i);
 			for (int j = 0; j < column; j++) {
-				if (layout[i][j] != null) {
-					if (layout[i][j].isOccupied()) {
+				if (hasObject(i, j)) {
+					if (isOccupied(i, j)) {
 						System.out.printf("X");
 					} else {
 						System.out.printf("%c", layout[i][j].getSeatSymbol());
@@ -82,11 +89,25 @@ public class Layout {
 	 * @param column The column index
 	 */
 	public boolean occupy(int row, int column) {
-		if (layout[row][column].isOccupied()) {
+		if (isOccupied(row, column)) {
 			return false;
 		}
 		layout[row][column].occupy();
 		return true;
+	}
+	/**
+	 * Checks if the specified row and column is occupied
+	 * @param row The row index
+	 * @param column The column index
+	 */
+	private boolean isOccupied(int row, int column) {
+		if (!hasObject(row, column)) {
+			return true;
+		}
+		if (layout[row][column].isOccupied()) {
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * Frees up the Cinema Object in the specified row and column
@@ -97,8 +118,10 @@ public class Layout {
 		layout[row][column].free();
 	}
 
-	public void confirm() {
-		// TODO - implement CinemaLayout.confirm
-		throw new UnsupportedOperationException();
+	private boolean hasObject(int row, int column) {
+		if (layout[row][column] == null) {
+			return false;
+		}
+		return true;
 	}
 }
