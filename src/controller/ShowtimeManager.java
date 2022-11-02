@@ -2,7 +2,7 @@ package controller;
 
 import entity.cinema.Showtime;
 
-public class CinemaShowtimeManager {
+public class ShowtimeManager {
 
 	/**
 	 * 
