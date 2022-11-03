@@ -6,8 +6,8 @@ package entity.cinema;
  @version 1.0
  @since 2022-11-1
  */
-public enum Class {
+public enum CinemaClass {
 	PLATINUM_MOVIE_SUITES,
-	SILVER_MOVIE_SUITES,
-	BRONZE_MOVIE_SUITES
+	ELITE_CLUB,
+	ULTIMA
 }

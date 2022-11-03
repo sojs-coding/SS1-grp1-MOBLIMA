@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- Represents Cineplex
+ Represents a Cineplex that has multiple Cinemas
  @author Samuel Ong
  @version 1.2
  @since 2022-10-31
@@ -40,7 +40,7 @@ public class Cineplex implements Serializable {
 		try {
 			return cinemas.get(id);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.printf("No cinema at index %d", id);
+			System.out.printf("No cinema at index %d\n", id);
 		}
 		return null;
 	}
