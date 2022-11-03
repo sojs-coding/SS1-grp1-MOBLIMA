@@ -1,14 +1,24 @@
 package controller;
 
 import entity.cinema.Showtime;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/**
+ Represents the Showtime Manager
+ @author Samuel Ong
+ @version 1.0
+ @since 2022-11-03
+ */
 public class ShowtimeManager implements Serializable {
-
+/**
+ * A list of showtime
+ */
 	ArrayList<Showtime> showtimes;
 
+	/**
+	 * Constructor of ShowtimeManager
+	 * Instantiates a list of showtime
+	 */
 	public ShowtimeManager() {
 		showtimes = new ArrayList<Showtime>();
 	}
@@ -21,19 +31,27 @@ public class ShowtimeManager implements Serializable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 */
 	public void removeShowtime(int id) {
-		// TODO - implement CinemaShowtimeManager.removeShowtime
-		throw new UnsupportedOperationException();
+		try {
+			showtimes.remove(id);
+		} catch (IndexOutOfBoundsException e) {
+			System.out.printf("No showtime at index %d", id);
+		}
 	}
 
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
 	public Showtime getShowtime(int id) {
 		try {
 			return showtimes.get(id);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.printf("No cinema at index %d", id);
+			System.out.printf("No showtime at index %d", id);
 		}
 		return null;
 	}
