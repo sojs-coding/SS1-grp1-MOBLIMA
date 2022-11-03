@@ -22,34 +22,55 @@ public class LayoutObject implements Serializable {
 	 * Size of the object
 	 */
 	private int size;
-	private int row;
-	private int column;
+	//private int row;
+	//private int column;
+	/**
+	 * Constructor of LayoutObject
+	 * @param isOccupied Whether the object is occupied
+	 * @param displayChar The character to be displayed for this object
+	 * @param size Size of the object on the x-axis
+	 */
 	LayoutObject(boolean isOccupied, char displayChar, int size) {
 		this.occupied = isOccupied;
 		this.displayChar = displayChar;
 		this.size = size;
 	}
+	/**
+	 * Constructor copy
+	 * @param other The other LayoutObject being copied
+	 */
 	LayoutObject(LayoutObject other) {
 		this.occupied = other.occupied;
 		this.displayChar = other.displayChar;
 		this.size = other.size;
 	}
+	/**
+	 * To retrieve the display character
+	 */
 	protected char getSeatSymbol() {
 		return displayChar;
 	}
-
+	/**
+	 * To return the size of the object
+	 */
 	protected int getSize() {
 		return size;
 	}
-
+	/**
+	 * To return the occupancy
+	 */
 	protected boolean isOccupied() {
 		return occupied;
 	}
-
+	/**
+	 * To occupy the object
+	 */
 	protected void occupy() {
 		occupied = true;
 	}
-
+	/**
+	 * To free up the occupancy
+	 */
 	protected void free() {
 		occupied = false;
 	}
