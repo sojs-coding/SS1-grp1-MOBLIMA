@@ -27,6 +27,7 @@ public class MovieManager implements Serializable {
 	 */
 	public boolean removeMovie(int id) {
 		// TODO - implement MovieManager.removeMovie
+		Movies.remove(id);
 		throw new UnsupportedOperationException();
 	}
 
@@ -48,7 +49,13 @@ public class MovieManager implements Serializable {
 	 * @param movie
 	 */
 	public void searchMovie(String movie) {
-		// TODO - implement MovieManager.searchMovie
+		for(int i = 0; i < Movies.size(); i++) {
+			Movie targetMovie = Movies.get(i);
+			if(targetMovie.getTitle() == movie) {
+				targetMovie.printMovie();
+				break;
+			}
+		}
 		throw new UnsupportedOperationException();
 	}
 
