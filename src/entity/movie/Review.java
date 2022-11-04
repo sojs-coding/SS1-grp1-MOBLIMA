@@ -1,11 +1,13 @@
+package entity.movie;
+
 import java.io.Serializable;
 
-public class MovieReview implements Serializable {
+public class Review implements Serializable {
 
 	private String review;
 	private int rating;
 	
-	MovieReview(String review, int rating) {
+	Review(String review, int rating) {
 		
 		this.review = review;
 		this.rating = rating;

@@ -1,6 +1,7 @@
 package entity.movie;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Movie implements Serializable {
 
@@ -21,6 +22,7 @@ public class Movie implements Serializable {
 	private MovieType type;
 	private String director;
 	private String[] casts;
+	private ArrayList<Review> reviews;
 
 	public String getTitle() {
 		return title;
@@ -36,18 +38,21 @@ public class Movie implements Serializable {
 		this.synopsis = synopsis;
 	}
 	
-	public String getStatus() {
-		switch(status) {
+	public ShowingStatus getStatus() {
+		return status; // Why did I do it this way? Don't go returning a variable in a different form.
+		// They can use ShowingStatus.COMING_SOON. They don't need you to convert it into a String
+
+		/*switch(status) {
 		case COMING_SOON:
 			return "Coming soon";
 		case PREVIEW:
 			return "Preview";
-		case NON_SHOWING:
+		case NOW_SHOWING:
 			return "Not Showing";
 		case END_OF_SHOWING:
 			return "Showing Ended";
 		}
-		return "Not in switch function.";
+		return "Not in switch function.";*/
 	}
 	public void setStatus(ShowingStatus status) {
 		this.status = status;
@@ -81,18 +86,18 @@ public class Movie implements Serializable {
 		this.casts = casts;
 	}
 	
-	public MovieReview getReview(int id) {
+	public Review getReview(int id) {
 		return reviews.get(id);
 	}
-	public void addReview(MovieReview review) {
+	public void addReview(Review review) {
 		reviews.add(review);
 	}
 	
-	public void setReview(MovieReview review, int id) {
+	public void setReview(Review review, int id) {
 		reviews.set(id, review);
 	}
 	
-	public void printMovie() {
+/*	public void printMovie() {
 		System.out.println("Title: " + title);
 		System.out.print("Casts: ");
 		for(int i = 0; i < casts.length; i++) {
@@ -104,10 +109,10 @@ public class Movie implements Serializable {
 		System.out.println("Movie Type: ");
 		System.out.print("Reviews: ");
 		for(int i = 0; i < reviews.size(); i++) {
-			MovieReview review = reviews.get(i);
+			Review review = reviews.get(i);
 			System.out.printf(review.getReview() + " Rating: %d/5",review.getRating());
 			System.out.println();
 		}
 		System.out.println("Status: " + this.getStatus());
-	}
+	}*/
 }
