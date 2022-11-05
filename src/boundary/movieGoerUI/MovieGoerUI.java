@@ -1,5 +1,7 @@
 package boundary.movieGoerUI;
 
+import controller.MovieGoerAuthenticator;
+
 import java.util.Scanner;
 
 public class MovieGoerUI {
@@ -40,7 +42,17 @@ public class MovieGoerUI {
     
 
     public void login() {
-        String email;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Mobile : ");
+        String mobile = sc.nextLine();
+        System.out.print("Password : ");
+        String pass = sc.nextLine();
+        MovieGoerAuthenticator movieGoerAuthenticator = new MovieGoerAuthenticator();
+        movieGoerAuthenticator.login(mobile, pass);
+        if (MovieGoerAuthenticator.user != null) {
+            movieGoerMenu();
+        }
+        /*String email;
         String email2;
         int choices;
         Boolean isStillrunning = true;
@@ -53,12 +65,13 @@ public class MovieGoerUI {
             System.out.println("Please Re-enter your Email: ");
             email2 = scanner.nextLine();
             if (email.equals(email2) == true) {
+                movieGoerMenu();
                 break;
             } else {
                 System.out.println("Try again! Email do not match! ");
             }
         }
-        //code to check whether email exist in database
+        //code to check whether email exist in database*/
     }
 
     public void movieGoerMenu() {
@@ -123,7 +136,6 @@ public class MovieGoerUI {
                     isStillrunning = false;
                     System.out.println("bye");
                     break;
-
             }
         }
     }

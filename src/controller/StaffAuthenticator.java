@@ -21,7 +21,7 @@ public class StaffAuthenticator implements UserAuthenticator {
     /**
      * Boolean to check if there's an account logged in
      */
-    private boolean loggedIn = false;
+    static boolean loggedIn = false;
 
     /**
      * The constructor to retrieve all usernames and passwords
@@ -45,11 +45,6 @@ public class StaffAuthenticator implements UserAuthenticator {
             System.out.println("IO error!" + e.getMessage());
             System.exit(0);
         }
-    }
-
-    @Override
-    public boolean isLoggedIn() {
-        return loggedIn;
     }
 
     /**

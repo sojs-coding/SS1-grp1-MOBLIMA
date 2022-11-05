@@ -1,7 +1,6 @@
 package controller;
 
 public interface UserAuthenticator {
-    boolean isLoggedIn();
-    boolean login(String username, String password);
+    boolean login(String identifier, String password);
     void logout();
 }
