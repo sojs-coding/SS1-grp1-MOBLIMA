@@ -40,7 +40,7 @@ public class BookingManager implements Serializable {
 				System.out.println("Removal was unsuccessful...");
 				System.out.println("Invalid id entered...");
 			}
-		} catch (UnsupportedOperationException e) {
+		} catch (IndexOutOfBoundsException e) {
 			System.out.println("Error...");
 		}
 	}
@@ -57,7 +57,7 @@ public class BookingManager implements Serializable {
 					return curr;
 					}
 				}
-			} catch (UnsupportedOperationException e) {
+			} catch (IndexOutOfBoundsException e) {
 				// TODO: handle exception
 				System.out.println("Error..."); /*Anything that happens */
 			}
