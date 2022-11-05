@@ -24,19 +24,35 @@ public class Initialization implements Serializable{
     /**
      * A manager to manage all the Cineplexes
      */
-    CineplexManager cineplexManager;
+    private CineplexManager cineplexManager;
     /**
      * A manager to manage all the bookings
      */
-    BookingManager bookingManager;
+    private BookingManager bookingManager;
     /**
      * A manager to manage all the movies
      */
-    MovieManager movieManager;
+    private MovieManager movieManager;
     /**
      * A manager to manage all the showtimes
      */
-    ShowtimeManager showtimeManager;
+    private ShowtimeManager showtimeManager;
+
+    public CineplexManager getCineplexManager() {
+        return cineplexManager;
+    }
+
+    public BookingManager getBookingManager() {
+        return bookingManager;
+    }
+
+    public MovieManager getMovieManager() {
+        return movieManager;
+    }
+
+    public ShowtimeManager getShowtimeManager() {
+        return showtimeManager;
+    }
 
     /**
      * Constructor of initialization

@@ -1,8 +1,9 @@
-import java.util.Scanner;
-import controller;
+package boundary.movieGoerUI;
 
-public class UI {
-    static void showAvailableSeats(){
+import java.util.Scanner;
+
+public class MovieGoerUI {
+    public void showAvailableSeats(){
         int rowLength = 10;
         int row =0;
         for (int i = 0; i < rowLength / 2; i++) {
@@ -38,7 +39,7 @@ public class UI {
     }
     
 
-    static void MovieGoerLogin(){
+    public void login() {
         String email;
         String email2;
         int choices;
@@ -46,38 +47,42 @@ public class UI {
         System.out.println("=====================================");
         System.out.println("Welcome to Movie-Goer Page");
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
             System.out.println("Please enter your Email: ");
-            email= scanner.nextLine();
+            email = scanner.nextLine();
             System.out.println("Please Re-enter your Email: ");
-            email2= scanner.nextLine();
-            if (email.equals(email2)==true){
+            email2 = scanner.nextLine();
+            if (email.equals(email2) == true) {
                 break;
-            }
-            else{
+            } else {
                 System.out.println("Try again! Email do not match! ");
             }
         }
-
         //code to check whether email exist in database
+    }
+
+    public void movieGoerMenu() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("=====================================");
         System.out.println("Welcome to Movie-Goer Page");
-        while(isStillrunning){
+        boolean isStillrunning = true;
+
+        while (isStillrunning) {
             System.out.println("--------------------------------------------------------------------");
             System.out.println("                           Booking Menu                             ");
             System.out.println("--------------------------------------------------------------------");
-            System.out.println("(1) List movies available: ");    
-            System.out.println("(2) Search movies available: ");  
-            System.out.println("(3) View Movie Details: ");      
-            System.out.println("(4) Check seat availability: ");    
-            System.out.println("(5) Book and purchase ticket: ");   
-            System.out.println("(6) Show booking history"); 
-            System.out.println("(7) View Top 5 movies ranked by ticket sales: ");   
-            System.out.println("(8) Leave Rating"); 
+            System.out.println("(1) List movies available: ");
+            System.out.println("(2) Search movies available: ");
+            System.out.println("(3) View Movie Details: ");
+            System.out.println("(4) Check seat availability: ");
+            System.out.println("(5) Book and purchase ticket: ");
+            System.out.println("(6) Show booking history");
+            System.out.println("(7) View Top 5 movies ranked by ticket sales: ");
+            System.out.println("(8) Leave Rating");
             System.out.println("(9) Quit");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Enter your choice:");
-            choices= scanner.nextInt();
+            int choices = scanner.nextInt();
             switch (choices) {
                 case 1:
                     System.out.println("(1) List movies available");
@@ -118,41 +123,8 @@ public class UI {
                     isStillrunning = false;
                     System.out.println("bye");
                     break;
-                
+
             }
-         }
-
-    }
-    public static void main(String[] args){
-        int choice = 0;
-        Boolean isRunning = true;
-        while (isRunning) {
-            System.out.println("=====================================");
-            System.out.println("Welcome to MOLIMA");
-            System.out.println("Are you an Admin or Movie-goer? ");
-            System.out.println("1. Admin Module");
-            System.out.println("2. Movie-goer Module");
-            System.out.println("3. Exit Application");
-            System.out.println("=====================================");
-
-
-            Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.println("adminLogin()");
-                    break;
-                case 2:
-                    MovieGoerLogin();
-                    break;
-                case 3:
-                    isRunning = false;
-                    System.out.println("bye");
-                    break;
-            }
-
-
-
         }
     }
 }

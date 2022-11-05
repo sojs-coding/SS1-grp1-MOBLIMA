@@ -1,0 +1,40 @@
+package boundary;
+
+import boundary.movieGoerUI.MovieGoerUI;
+import boundary.staffUI.StaffLoginUI;
+
+import java.util.Scanner;
+
+public class StartUpUI {
+    public void start() {
+        int choice = 0;
+        Boolean isRunning = true;
+        while (isRunning) {
+            System.out.println("=====================================");
+            System.out.println("Welcome to MOLIMA");
+            System.out.println("Are you an Admin or Movie-goer? ");
+            System.out.println("1. Admin Module");
+            System.out.println("2. Movie-goer Module");
+            System.out.println("3. Exit Application");
+            System.out.println("=====================================");
+
+
+            Scanner scanner = new Scanner(System.in);
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    StaffLoginUI staffLoginUI = new StaffLoginUI();
+                    staffLoginUI.login();
+                    break;
+                case 2:
+                    MovieGoerUI movieGoerUI = new MovieGoerUI();
+                    movieGoerUI.login();
+                    break;
+                case 3:
+                    isRunning = false;
+                    System.out.println("bye");
+                    break;
+            }
+        }
+    }
+}

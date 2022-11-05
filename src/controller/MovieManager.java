@@ -27,8 +27,13 @@ public class MovieManager implements Serializable {
 	 */
 	public boolean removeMovie(int id) {
 		// TODO - implement MovieManager.removeMovie
-		Movies.remove(id);
-		throw new UnsupportedOperationException();
+		try {
+			movies.remove(id);
+			return true;
+		} catch (IndexOutOfBoundsException e) {
+			System.out.printf("Movie does not exist at index %d", id);
+			return false;
+		}
 	}
 
 	/**
@@ -49,14 +54,15 @@ public class MovieManager implements Serializable {
 	 * @param movie
 	 */
 	public void searchMovie(String movie) {
-		for(int i = 0; i < Movies.size(); i++) {
-			Movie targetMovie = Movies.get(i);
+		for(int i = 0; i < movies.size(); i++) {
+			Movie targetMovie = movies.get(i);
 			if(targetMovie.getTitle() == movie) {
-				targetMovie.printMovie();
+				// How tf is this even the responsibility of MovieManager?
+				//targetMovie.printMovie();
 				break;
 			}
 		}
-		throw new UnsupportedOperationException();
 	}
+
 
 }

@@ -13,7 +13,7 @@ import java.util.Scanner;
  @version 1.0
  @since 2022-11-03
  */
-public class Authentication {
+public class StaffAuthenticator implements UserAuthenticator {
     /**
      * Map of Username and Password are stored here
      */
@@ -26,7 +26,7 @@ public class Authentication {
     /**
      * The constructor to retrieve all usernames and passwords
      */
-    public Authentication() {
+    public StaffAuthenticator() {
         userAccounts = new HashMap<>();
         try {
             Scanner scStream = new Scanner(new File("./cinemadata/staffacc.txt" ));
@@ -47,12 +47,18 @@ public class Authentication {
         }
     }
 
+    @Override
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
     /**
      * To log in as a user
      * @param username Username for identification
      * @param password Password for verification
      * @return whether logged was a success
      */
+    @Override
     public boolean login(String username, String password) {
         if (validateUser(username, password)) {
             loggedIn = true;
@@ -65,6 +71,7 @@ public class Authentication {
     /**
      * To log out
      */
+    @Override
     public void logout() {
         loggedIn = false;
     }
@@ -77,6 +84,9 @@ public class Authentication {
      */
     private boolean validateUser(String username, String password) {
         String user = userAccounts.get(username);
-        return user != null;
+        if (user != null) {
+            return user.equals(password);
+        }
+        return false;
     }
 }
