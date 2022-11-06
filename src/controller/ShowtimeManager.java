@@ -13,7 +13,7 @@ public class ShowtimeManager implements Serializable {
 /**
  * A list of showtime
  */
-	ArrayList<Showtime> showtimes;
+	private ArrayList<Showtime> showtimes;
 
 	/**
 	 * Constructor of ShowtimeManager
@@ -22,10 +22,17 @@ public class ShowtimeManager implements Serializable {
 	public ShowtimeManager() {
 		showtimes = new ArrayList<Showtime>();
 	}
+
+	public ArrayList<Showtime> getShowtimes() {
+		return showtimes;
+	}
+
 	/**
 	 * 
 	 * @param showtime
 	 */
+
+
 	public void addShowtime(Showtime showtime) {
 		showtimes.add(showtime);
 	}

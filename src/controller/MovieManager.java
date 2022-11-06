@@ -13,6 +13,10 @@ public class MovieManager implements Serializable {
 		movies = new ArrayList<Movie>();
 	}
 
+	public ArrayList<Movie> getMovies() {
+		return movies;
+	}
+
 	/**
 	 * 
 	 * @param movie
