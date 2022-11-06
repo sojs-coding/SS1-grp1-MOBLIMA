@@ -247,7 +247,7 @@ public class bookingUI {
         while (count > 0){
             if(!movieCount.isEmpty()){
                 String topMovie = getMaxCount(movieCount);
-                System.out.printf("(1): %s , Ticket Sales: %d",topMovie,movieCount.get(topMovie));
+                System.out.printf("(1): %s , Ticket Sales: %d\n",topMovie,movieCount.get(topMovie));
                 movieCount.remove(topMovie);
             }
             else{
