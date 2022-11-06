@@ -76,4 +76,11 @@ public class Showtime implements Serializable {
 	public Cinema getCinema() {
 		return cinema;
 	}
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public Layout getLayout() {
+		return layout;
+	}
 }

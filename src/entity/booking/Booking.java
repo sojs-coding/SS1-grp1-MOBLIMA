@@ -6,14 +6,14 @@ import java.io.Serializable;
 
 public class Booking implements Serializable {
     private Showtime central;
-    private MovieGoer user;
+    private entity.MovieGoer user;
     private Payment payment;
     private Ticket ticket;
     private int id;
 
-    public Booking(Showtime central,MovieGoer user, Payment payment, Ticket ticket, int id){
+    public Booking(Showtime central,entity.MovieGoer movieGoer, Payment payment, Ticket ticket, int id){
         this.central = central;
-        this.user = user;
+        this.user = movieGoer;
         this.payment = payment;
         this.ticket = ticket;
         this.id = id;
@@ -35,7 +35,7 @@ public class Booking implements Serializable {
         return this.payment;
     }
 
-    public MovieGoer getUser() {
+    public entity.MovieGoer getUser() {
         return user;
     }
 
@@ -55,7 +55,7 @@ public class Booking implements Serializable {
         this.payment = payment;
     }
 
-    public void setUser(MovieGoer user) {
+    public void setUser(entity.MovieGoer user) {
         this.user = user;
     }
 

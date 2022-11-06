@@ -1,5 +1,7 @@
 package entity;
 
+import entity.booking.PersonAge;
+
 public class MovieGoer {
     private String name;
     private int mobile;
@@ -34,5 +36,9 @@ public class MovieGoer {
 
     private void setEmail(String email) {
         this.email = email;
+    }
+
+    public PersonAge getAge() {
+        return null;
     }
 }

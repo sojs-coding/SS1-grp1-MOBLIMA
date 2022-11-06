@@ -1,6 +1,7 @@
 package boundary.movieGoerUI;
 
 import controller.MovieGoerAuthenticator;
+import entity.MovieGoer;
 
 import java.util.Scanner;
 
@@ -50,7 +51,7 @@ public class MovieGoerUI {
         MovieGoerAuthenticator movieGoerAuthenticator = new MovieGoerAuthenticator();
         movieGoerAuthenticator.login(mobile, pass);
         if (MovieGoerAuthenticator.user != null) {
-            movieGoerMenu();
+            movieGoerMenu(MovieGoerAuthenticator.user);
         }
         /*String email;
         String email2;
@@ -74,11 +75,12 @@ public class MovieGoerUI {
         //code to check whether email exist in database*/
     }
 
-    public void movieGoerMenu() {
+    public void movieGoerMenu(MovieGoer user) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=====================================");
         System.out.println("Welcome to Movie-Goer Page");
         boolean isStillrunning = true;
+        bookingUI bookingUI = new bookingUI(user);
 
         while (isStillrunning) {
             System.out.println("--------------------------------------------------------------------");
@@ -118,14 +120,17 @@ public class MovieGoerUI {
                     break;
                 case 5:
                     System.out.println("(5) Book and purchase ticket");
+                    bookingUI.BookAndPurchase();
                     //function to book and purchase
                     break;
                 case 6:
                     System.out.println("(6) Show booking history");
+                    bookingUI.BookingHistory(user);
                     // function to get booing details
                     break;
                 case 7:
                     System.out.println("(7) View Top 5 movies ranked by ticket sales ");
+                    
                     //function to get top 5
                     break;
                 case 8:

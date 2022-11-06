@@ -10,6 +10,7 @@ public class MovieGoer implements Serializable {
 	 */
 	private char[] mobile;
 	private String email;
+	private PersonAge age;
 
 	public String getEmail() {
 		return email;
@@ -35,4 +36,10 @@ public class MovieGoer implements Serializable {
 		this.name = name;
 	}
 
+	public PersonAge getAge() {
+		return age;
+	}
+	public void setAge(PersonAge age) {
+		this.age = age;
+	}
 }

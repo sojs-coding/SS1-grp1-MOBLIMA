@@ -55,6 +55,10 @@ public class Cineplex implements Serializable {
 		}
 		return null;
 	}
+
+	public ArrayList<Cinema> getCinemas() {
+		return cinemas;
+	}
 }
 
 //SOLID

@@ -1,5 +1,6 @@
 package controller;
 
+import entity.cinema.Cinema;
 import entity.movie.Movie;
 
 import java.io.Serializable;
@@ -57,15 +58,18 @@ public class MovieManager implements Serializable {
 	 * 
 	 * @param movie
 	 */
-	public void searchMovie(String movie) {
-		for(int i = 0; i < movies.size(); i++) {
-			Movie targetMovie = movies.get(i);
-			if(targetMovie.getTitle() == movie) {
-				// How tf is this even the responsibility of MovieManager?
-				//targetMovie.printMovie();
-				break;
+	public Movie searchMovie(String movie) {
+		try{
+			for(int i = 0; i < movies.size(); i++) {
+				Movie targetMovie = movies.get(i);
+				if(targetMovie.getTitle() == movie) {
+					return targetMovie;
+				}
 			}
+		}catch (IndexOutOfBoundsException e) {
+			System.out.printf("Movie cannot be found....");
 		}
+		return null;
 	}
 
 
