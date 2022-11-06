@@ -125,7 +125,7 @@ public class MovieGoerUI {
                     break;
                 case 6:
                     System.out.println("(6) Show booking history");
-                    bookingUI.BookingHistory(user);
+                    bookingUI.BookingHistory();
                     // function to get booing details
                     break;
                 case 7:

@@ -162,19 +162,19 @@ public class bookingUI {
     }
 
 
-    public void BookingHistory(MovieGoer user){
+    public void BookingHistory(){
         System.out.println("Printing your booking history");
         BookingManager bookingManager = new BookingManager();
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int i = 0;
 
         System.out.println("--------------------------------------------------------------------");
-        System.out.printf("                           Bookings of %s                            \n",user.getName());
+        System.out.printf("                           Bookings of %s                            \n",movieGoer.getName());
         System.out.println("--------------------------------------------------------------------");
         while (i < bookings.size()){
-            if (bookings.get(i).getUser().getName() == user.getName() && 
-            bookings.get(i).getUser().getMobile() == user.getMobile() && 
-            bookings.get(i).getUser().getEmail() == user.getEmail()){
+            if (bookings.get(i).getUser().getName() == movieGoer.getName() && 
+            bookings.get(i).getUser().getMobile() == movieGoer.getMobile() && 
+            bookings.get(i).getUser().getEmail() == movieGoer.getEmail()){
                 System.out.print("Cinema Code: ");
                 System.out.println(bookings.get(i).getCentral().getCinema().getCode());
                 System.out.print("Movie Title: ");
