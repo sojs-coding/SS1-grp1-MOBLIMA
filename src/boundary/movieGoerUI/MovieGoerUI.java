@@ -130,7 +130,7 @@ public class MovieGoerUI {
                     break;
                 case 7:
                     System.out.println("(7) View Top 5 movies ranked by ticket sales ");
-                    
+                    bookingUI.TopFiveMovie();
                     //function to get top 5
                     break;
                 case 8:

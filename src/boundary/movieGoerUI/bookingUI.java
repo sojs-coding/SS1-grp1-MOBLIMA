@@ -2,6 +2,8 @@ package boundary.movieGoerUI;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Hashtable;
+import java.util.Map;
 
 import controller.BookingManager;
 import controller.MovieManager;
@@ -22,6 +24,24 @@ public class bookingUI {
 
     public bookingUI(MovieGoer movieGoer){
         this.movieGoer = movieGoer;
+    }
+
+    public String getMaxCount(Map<String,Integer> movieCount){
+        int max = 0;
+        String maxString = "";
+
+        for(Map.Entry<String,Integer> entry : movieCount.entrySet()){
+            String key = entry.getKey();
+            int val = entry.getValue();
+
+            if (val > max){
+                maxString = key;
+                max = val;
+            }
+        }
+
+        return maxString;
+
     }
 
     public static void printMovies(){
@@ -100,18 +120,19 @@ public class bookingUI {
         // Loops through Showtime array to find corresponding showtime with input datetime
         ArrayList<Showtime> showtimes= ShowtimeManager.getShowtimes();
         Showtime showtime = new Showtime(null, cinema, movie);
-        LocalDateTime dateTime;
         for(int i = 0; i < showtimes.size(); i++){
             if (showtimes.get(i).getDateTime().toString() == avail){
                 showtime = ShowtimeManager.getShowtime(i);
-                dateTime = showtime.getDateTime();
                 break;
             }
-            else{
-                System.out.println("Invalid date and time entry...");
-                System.out.println("Returning...");
-                return;
-            }
+        }
+
+        //if no there is no showtime with corresonding dateTime we return back to movieGoerUI
+        if(showtime.getDateTime() == null){
+            System.out.println("Invalid date and time entry...");
+            System.out.println("Returning...");
+            sc.close();
+            return;
         }
         
         //Prints seating arrangements
@@ -126,6 +147,7 @@ public class bookingUI {
         switch(choice){
             case 0:
                 System.out.println("Returning to menu....");
+                sc.close();
                 return;
             case 1:
                 System.out.println("How many tickets are you purchasing?");
@@ -153,12 +175,16 @@ public class bookingUI {
                     Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(i), i);
                     bookingManager.addBooking(booking);
                 }
+                sc.close();
+                break;
 
             default:
                 System.out.println("Invalid entry...");
                 System.out.println("Returning...");
+                sc.close();
                 return;
         }
+        sc.close();
     }
 
 
@@ -168,6 +194,7 @@ public class bookingUI {
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int i = 0;
 
+        //Iterates through all bookings and print those that match movieGoer
         System.out.println("--------------------------------------------------------------------");
         System.out.printf("                           Bookings of %s                            \n",movieGoer.getName());
         System.out.println("--------------------------------------------------------------------");
@@ -185,8 +212,49 @@ public class bookingUI {
                 System.out.println(bookings.get(i).getPayment().getTid());
                 System.out.print("Ticket row and column: ");
                 System.out.println(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn());
-        
+            }
+            i++;
+        }
+    }
+
+    public void TopFiveMovie(){
+        /*Loop through all bookings and keep count of movie using dict
+         since each booking equals one ticket*/
+
+        BookingManager bookingManager = new BookingManager();
+        ArrayList<Booking> bookings = bookingManager.getBookings();
+        int size = bookings.size();
+        int i = 0;
+        Map<String,Integer> movieCount = new Hashtable<String,Integer>();
+
+        //Create a dictionary to keep count of each movie of the tickets
+        while (i < size){
+            String movieTitle = bookings.get(i).getCentral().getMovie().getTitle();
+            if(((Hashtable<String, Integer>) movieCount).containsKey(movieTitle)){
+                movieCount.put(movieTitle,movieCount.get(movieTitle)+1);
+            }
+            else{
+                movieCount.put(movieTitle,1);
+            }
+            i++;
+        } 
+
+        //Find the max number of tickets with movie and print
+        int count = 5;
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("                  Top 5 Movies (By Ticket Sales)                    ");
+        System.out.println("--------------------------------------------------------------------");
+        while (count > 0){
+            if(!movieCount.isEmpty()){
+                String topMovie = getMaxCount(movieCount);
+                System.out.printf("(1): %s , Ticket Sales: %d",topMovie,movieCount.get(topMovie));
+                movieCount.remove(topMovie);
+            }
+            else{
+                System.out.println("There are less than 5 movies premiered...");
+                break;
             }
         }
+        System.out.println("--------------------------------------------------------------------");
     }
 }
