@@ -95,7 +95,7 @@ public class bookingUI {
         ShowtimeManager ShowtimeManager = new ShowtimeManager();
 
         //Returns movie based on title
-        Movie movie = new Movie(null, null, null, 0, null, null, null)
+        Movie movie = new Movie(null, null, null, 0, null, null, null);
         try {
             printMovies();
             System.out.println("(1) Which movie are you watching?");
