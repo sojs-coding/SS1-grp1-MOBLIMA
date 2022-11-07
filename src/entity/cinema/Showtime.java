@@ -66,6 +66,7 @@ public class Showtime implements Serializable {
 	}
 	/**
 	 * Displays the seating arrangement for this showtime
+	 * This is temporary btw. I don't think there should be any displaying of layout done by the entity.
 	 */
 	public void displaySeating() {
 		layout.displayLayout();

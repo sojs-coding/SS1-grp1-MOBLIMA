@@ -1,6 +1,6 @@
 package controller;
 
-import entity.MovieGoer;
+import entity.booking.MovieGoer;
 import entity.movie.Movie;
 
 import java.io.File;
@@ -50,7 +50,7 @@ public class MovieGoerAuthenticator implements UserAuthenticator {
     public boolean login(String mobile, String password) {
         if (validateUser(mobile, password)) {
             Map<MovieGoerData, String> data = userAccounts.get(mobile);
-            user = new MovieGoer(data.get(MovieGoerData.NAME), Integer.parseInt(mobile), data.get(MovieGoerData.EMAIL));
+            user = new MovieGoer(data.get(MovieGoerData.NAME), mobile.toCharArray(), data.get(MovieGoerData.EMAIL));
             return true;
         }
         return false;

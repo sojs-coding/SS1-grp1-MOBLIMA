@@ -1,17 +1,17 @@
 package entity.booking;
 
 import entity.cinema.Showtime;
-
 import java.io.Serializable;
+import entity.booking.MovieGoer;
 
 public class Booking implements Serializable {
     private Showtime central;
-    private entity.MovieGoer user;
+    private MovieGoer user;
     private Payment payment;
     private Ticket ticket;
     private int id;
 
-    public Booking(Showtime central,entity.MovieGoer movieGoer, Payment payment, Ticket ticket, int id){
+    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, Ticket ticket, int id){
         this.central = central;
         this.user = movieGoer;
         this.payment = payment;
@@ -35,7 +35,7 @@ public class Booking implements Serializable {
         return this.payment;
     }
 
-    public entity.MovieGoer getUser() {
+    public MovieGoer getUser() {
         return user;
     }
 
@@ -55,7 +55,7 @@ public class Booking implements Serializable {
         this.payment = payment;
     }
 
-    public void setUser(entity.MovieGoer user) {
+    public void setUser(MovieGoer user) {
         this.user = user;
     }
 

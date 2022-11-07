@@ -8,7 +8,7 @@ import java.util.Map;
 import controller.BookingManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
-import entity.MovieGoer;
+import entity.booking.MovieGoer;
 import entity.booking.Booking;
 import entity.booking.Payment;
 import entity.booking.Ticket;

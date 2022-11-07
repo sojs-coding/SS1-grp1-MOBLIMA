@@ -1,7 +1,7 @@
 package boundary.movieGoerUI;
 
 import controller.MovieGoerAuthenticator;
-import entity.MovieGoer;
+import entity.booking.MovieGoer;
 
 import java.util.Scanner;
 

@@ -1,6 +1,7 @@
 package entity.booking;
 
 import java.io.Serializable;
+import entity.booking.PersonAge;
 
 public class MovieGoer implements Serializable {
 
@@ -11,6 +12,12 @@ public class MovieGoer implements Serializable {
 	private char[] mobile;
 	private String email;
 	private PersonAge age;
+
+	public MovieGoer(String username, char[] mobile, String email) {
+		setEmail(email);
+		setMobile(mobile);
+		setName(username);
+	}
 
 	public String getEmail() {
 		return email;
@@ -29,6 +36,7 @@ public class MovieGoer implements Serializable {
 	}
 
 	public void setMobile(char[] mobile) {
+		// Set up verification. 8 digits only.
 		this.mobile = mobile;
 	}
 
