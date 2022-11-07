@@ -81,7 +81,7 @@ public class MovieGoerUI {
         System.out.println("Welcome to Movie-Goer Page");
         boolean isStillrunning = true;
         bookingUI bookingUI = new bookingUI(user);
-        movieUI movieUI = new MovieUI(user);
+        movieUI movieUI = new MovieUI();
 
         while (isStillrunning) {
             System.out.println("--------------------------------------------------------------------");
