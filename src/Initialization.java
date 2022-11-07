@@ -84,24 +84,41 @@ public class Initialization implements Serializable{
      * @return INSTANCE of Initialization
      */
     public static Initialization initProgram() {
+        boolean deleteFile = false;
         File f = new File("./cinemadata/init.ser");
         if (f.exists() && !f.isDirectory()) {
+            FileInputStream fileIn = null;
+            ObjectInputStream in = null;
             // do something
             try {
-                FileInputStream fileIn = new FileInputStream("./cinemadata/init.ser");
-                ObjectInputStream in = new ObjectInputStream(fileIn);
+                fileIn = new FileInputStream("./cinemadata/init.ser");
+                in = new ObjectInputStream(fileIn);
                 Initialization.INSTANCE = (Initialization) in.readObject();
-                in.close();
-                fileIn.close();
-            } catch (IOException i) {
-                i.printStackTrace();
-                return null;
-            } catch (ClassNotFoundException c) {
-                System.out.println("Cineplex Manager class not found");
-                c.printStackTrace();
-                return null;
+            } catch (Exception c) {
+                deleteFile = true;
             }
-            System.out.println("Loaded");
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                if (fileIn != null) {
+                    try {
+                        fileIn.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            if (deleteFile) {
+                f.delete();
+                initProgram();
+            } else {
+                System.out.println("Loaded");
+            }
         } else {
             if (Initialization.INSTANCE == null) {
                 Initialization.INSTANCE = new Initialization();
