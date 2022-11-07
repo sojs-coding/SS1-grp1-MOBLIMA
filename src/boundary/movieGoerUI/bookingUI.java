@@ -95,27 +95,49 @@ public class bookingUI {
         ShowtimeManager ShowtimeManager = new ShowtimeManager();
 
         //Returns movie based on title
-        printMovies();
-        System.out.println("(1) Which movie are you watching?");
-        System.out.println("Enter the title in full");
-        String title = sc.nextLine();
-        Movie movie = MovieManager.searchMovie(title);
+        Movie movie = new Movie(null, null, null, 0, null, null, null)
+        try {
+            printMovies();
+            System.out.println("(1) Which movie are you watching?");
+            System.out.println("Enter the title in full");
+            String title = sc.nextLine();
+            movie = MovieManager.searchMovie(title);
+        } catch (Exception e) {
+            System.out.println("Invalid entry...");
+            sc.close();
+            return;
+        }
 
         //Returns cinema based on code
-        printCinemas();
-        System.out.println("(2) Which cinema are you going to?");
-        System.out.println("Enter the three character code");
-        char[] code = {};
-        for(int i = 0; i < 3; i++){
-            code[i] = sc.next().charAt(0);
+        Cinema cinema = new Cinema(null, null);
+        try {
+            printCinemas();
+            System.out.println("(2) Which cinema are you going to?");
+            System.out.println("Enter the three character code");
+            char[] code = {};
+            for(int i = 0; i < 3; i++){
+                code[i] = sc.next().charAt(0);
+            }
+            cinema = Cineplex.findCinema(code);
+        } catch (Exception e) {
+            System.out.println("Invalid entry...");
+            sc.close();
+            return;
         }
-        Cinema cinema = Cineplex.findCinema(code);
 
         //Returns dateTime based on string given
-        printShowTimes(cinema,movie); //ShowTimes corresponding to cinema and movie are given
-        System.out.println("(3) What are the dates and times that you prefer?");
-        System.out.println("Enter the time in full");
-        String avail = sc.nextLine();
+        String avail;
+        try {
+            printShowTimes(cinema,movie); //ShowTimes corresponding to cinema and movie are given
+            System.out.println("(3) What are the dates and times that you prefer?");
+            System.out.println("Enter the time in full");
+            avail = sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid entry...");
+            sc.close();
+            return;
+        }
+        
 
         // Loops through Showtime array to find corresponding showtime with input datetime
         ArrayList<Showtime> showtimes= ShowtimeManager.getShowtimes();
@@ -150,33 +172,39 @@ public class bookingUI {
                 sc.close();
                 return;
             case 1:
-                System.out.println("How many tickets are you purchasing?");
-                int count = sc.nextInt();
-                ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+                try {
+                    System.out.println("How many tickets are you purchasing?");
+                    int count = sc.nextInt();
+                    ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 
-                for(int i = 0; i < count; i++){
-                    showtime.displaySeating();
-                    Layout layout = showtime.getLayout();
-                    System.out.printf("Please enter Seat %d that you want to purchase.", i);
-                    int row = sc.nextInt();
-                    int column = sc.nextInt();
-                    if (!layout.occupy(row, column)){
-                        System.out.println("Seat is available.");
-                        tickets.add(new Ticket(row,column,movieGoer.getAge())); //Generates count number of tickets
+                    for(int i = 0; i < count; i++){
+                        showtime.displaySeating();
+                        Layout layout = showtime.getLayout();
+                        System.out.printf("Please enter Seat %d that you want to purchase.", i);
+                        int row = sc.nextInt();
+                        int column = sc.nextInt();
+                        if (!layout.occupy(row, column)){
+                            System.out.println("Seat is available.");
+                            tickets.add(new Ticket(row,column,movieGoer.getAge())); //Generates count number of tickets
+                        }
+                        else{
+                            System.out.println("Seat is taken.");
+                        }
                     }
-                    else{
-                        System.out.println("Seat is taken.");
+                    // Generates only one payment per MovieGoer
+                    Payment payment = new Payment(cinema.getCode());
+                    BookingManager bookingManager = new BookingManager();
+                    for(int i = 0; i < count; i++){
+                        Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(i), i);
+                        bookingManager.addBooking(booking);
                     }
+                    sc.close();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Invalid entry...");
+                    sc.close();
+                    return;
                 }
-                // Generates only one payment per MovieGoer
-                Payment payment = new Payment(cinema.getCode());
-                BookingManager bookingManager = new BookingManager();
-                for(int i = 0; i < count; i++){
-                    Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(i), i);
-                    bookingManager.addBooking(booking);
-                }
-                sc.close();
-                break;
 
             default:
                 System.out.println("Invalid entry...");
