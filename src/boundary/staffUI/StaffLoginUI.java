@@ -12,18 +12,17 @@ public class StaffLoginUI {
 		System.out.println("CINEMA STAFF USER:");
 		System.out.println("Please enter the login details ");
 		System.out.println("Enter Staff Username:");
-		//code to check if username exist in database
 		String username = sc.nextLine();
 		System.out.println("Enter Password:");
-		//code to check if password exist in database
 		String password = sc.nextLine();
-		//if check successful print below statement
 		StaffAuthenticator staffAuthenticator = new StaffAuthenticator();
 		if (staffAuthenticator.login(username, password)) {
 			System.out.println("Login successful!");
 			StaffMainMenu();
 		} else {
-			// ???
+			System.out.println("Login unsuccessful!");
+			System.out.println("Pleae try again");
+			login();
 		}
 	}
 	
