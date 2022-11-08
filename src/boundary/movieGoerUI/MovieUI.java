@@ -23,13 +23,29 @@ public class MovieUI {
 	
 	public void searchMovie() {
 		String movieString;
-		System.out.println("Please enter the Title of the movie: ");
+		int count = 1;
+		System.out.println("Please enter a string: ");
 		movieString = sc.next();
-		Movie targetMovie = movieMgr.searchMovie(movieString);
+		for(int i = 0; i < movieMgr.getSize(); i++) {
+			String movieTitle = movieMgr.getMovie(i).getTitle();
+			for(int j = 0; j < movieTitle.length() - movieString.length(); j++) {
+				String strCompare = movieTitle.substring(j, movieString.length()-j-1);
+				if(strCompare.compareToIgnoreCase(movieString) == 0) {
+					System.out.printf("%d) ",count++ + movieTitle);
+					System.out.println();
+					break;
+				}
+			}
+		}
+		if(count == 1)
+			System.out.println("There is no movie with that string.");
 	}
 	
-	public void viewMovieDetails(Movie movie) {
-		
+	public void viewMovieDetails() {
+		String movieTitle;
+		System.out.println("Please enter the full title of the movie: ");
+		movieTitle = sc.next();
+		Movie movie = movieMgr.searchMovie(movieTitle);
 		String[] casts = movie.getCasts();
 		ArrayList<Review> reviews = movie.getReview();
 		System.out.println("Title: " + movie.getTitle());
