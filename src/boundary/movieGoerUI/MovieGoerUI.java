@@ -81,7 +81,7 @@ public class MovieGoerUI {
         System.out.println("Welcome to Movie-Goer Page");
         boolean isStillrunning = true;
         BookingUI bookingUI = new BookingUI(user);
-        movieUI movieUI = new MovieUI();
+        MovieUI movieUI = new MovieUI(movieMgr);
 
         while (isStillrunning) {
             System.out.println("--------------------------------------------------------------------");
@@ -104,15 +104,18 @@ public class MovieGoerUI {
                     System.out.println("(1) List movies available");
                     //get
                     //function to show get availble movies
+                    movieUI.printAllMovies();
                     break;
                 case 2:
                     System.out.println("(2) Search movies available");
                     //searchMovie();
                     //search function
+                    movieUI.searchMovie();
                     break;
                 case 3:
                     System.out.println("(3) View Movie Details");
                     //get movie details
+                    movieUI.viewMovieDetails();
                     break;
                 case 4:
                     System.out.println("(4) Check seat availability ");
@@ -137,6 +140,7 @@ public class MovieGoerUI {
                 case 8:
                     System.out.println("(8) Leave Rating");
                     //leave ratings
+                    movieUI.leaveReview();
                     break;
                 case 9:
                     isStillrunning = false;
