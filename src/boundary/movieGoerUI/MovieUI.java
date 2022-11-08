@@ -1,4 +1,4 @@
-package Movie;
+package boundary.movieGoerUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
