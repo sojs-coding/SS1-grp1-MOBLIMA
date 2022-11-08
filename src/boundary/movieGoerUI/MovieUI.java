@@ -1,5 +1,8 @@
 package boundary.movieGoerUI;
 
+import controller.MovieManager;
+import entity.movie.Movie;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
