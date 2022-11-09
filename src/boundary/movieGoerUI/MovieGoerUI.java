@@ -6,6 +6,7 @@ import entity.booking.MovieGoer;
 import java.util.Scanner;
 
 public class MovieGoerUI {
+    private Initialization initObj = Initialization.getInstance();
     public void showAvailableSeats(){
         int rowLength = 10;
         int row =0;
@@ -81,7 +82,7 @@ public class MovieGoerUI {
         System.out.println("Welcome to Movie-Goer Page");
         boolean isStillrunning = true;
         BookingUI bookingUI = new BookingUI(user);
-        MovieUI movieUI = new MovieUI(movieMgr);
+        MovieUI movieUI = new MovieUI(initObj.getMovieManager());
 
         while (isStillrunning) {
             System.out.println("--------------------------------------------------------------------");
