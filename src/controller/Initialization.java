@@ -5,6 +5,8 @@ import entity.movie.Movie;
 import entity.movie.MovieType;
 import entity.movie.ShowingStatus;
 import java.io.*;
+import java.time.LocalDateTime;
+
 
 /**
 Represents the controller.Initialization of the application
@@ -232,6 +234,11 @@ public class Initialization implements Serializable{
         Cinema cinema = new Cinema("JR1".toCharArray(), layout);
         gvJurong.addCinema(cinema);
 
+
+        Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
+        showtimeManager.addShowtime(juraShowtime);
+
+
         layout = new Layout(5,5);
         layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -257,6 +264,24 @@ public class Initialization implements Serializable{
         gvJurong.addCinema(cinema);
         cineplexManager.addCineplex(gvJurong);
 
+        Showtime juraShowtime2 = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
+        showtimeManager.addShowtime(juraShowtime2);
+
         Cineplex gvWoodlands = new Cineplex("Woodlands");
     }
+
+    public Layout getLayout() {
+        Layout layout = new Layout(3,5);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        return layout;
+    }
+
 }

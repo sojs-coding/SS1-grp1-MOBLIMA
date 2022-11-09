@@ -69,6 +69,7 @@ public class MovieManager implements Serializable {
 		}catch (IndexOutOfBoundsException e) {
 			System.out.printf("Movie cannot be found....");
 		}
+
 		return null;
 	}
 

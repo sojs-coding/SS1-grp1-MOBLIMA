@@ -1,10 +1,9 @@
 package boundary.movieGoerUI;
 import java.util.Scanner;
 
-import javax.management.AttributeNotFoundException;
-
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import controller.BookingManager;
 import controller.CineplexManager;
@@ -17,8 +16,11 @@ import entity.booking.Ticket;
 import entity.cinema.Cinema;
 import entity.cinema.Cineplex;
 import entity.cinema.Layout;
+import entity.cinema.LayoutObject;
 import entity.cinema.Showtime;
 import entity.movie.Movie;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BookingUI {
@@ -26,12 +28,16 @@ public class BookingUI {
     private MovieManager movieManager;
     private CineplexManager cineplexManager;
     private ShowtimeManager showtimeManager;
+    private Layout layout;
+    private BookingManager bookingManager;
 
-    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager){
+    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager,Layout l,BookingManager b){
         this.movieGoer = movieGoer;
         this.movieManager = m;
         this.cineplexManager = c;
         this.showtimeManager = showtimeManager;
+        this.layout = l;
+        this.bookingManager = b;
     }
 
     public String getMaxCount(Map<String,Integer> movieCount){
@@ -87,20 +93,26 @@ public class BookingUI {
         return false;
     }
 
-    public static void printShowTimes(Cineplex cineplex, Movie movie, ShowtimeManager s){
-    
+    public static int printShowTimes(Cineplex cineplex, Movie movie, ShowtimeManager s){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
         ArrayList<Showtime> showTimes = s.getShowtimes();
+        int count = 0;
         int i = 0;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("                           Showtimes List                             ");
         System.out.println("--------------------------------------------------------------------");
+
         while (i < showTimes.size()){
             if (showTimes.get(i).getMovie() == movie && inCineplex(showTimes.get(i).getCinema(),cineplex)){
-                System.out.println("Date: " + showTimes.get(i).getDateTime().toString() + ", Cinema: " + showTimes.get(i).getCinema().getCode().toString());
-                i++;
+                System.out.println("Date: " + dtf.format(showTimes.get(i).getDateTime())+ ", Cinema: " + new String(showTimes.get(i).getCinema().getCode()));
+                count++;
             }
+            i++;
         }
+
+
         System.out.println("--------------------------------------------------------------------");
+        return count;
     }
 
     public void BookAndPurchase(){
@@ -113,8 +125,12 @@ public class BookingUI {
             System.out.println("(1) Which movie are you watching?");
             System.out.println("Enter the title in full");
             String title = sc.nextLine();
-            movie = movieManager.searchMovie(title);
-        } catch (Exception e) {
+            movie = movieManager.searchMovie(title);     
+            if(movie == null){
+                System.out.println("Movie does not exist...");
+                return;
+            }
+        } catch (NoSuchElementException e) {
             System.out.println("Invalid entry...");
             sc.close();
             return;
@@ -129,6 +145,10 @@ public class BookingUI {
             System.out.println("Enter the title of the cineplex...");
             cineplexString = sc.nextLine();
             cineplex = cineplexManager.searchCompany(cineplexString);
+            if(cineplex == null){
+                System.out.println("Cineplex does not exist...");
+                return;
+            }
         } catch (Exception e) {
             System.out.println("Invalid entry...");
             sc.close();
@@ -137,10 +157,16 @@ public class BookingUI {
 
         //Returns dateTime based on string given
         String avail;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
         try {
-            printShowTimes(cineplex,movie,showtimeManager); //ShowTimes corresponding to cinema and movie are given
-            System.out.println("(3) What are the dates and times that you prefer?");
-            System.out.println("Enter the time in full");
+            
+            int count = printShowTimes(cineplex,movie,showtimeManager);
+            if (count == 0){
+                System.out.println("There are no showtimes...");
+                return;
+            } //ShowTimes corresponding to cinema and movie are given
+            System.out.println("(3) What and which cinema do you prefer? YYTTMMddHHmm format");
+            System.out.println("Enter the time and cinema...(E.g 202209011122 JR1)");
             avail = sc.nextLine();
         } catch (Exception e) {
             System.out.println("Invalid entry...");
@@ -150,18 +176,19 @@ public class BookingUI {
         
 
         // Loops through Showtime array to find corresponding showtime with input datetime
-        Cinema cinema = new Cinema(null, null);
-        Showtime showtime = new Showtime(null, null, movie);
-        for(int i = 0; i < showtimeManager.getShowtimes().size(); i++){
-            if (showtimeManager.getShowtimes().get(i).getDateTime().toString() == avail){
-                showtime = showtimeManager.getShowtime(i);
+        Cinema cinema = new Cinema("JR1".toCharArray(),layout);
+        Showtime showtime = new Showtime(null, cinema, null);
+        ArrayList<Showtime> showtimes = showtimeManager.getShowtimes();
+        for(int i = 0; i < showtimes.size(); i++){
+            if (dtf.format(showtimes.get(i).getDateTime())== avail + " " + new String(showtimeManager.getShowtimes().get(i).getCinema().getCode())){
+                showtime = showtimes.get(i);
                 cinema = showtimeManager.getShowtime(i).getCinema();
                 break;
             }
         }
 
         //if no there is no showtime with corresonding dateTime we return back to movieGoerUI
-        if(showtime.getDateTime() == null){
+        if(cinema==null){
             System.out.println("Invalid date and time entry...");
             System.out.println("Returning...");
             sc.close();
@@ -175,28 +202,34 @@ public class BookingUI {
 
         //Asks if they want to purchase tickets
         System.out.println("Do you want to purchase tickets?");
-        System.out.println("0 for No, 1 for Yes");
-        int choice = sc.nextInt();
+        System.out.println("1 for No, 2 for Yes");
+        int choice;
+        choice = sc.nextInt();
         switch(choice){
-            case 0:
-                System.out.println("Returning to menu....");
-                sc.close();
-                return;
             case 1:
+                System.out.println("Returning to menu....");
+                return;
+            case 2:
                 try {
                     System.out.println("How many tickets are you purchasing?");
                     int count = sc.nextInt();
                     ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+                    int i = 0;
 
-                    for(int i = 0; i < count; i++){
+                    while (i < count){
                         showtime.displaySeating();
                         Layout layout = showtime.getLayout();
-                        System.out.printf("Please enter Seat %d that you want to purchase.", i);
+                        System.out.printf("Please enter Seat %d that you want to purchase.\n", i+1);
+                        System.out.println("Row:");
                         int row = sc.nextInt();
+                        System.out.println("Column:");
                         int column = sc.nextInt();
-                        if (!layout.occupy(row, column)){
+                        if (!layout.isOccupied(row, column)){
                             System.out.println("Seat is available.");
-                            tickets.add(new Ticket(row,column,movieGoer.getAge())); //Generates count number of tickets
+                            tickets.add(new Ticket(row,column,movieGoer.getAge())); 
+                            layout.occupy(row, column);
+                            i++;
+                            //Generates count number of tickets
                         }
                         else{
                             System.out.println("Seat is taken.");
@@ -204,32 +237,26 @@ public class BookingUI {
                     }
                     // Generates only one payment per MovieGoer
                     Payment payment = new Payment(cinema.getCode());
-                    BookingManager bookingManager = new BookingManager();
-                    for(int i = 0; i < count; i++){
-                        Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(i), i);
+                    for(int j = 0; j < count; i++){
+                        Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(j), j);
                         bookingManager.addBooking(booking);
                     }
-                    sc.close();
                     break;
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     System.out.println("Invalid entry...");
-                    sc.close();
                     return;
                 }
 
             default:
                 System.out.println("Invalid entry...");
                 System.out.println("Returning...");
-                sc.close();
                 return;
         }
-        sc.close();
     }
 
 
     public void BookingHistory(){
         System.out.println("Printing your booking history");
-        BookingManager bookingManager = new BookingManager();
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int i = 0;
 
@@ -259,8 +286,6 @@ public class BookingUI {
     public void TopFiveMovie(){
         /*Loop through all bookings and keep count of movie using dict
          since each booking equals one ticket*/
-
-        BookingManager bookingManager = new BookingManager();
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int size = bookings.size();
         int i = 0;

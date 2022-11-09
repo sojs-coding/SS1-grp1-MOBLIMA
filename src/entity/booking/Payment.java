@@ -13,8 +13,9 @@ public class Payment implements Serializable {
 	public Payment(char[] cinemaCode){
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");  
 		LocalDateTime now = LocalDateTime.now();
-		System.out.println("Your TID is: " + this.cinemaCode.toString() + dtf.format(now));
-		this.tid = dtf.format(now);
+		String tid = new String(cinemaCode) + dtf.format(now);
+		System.out.println("Your TID is: " + tid);
+		this.tid = tid;
 		this.cinemaCode = cinemaCode;
 	}
 

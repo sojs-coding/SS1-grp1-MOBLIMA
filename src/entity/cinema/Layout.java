@@ -103,7 +103,7 @@ public class Layout implements Serializable {
 	 * @param row The row index
 	 * @param column The column index
 	 */
-	private boolean isOccupied(int row, int column) {
+	public boolean isOccupied(int row, int column) {
 		if (!hasObject(row, column)) {
 			return true;
 		}
