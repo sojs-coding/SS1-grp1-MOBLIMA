@@ -179,8 +179,10 @@ public class BookingUI {
         Cinema cinema = new Cinema("JR1".toCharArray(),layout);
         Showtime showtime = new Showtime(null, cinema, null);
         ArrayList<Showtime> showtimes = showtimeManager.getShowtimes();
+
         for(int i = 0; i < showtimes.size(); i++){
-            if (dtf.format(showtimes.get(i).getDateTime())== avail + " " + new String(showtimeManager.getShowtimes().get(i).getCinema().getCode())){
+            String code = new String(showtimes.get(i).getCinema().getCode());
+            if (avail.equals(new String(dtf.format(showtimes.get(i).getDateTime()) + " " + code))){
                 showtime = showtimes.get(i);
                 cinema = showtimeManager.getShowtime(i).getCinema();
                 break;
@@ -188,10 +190,9 @@ public class BookingUI {
         }
 
         //if no there is no showtime with corresonding dateTime we return back to movieGoerUI
-        if(cinema==null){
+        if(showtime.getDateTime() == null){
             System.out.println("Invalid date and time entry...");
             System.out.println("Returning...");
-            sc.close();
             return;
         }
         
@@ -237,11 +238,11 @@ public class BookingUI {
                     }
                     // Generates only one payment per MovieGoer
                     Payment payment = new Payment(cinema.getCode());
-                    for(int j = 0; j < count; i++){
+                    for(int j = 0; j < count; j++){
                         Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(j), j);
                         bookingManager.addBooking(booking);
                     }
-                    break;
+                    return;
                 } catch (NullPointerException e) {
                     System.out.println("Invalid entry...");
                     return;
@@ -259,6 +260,7 @@ public class BookingUI {
         System.out.println("Printing your booking history");
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int i = 0;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
 
         //Iterates through all bookings and print those that match movieGoer
         System.out.println("--------------------------------------------------------------------");
@@ -273,7 +275,7 @@ public class BookingUI {
                 System.out.print("Movie Title: ");
                 System.out.println(bookings.get(i).getCentral().getMovie().getTitle());
                 System.out.print("Date and Time of Movie: ");
-                System.out.println(bookings.get(i).getCentral().getDateTime());
+                System.out.println(dtf.format(bookings.get(i).getCentral().getDateTime()));
                 System.out.print("Payment Tid: ");
                 System.out.println(bookings.get(i).getPayment().getTid());
                 System.out.print("Ticket row and column: ");
