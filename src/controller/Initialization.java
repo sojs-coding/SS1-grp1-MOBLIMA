@@ -185,7 +185,7 @@ public class Initialization implements Serializable{
         Movie movie7 = new Movie("American Psycho",
                 ShowingStatus.END_OF_SHOWING,
                 "A wealthy New York City investment banking executive, Patrick Bateman, hides his alternate psychopathic ego from his co-workers and friends as he delves deeper into his violent, hedonistic fantasies.",
-                3.7, MovieType.MOVIE2D, "Mary Harron", new String[]{"Christian Bale", "Justin Theroux", "Josh Lucas"});
+                3.7, MovieType.BLOCKBUSTER, "Mary Harron", new String[]{"Christian Bale", "Justin Theroux", "Josh Lucas"});
 
         Movie movie8 = new Movie("Harry Potter and the Philosopher's Stone",
                 ShowingStatus.END_OF_SHOWING,
@@ -196,12 +196,11 @@ public class Initialization implements Serializable{
                 ShowingStatus.NOW_SHOWING,
                 "25 years after a streak of brutal murders shocked the quiet town of Woodsboro, Calif., a new killer dons the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town's deadly past.",
                 3.1, MovieType.MOVIE3D, "Matt Bettinelli-Olpin", new String[]{"Neve Campbell", "Courteney Cox", "David Arquette"});
-
-         
+     
         Movie movie10 = new Movie("Interstellar",
                 ShowingStatus.END_OF_SHOWING,
                 "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-                4.3, MovieType.MOVIE2D, "Christopher Nolan", new String[]{"Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"});
+                4.3, MovieType.BLOCKBUSTER, "Christopher Nolan", new String[]{"Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"});
 
         movieManager.addMovie(movie1);
         movieManager.addMovie(movie2);
