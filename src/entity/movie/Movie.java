@@ -1,6 +1,7 @@
 package entity.movie;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Movie implements Serializable {
@@ -13,6 +14,7 @@ public class Movie implements Serializable {
 		this.type = type;
 		this.director = director;
 		this.casts = casts;
+		this.reviews = new ArrayList<Review>();
 	}
 
 	private String title;
@@ -85,7 +87,11 @@ public class Movie implements Serializable {
 	public void setCasts(String[] casts) {
 		this.casts = casts;
 	}
-	
+
+	public ArrayList<Review> getReviews() {
+		return reviews;
+	}
+
 	public Review getReview(int id) {
 		return reviews.get(id);
 	}

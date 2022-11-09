@@ -1,6 +1,5 @@
 import boundary.StartUpUI;
-import boundary.movieGoerUI.MovieGoerUI;
-import entity.movie.Movie;
+import controller.Initialization;
 
 public class Application {
     public static void main(String[] args) {

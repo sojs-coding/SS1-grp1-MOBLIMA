@@ -62,7 +62,7 @@ public class MovieManager implements Serializable {
 		try{
 			for(int i = 0; i < movies.size(); i++) {
 				Movie targetMovie = movies.get(i);
-				if(targetMovie.getTitle() == movie) {
+				if(targetMovie.getTitle().equals(movie)) {
 					return targetMovie;
 				}
 			}

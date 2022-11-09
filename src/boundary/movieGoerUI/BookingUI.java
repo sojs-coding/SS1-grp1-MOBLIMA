@@ -1,7 +1,5 @@
 package boundary.movieGoerUI;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -19,10 +17,10 @@ import entity.cinema.Showtime;
 import entity.movie.Movie;
 import java.util.ArrayList;
 
-public class bookingUI {
+public class BookingUI {
     private MovieGoer movieGoer;
 
-    public bookingUI(MovieGoer movieGoer){
+    public BookingUI(MovieGoer movieGoer){
         this.movieGoer = movieGoer;
     }
 

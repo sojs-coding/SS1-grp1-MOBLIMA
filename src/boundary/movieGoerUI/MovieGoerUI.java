@@ -2,11 +2,11 @@ package boundary.movieGoerUI;
 
 import controller.MovieGoerAuthenticator;
 import entity.booking.MovieGoer;
-
+import controller.Initialization;
 import java.util.Scanner;
 
 public class MovieGoerUI {
-    private Initialization initObj = Initialization.getInstance();
+    private Initialization initObj = Initialization.getINSTANCE();
     public void showAvailableSeats(){
         int rowLength = 10;
         int row =0;
