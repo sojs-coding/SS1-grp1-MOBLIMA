@@ -25,7 +25,7 @@ public class ListTop5 {
 			}
 			else
 			{
-				ratings.put(movie.getTitle(), movie.getOverallRating());
+				ratings.put(movie.getTitle(), (float) movie.getOverallRating());
 			}
          }
 		 Map<String, Float> sortedratings = sortbyratings(ratings);

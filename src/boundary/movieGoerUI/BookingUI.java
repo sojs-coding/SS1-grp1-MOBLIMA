@@ -1,9 +1,13 @@
 package boundary.movieGoerUI;
 import java.util.Scanner;
+
+import javax.management.AttributeNotFoundException;
+
 import java.util.Hashtable;
 import java.util.Map;
 
 import controller.BookingManager;
+import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import entity.booking.MovieGoer;
@@ -19,9 +23,15 @@ import java.util.ArrayList;
 
 public class BookingUI {
     private MovieGoer movieGoer;
+    private MovieManager movieManager;
+    private CineplexManager cineplexManager;
+    private ShowtimeManager showtimeManager;
 
-    public BookingUI(MovieGoer movieGoer){
+    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager){
         this.movieGoer = movieGoer;
+        this.movieManager = m;
+        this.cineplexManager = c;
+        this.showtimeManager = showtimeManager;
     }
 
     public String getMaxCount(Map<String,Integer> movieCount){
@@ -39,12 +49,10 @@ public class BookingUI {
         }
 
         return maxString;
-
     }
 
-    public static void printMovies(){
-        MovieManager MovieManager = new MovieManager();
-        ArrayList<Movie> movies = MovieManager.getMovies();
+    public static void printMovies(MovieManager movieManager){
+        ArrayList<Movie> movies = movieManager.getMovies();
         int i = 0;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("                           Movie List                             ");
@@ -56,30 +64,39 @@ public class BookingUI {
         System.out.println("--------------------------------------------------------------------");
     }
 
-    public static void printCinemas(){
-        Cineplex cineplex = new Cineplex();
-        ArrayList<Cinema> cinemas = cineplex.getCinemas();
+    public static void printCineplex(CineplexManager cineplex){
+        ArrayList<Cineplex> c = cineplex.getCineplexes();
         int i = 0;
         System.out.println("--------------------------------------------------------------------");
-        System.out.println("                           Cinemas List                             ");
+        System.out.println("                           Cineplex List                            ");
         System.out.println("--------------------------------------------------------------------");
-        while (i < cinemas.size()){
-            System.out.println(cinemas.get(i).getCode());
+        while (i < c.size()){
+            System.out.println(c.get(i).getCompany());
             i++;
         }
         System.out.println("--------------------------------------------------------------------");
     }
 
-    public static void printShowTimes(Cinema cinema, Movie movie){
-        ShowtimeManager showTime = new ShowtimeManager();
-        ArrayList<Showtime> showTimes = showTime.getShowtimes();
+    public static boolean inCineplex(Cinema c, Cineplex cin){
+        ArrayList<Cinema> cinemas = cin.getCinemas();
+        for(int i = 0 ; i < cinemas.size(); i++){
+            if(cinemas.get(i).getCode() == c.getCode())
+                return true;
+        }
+
+        return false;
+    }
+
+    public static void printShowTimes(Cineplex cineplex, Movie movie, ShowtimeManager s){
+    
+        ArrayList<Showtime> showTimes = s.getShowtimes();
         int i = 0;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("                           Showtimes List                             ");
         System.out.println("--------------------------------------------------------------------");
         while (i < showTimes.size()){
-            if (showTimes.get(i).getCinema() == cinema && showTimes.get(i).getMovie() == movie){
-                System.out.println(showTimes.get(i).getDateTime());
+            if (showTimes.get(i).getMovie() == movie && inCineplex(showTimes.get(i).getCinema(),cineplex)){
+                System.out.println("Date: " + showTimes.get(i).getDateTime().toString() + ", Cinema: " + showTimes.get(i).getCinema().getCode().toString());
                 i++;
             }
         }
@@ -88,35 +105,30 @@ public class BookingUI {
 
     public void BookAndPurchase(){
         Scanner sc = new Scanner(System.in);
-        MovieManager MovieManager = new MovieManager();
-        Cineplex Cineplex = new Cineplex();
-        ShowtimeManager ShowtimeManager = new ShowtimeManager();
 
         //Returns movie based on title
         Movie movie = new Movie(null, null, null, 0, null, null, null);
         try {
-            printMovies();
+            printMovies(movieManager);
             System.out.println("(1) Which movie are you watching?");
             System.out.println("Enter the title in full");
             String title = sc.nextLine();
-            movie = MovieManager.searchMovie(title);
+            movie = movieManager.searchMovie(title);
         } catch (Exception e) {
             System.out.println("Invalid entry...");
             sc.close();
             return;
         }
 
-        //Returns cinema based on code
-        Cinema cinema = new Cinema(null, null);
+        //Returns cineplex 
+        Cineplex cineplex = new Cineplex(null);
+        String cineplexString;
         try {
-            printCinemas();
-            System.out.println("(2) Which cinema are you going to?");
-            System.out.println("Enter the three character code");
-            char[] code = {};
-            for(int i = 0; i < 3; i++){
-                code[i] = sc.next().charAt(0);
-            }
-            cinema = Cineplex.findCinema(code);
+            printCineplex(cineplexManager);
+            System.out.println("(2) Which cineplex are you going to?");
+            System.out.println("Enter the title of the cineplex...");
+            cineplexString = sc.nextLine();
+            cineplex = cineplexManager.searchCompany(cineplexString);
         } catch (Exception e) {
             System.out.println("Invalid entry...");
             sc.close();
@@ -126,7 +138,7 @@ public class BookingUI {
         //Returns dateTime based on string given
         String avail;
         try {
-            printShowTimes(cinema,movie); //ShowTimes corresponding to cinema and movie are given
+            printShowTimes(cineplex,movie,showtimeManager); //ShowTimes corresponding to cinema and movie are given
             System.out.println("(3) What are the dates and times that you prefer?");
             System.out.println("Enter the time in full");
             avail = sc.nextLine();
@@ -138,11 +150,12 @@ public class BookingUI {
         
 
         // Loops through Showtime array to find corresponding showtime with input datetime
-        ArrayList<Showtime> showtimes= ShowtimeManager.getShowtimes();
-        Showtime showtime = new Showtime(null, cinema, movie);
-        for(int i = 0; i < showtimes.size(); i++){
-            if (showtimes.get(i).getDateTime().toString() == avail){
-                showtime = ShowtimeManager.getShowtime(i);
+        Cinema cinema = new Cinema(null, null);
+        Showtime showtime = new Showtime(null, null, movie);
+        for(int i = 0; i < showtimeManager.getShowtimes().size(); i++){
+            if (showtimeManager.getShowtimes().get(i).getDateTime().toString() == avail){
+                showtime = showtimeManager.getShowtime(i);
+                cinema = showtimeManager.getShowtime(i).getCinema();
                 break;
             }
         }

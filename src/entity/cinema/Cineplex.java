@@ -24,7 +24,8 @@ public class Cineplex implements Serializable {
 	/**
 	 * Cineplex constructor
 	 */
-	public Cineplex() {
+	public Cineplex(String company) {
+		this.company = company;
 		cinemas = new ArrayList<Cinema>();
 	}
 
@@ -59,6 +60,12 @@ public class Cineplex implements Serializable {
 	public ArrayList<Cinema> getCinemas() {
 		return cinemas;
 	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	
 }
 
 //SOLID

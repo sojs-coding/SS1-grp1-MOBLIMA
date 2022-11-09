@@ -24,7 +24,7 @@ public class ManageShowtime {
 	public  void createCinemaShowtime()
 	{
 		ShowtimeManager showtimeManager = new ShowtimeManager();
-		Cineplex cineplex = new Cineplex();
+		Cineplex cineplex = new Cineplex(null);
 		MovieManager movieManager = new MovieManager();
         
 		System.out.println("How many showtimes do you want to add?");
@@ -76,7 +76,7 @@ public class ManageShowtime {
 	{
 		printShowTimes();
 		ShowtimeManager showtimeManager = new ShowtimeManager();
-		Cineplex cineplex = new Cineplex();
+		Cineplex cineplex = new Cineplex(null);
 		MovieManager movieManager = new MovieManager();
 	    ArrayList<Movie> movielist = movieManager.getMovies();
         Movie movie = new Movie(null, null, null, 0, null, null, null);
@@ -101,7 +101,7 @@ public class ManageShowtime {
     }
 
 	public static void printCinemas(){
-        Cineplex cineplex = new Cineplex();
+        Cineplex cineplex = new Cineplex(null);
         ArrayList<Cinema> cinemas = cineplex.getCinemas();
         int i = 0;
         System.out.println("--------------------------------------------------------------------");

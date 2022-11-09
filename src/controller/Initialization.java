@@ -218,7 +218,7 @@ public class Initialization implements Serializable{
      * Prepare fresh copy of Cineplexes
      */
     public void initCineplex() {
-        Cineplex gvJurong = new Cineplex();
+        Cineplex gvJurong = new Cineplex("Jurong");
         Layout layout = new Layout(3,5);
         layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -257,6 +257,6 @@ public class Initialization implements Serializable{
         gvJurong.addCinema(cinema);
         cineplexManager.addCineplex(gvJurong);
 
-        Cineplex gvWoodlands = new Cineplex();
+        Cineplex gvWoodlands = new Cineplex("Woodlands");
     }
 }
