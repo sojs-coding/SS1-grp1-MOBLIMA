@@ -152,11 +152,67 @@ public class Initialization implements Serializable{
      * Prepare fresh copy of Movies
      */
     public void initMovie() {
-        Movie movie = new Movie("Jurassic Park",
+        Movie movie1 = new Movie("Jurassic Park",
                 ShowingStatus.NOW_SHOWING,
                 "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA. Before opening day, he invites a team of experts and his two eager grandchildren to experience the park and help calm anxious investors. However, the park is anything but amusing as the security systems go off-line and the dinosaurs escape. ",
                 0, MovieType.BLOCKBUSTER, "Me", new String[]{"Laura Dern", "Jeff Goldblum", "Richard Attenborough", "Bob Peck"});
-        movieManager.addMovie(movie);
+     
+        Movie movie2 = new Movie("Black Adam",
+                ShowingStatus.NOW_SHOWING,
+                "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods -- and imprisoned just as quickly -- Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+                4.5, MovieType.MOVIE2D, "Jaume Collet-Serra", new String[]{"Dwayne Johnson", "Aldis Hodge", "Noah Centineo", "Sarah Shahi", "Marwan Kenzari", "Quintessa Swindell"});
+
+        Movie movie3 = new Movie("Terrifier",
+                ShowingStatus.END_OF_SHOWING,
+                "On Halloween night, Tara Heyes finds herself as the obsession of a sadistic murderer known as Art the Clown.",
+                2.6, MovieType.MOVIE3D, "Damien Leone", new String[]{"Jenna Kanell", "Samantha Scaffidi", "David Howard Thornton"});
+
+        Movie movie4 = new Movie("Luckiest Girl Alive",
+                ShowingStatus.NOW_SHOWING,
+                "A woman in New York, who seems to have things under control, is faced with a trauma that makes her life unravel.",
+                3.2, MovieType.MOVIE2D, "Mike Barker", new String[]{"Mila Kunis", "Chiara Aurelia", "Finn Wittrock"});
+
+        Movie movie5 = new Movie("Everything Everywhere All at Once",
+                ShowingStatus.END_OF_SHOWING,
+                "An aging Chinese immigrant is swept up in an insane adventure, in which she alone can save the world by exploring other universes connecting with the lives she could have led.",
+                3.2, MovieType.MOVIE2D, "Dan Kwan", new String[]{"Michelle Yeoh", "Stephanie Hsu", "Jamie Lee Curtis"});
+
+        Movie movie6 = new Movie("A Man Called Otto",
+                ShowingStatus.PREVIEW,
+                "A grumpy widower whose only joy comes from criticizing and judging his exasperated neighbors meets his match when a lively young family moves in next door, leading to an unexpected friendship that will turn his world upside-down.",
+                0, MovieType.MOVIE2D, "Marc Forster", new String[]{"Tom Hanks", "Kailey Hyman", "Rachel Keller"});
+
+        Movie movie7 = new Movie("American Psycho",
+                ShowingStatus.END_OF_SHOWING,
+                "A wealthy New York City investment banking executive, Patrick Bateman, hides his alternate psychopathic ego from his co-workers and friends as he delves deeper into his violent, hedonistic fantasies.",
+                3.7, MovieType.MOVIE2D, "Mary Harron", new String[]{"Christian Bale", "Justin Theroux", "Josh Lucas"});
+
+        Movie movie8 = new Movie("Harry Potter and the Philosopher's Stone",
+                ShowingStatus.END_OF_SHOWING,
+                "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+                3.9, MovieType.MOVIE2D, "Chris Columbus", new String[]{"Daniel Radcliffe", "Rupert Grint", "Richard Harris"});
+
+        Movie movie9 = new Movie("Scream",
+                ShowingStatus.NOW_SHOWING,
+                "25 years after a streak of brutal murders shocked the quiet town of Woodsboro, Calif., a new killer dons the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town's deadly past.",
+                3.1, MovieType.MOVIE3D, "Matt Bettinelli-Olpin", new String[]{"Neve Campbell", "Courteney Cox", "David Arquette"});
+
+         
+        Movie movie10 = new Movie("Interstellar",
+                ShowingStatus.END_OF_SHOWING,
+                "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                4.3, MovieType.MOVIE2D, "Christopher Nolan", new String[]{"Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"});
+
+        movieManager.addMovie(movie1);
+        movieManager.addMovie(movie2);
+        movieManager.addMovie(movie3);
+        movieManager.addMovie(movie4);
+        movieManager.addMovie(movie5);
+        movieManager.addMovie(movie6);
+        movieManager.addMovie(movie7);
+        movieManager.addMovie(movie8);
+        movieManager.addMovie(movie9);
+        movieManager.addMovie(movie10);
     }
 
     /**
