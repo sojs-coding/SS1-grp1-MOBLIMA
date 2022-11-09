@@ -11,11 +11,19 @@ import entity.booking.Booking;
 
 public class ListTop5 {
 	
-	
+	 private MovieManager moviemanager;
+     private BookingManager bookingmanager;
+
+    ListTop5(MovieManager moviemanager,BookingManager bookingmanager)
+	{
+		this.moviemanager = moviemanager;
+        this.bookingmanager = bookingmanager;
+	}
+
+
 	 public void printTop5MoviesByRatings() 
 	 {
-		 MovieManager movielist= new MovieManager();
-		 ArrayList<Movie> movies = movielist.getMovies();
+		 ArrayList<Movie> movies = moviemanager.getMovies();
 		 HashMap<String, Float> ratings = new HashMap<String, Float>();
 		 for(Movie movie : movies) //loop through the array of movies
 		 {
@@ -62,8 +70,8 @@ public class ListTop5 {
     }
 	 public  void printTop5MoviesBySales()
 	 {	
-		BookingManager bookingManager = new BookingManager();
-        ArrayList<Booking> bookings = bookingManager.getBookings();
+
+        ArrayList<Booking> bookings = bookingmanager.getBookings();
         int size = bookings.size();
         int i = 0;
         Map<String,Integer> movieCount = new HashMap<String,Integer>();

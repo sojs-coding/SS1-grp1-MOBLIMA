@@ -12,19 +12,22 @@ import entity.movie.ShowingStatus;
 public class ManageMovielisting {
 
 	private Scanner sc = new Scanner(System.in);
+	private MovieManager moviemanager;
+
+	ManageMovielisting(MovieManager moviemanager)
+	{
+		this.moviemanager = moviemanager;
+	}
 
 	 public  void createmovielisting()
 	 {
 		    //create a new movie listing by adding a movie from movie manager
 			int choice;
-			MovieManager moviemanager = new MovieManager();
 			String title,director,synopsis;
 			float overallRating;
 			MovieType type = null;
 			String[] casts;
 			ShowingStatus status = null;
-			System.out.println("Movie's Overall Rating:");
-			overallRating = sc.nextFloat();
 			System.out.println("Movie's Title: ");
 			title = sc.nextLine();
 			System.out.println("Movie's Director:");
@@ -34,8 +37,8 @@ public class ManageMovielisting {
             synopsis = sc.nextLine();
 			System.out.println("Movie's Type:");
 			System.out.println(" (1) MOVIE3D\n " +
-			                 "   (2)BLOCKBUSTER\n "+
-			                  "  (3)MOVIE2D\n ");
+			                 " (2)BLOCKBUSTER\n "+
+			                  " (3)MOVIE2D\n ");
 			choice = sc.nextInt();
 			switch(choice)
 			{
@@ -50,10 +53,10 @@ public class ManageMovielisting {
 				  break;
 
 			}
-			System.out.print("Movie's Status:");
+			System.out.println("Movie's Status:");
 			System.out.println(" (1) COMING SOON\n " +
-			                 "   (2) PREVIEW\n "+
-			                  "  (3) NOW SHOWING\n " +
+			                   " (2) PREVIEW\n "+
+			                   " (3) NOW SHOWING\n " +
 							   " (4) END OF SHOWING\n");
 			choice = sc.nextInt();
 			switch(choice)
@@ -71,6 +74,9 @@ public class ManageMovielisting {
 				  status = ShowingStatus.END_OF_SHOWING;
 				  break;
 			}
+			System.out.println("Movie's Overall Rating:");
+			overallRating = sc.nextFloat();
+
 			Movie movie = new Movie(title,null,synopsis,overallRating,null,director,casts);
 			movie.setType(type);
 			movie.setStatus(status);
@@ -100,33 +106,50 @@ public class ManageMovielisting {
 	 }
 	 public  void updatemovielisting()
 	 {
-		 MovieManager movies = new MovieManager();
 		 int option;
 		 Movie movie = new Movie(null, null, null, 0, null, null, null);
-		 System.out.println("Which movie do you want to update?");
-		 System.out.println("Enter the movie title which you would like to update");
-		 String searchtitle = sc.nextLine();
-		 movie = movies.searchMovie(searchtitle);
+		 try{
+			System.out.println("Which movie do you want to update?");
+		    System.out.println("Enter the movie title which you would like to update");
+		    String searchtitle = sc.nextLine();
+		    movie = moviemanager.searchMovie(searchtitle);
+		 }
+		 catch(NullPointerException e)
+		 {
+			System.out.println("movies does not exist!");
+			return;
+		 }
+		
 		 do
 		 {
 			updatemoviemenu();
 			System.out.print("Select an option: ");
             option = sc.nextInt();
+			sc.nextLine();
 			switch(option)
 			{
 				case 1:
-				  System.out.println("Enter the updated Title: ");
-                  String title = sc.nextLine();
-				  movie.setTitle(title);
-				  break;
+				  try
+				  {
+					System.out.println("Enter the updated Title: ");
+					String title = sc.nextLine();
+					movie.setTitle(title);
+					break;
+				  }
+				  catch(Exception e)
+				  {
+						System.out.println("Invalid entry!");
+						return;
+					
+				  }
 				case 2:
 				  ShowingStatus status = null;
 				  System.out.println("Enter the updated Status: ");
 				  System.out.println("Movie's Status:");
-			      System.out.println(" (1) COMING SOON\n " +
-			                 "  (2) PREVIEW\n "+
-			                  "  (3) NOW SHOWING\n " +
-							   " (4) END OF SHOWING\n");
+			      System.out.println("(1) COMING SOON\n " +
+			                         "(2) PREVIEW\n "+
+			                         "(3) NOW SHOWING\n " +
+							         "(4) END OF SHOWING\n");
 			        int choice = sc.nextInt();
 			        switch(choice)
 			        {
@@ -146,10 +169,19 @@ public class ManageMovielisting {
 					movie.setStatus(status);
 				  break;
 				case 3:
-				  System.out.println("Enter the updated Synopsis: ");
-				  String synopsis = sc.nextLine();
-				  movie.setTitle(synopsis);
-				  break;
+				  try
+				  {
+					System.out.println("Enter the updated Synopsis: ");
+					String synopsis = sc.nextLine();
+					movie.setTitle(synopsis);
+					break;
+				  } 
+				  catch(Exception e)
+				  {
+						System.out.println("Invalid entry!");
+						return;
+					
+				  }
 				case 4:
 				  System.out.println("Enter the updated rating: ");
 				  Float overallrating = sc.nextFloat();
@@ -158,9 +190,9 @@ public class ManageMovielisting {
 				case 5:
 				   MovieType type = null;
 				   System.out.println("Movie's Type:");
-				   System.out.println(" (1) MOVIE3D\n " +
-								 "   (2)BLOCKBUSTER\n "+
-								  "  (3)MOVIE2D\n ");
+				   System.out.println("(1)MOVIE3D\n " +
+								      "(2)BLOCKBUSTER\n "+
+								      "(3)MOVIE2D\n ");
 				  int choose = sc.nextInt();
 				  switch(choose)
 				  {
@@ -177,10 +209,19 @@ public class ManageMovielisting {
 				  movie.setType(type);
 				  break;
 				case 6:
-				  System.out.println("Enter the updated Director: ");
-				  String director = sc.nextLine();
-				  movie.setDirector(director);
-				  break;
+				  try
+				  {
+					System.out.println("Enter the updated Director: ");
+					String director = sc.nextLine();
+					movie.setDirector(director);
+					break;
+				  }
+				  catch(Exception e)
+				  {
+						System.out.println("Invalid entry!");
+						return;
+					
+				  }
 				case 7:
 				  String [] casts;
 				  casts = addCast();
@@ -218,8 +259,7 @@ public class ManageMovielisting {
 	 public  void removemovielisting()
 	 {
 		int index = 0,size;
-		MovieManager removemovie = new MovieManager();
-		ArrayList<Movie> movieList = removemovie.getMovies();
+		ArrayList<Movie> movieList = moviemanager.getMovies();
 		Hashtable<String,Integer> movietable = new Hashtable<String,Integer>();
 		size = movieList.size();
 		System.out.println("======= Movies ==========");
@@ -241,14 +281,28 @@ public class ManageMovielisting {
             System.out.print("Which movie do you want to remove?: ");
 			System.out.print("Enter full title of movie you want to remove?: ");
 			String movietitle= sc.nextLine();
+			int counter = 0;
 			for (Movie movie : movieList) 
 			{
                if(movie.getTitle().equals(movietitle))
 			   {
 				  index = movieList.indexOf(movie);
+				  counter = 1;
+				  break;
 			   }
 
+
 		    }
+			if(counter == 1)
+			{
+				moviemanager.removeMovie(index);
+			    System.out.println( " Movie succesfully removed  " );
+			}
+			else
+			{
+				System.out.println( " Movie not succesfully removed  " );
+			}
+		
 			/*Set<Entry<String, Integer> > entrySet = movietable.entrySet();
 			int movieindex = 0;
 			for (Entry<String,Integer> entry : entrySet)
@@ -259,8 +313,6 @@ public class ManageMovielisting {
 					break;
 				 }
 			}*/
-			removemovie.removeMovie(index);
-			System.out.println( " Movie succesfully removed  " );
 
 	    }
 	 }
