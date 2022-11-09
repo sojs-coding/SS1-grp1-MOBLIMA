@@ -1,7 +1,5 @@
-import controller.BookingManager;
-import controller.CineplexManager;
-import controller.MovieManager;
-import controller.ShowtimeManager;
+package controller;
+
 import entity.cinema.*;
 import entity.movie.Movie;
 import entity.movie.MovieType;
@@ -9,7 +7,7 @@ import entity.movie.ShowingStatus;
 import java.io.*;
 
 /**
-Represents the Initialization of the application
+Represents the controller.Initialization of the application
  It shall be the central point of the application
  Provides all the necessary classes
  @author Samuel Ong
@@ -68,7 +66,7 @@ public class Initialization implements Serializable{
     }
 
     /**
-     * Instantiate a new Initialization if null
+     * Instantiate a new controller.Initialization if null
      * @return the only INSTANCE of initialization.
      */
     public static Initialization getINSTANCE() {
@@ -81,7 +79,7 @@ public class Initialization implements Serializable{
 
     /**
      * Load past data
-     * @return INSTANCE of Initialization
+     * @return INSTANCE of controller.Initialization
      */
     public static Initialization initProgram() {
         boolean deleteFile = false;
