@@ -227,7 +227,7 @@ public class Initialization implements Serializable{
     /**
      * Prepare fresh copy of Cineplexes
      */
-    public void initCineplex() {
+ public void initCineplex() {
         Cineplex gvJurong = new Cineplex("Jurong");
         Layout layout = new Layout(3,5);
         layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -275,8 +275,168 @@ public class Initialization implements Serializable{
         Showtime juraShowtime2 = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
         showtimeManager.addShowtime(juraShowtime2);
 
+        layout = new Layout(5,7);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,6, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,5, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,6, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,5, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,6, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,5, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+
+        Cinema cinema = new Cinema("JR3".toCharArray(), layout);
+        gvJurong.addCinema(cinema);
+
+        
         Cineplex gvWoodlands = new Cineplex("Woodlands");
-    }
+        layout = new Layout(3,5);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        Cinema cinema = new Cinema("WL1".toCharArray(), layout);
+        gvWoodlands.addCinema(cinema);
+
+
+        \\Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
+        \\showtimeManager.addShowtime(juraShowtime);
+
+        layout = new Layout(3,5);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        Cinema cinema = new Cinema("WL2".toCharArray(), layout);
+        gvWoodlands.addCinema(cinema);
+
+        layout = new Layout(3,5);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        Cinema cinema = new Cinema("WL3".toCharArray(), layout);
+        gvWoodlands.addCinema(cinema);
+        cineplexManager.addCineplex(gvWoodlands);
+
+        Cineplex gvTampines = new Cineplex("Tampines");
+        layout = new Layout(5,7);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,6, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,5, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,6, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,5, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,6, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,5, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+
+        Cinema cinema = new Cinema("TM1".toCharArray(), layout);
+        gvTampines.addCinema(cinema);
+
+        \\Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
+        \\showtimeManager.addShowtime(juraShowtime);
+
+        layout = new Layout(4,6);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+
+        Cinema cinema = new Cinema("TM2".toCharArray(), layout);
+        gvTampines.addCinema(cinema);
+
+        layout = new Layout(5,5);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(3,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(4,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(4,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(4,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        cinema = new Cinema("TM3".toCharArray(), layout);
+        gvTampines.addCinema(cinema);
+        cineplexManager.addCineplex(gvTampines);
+
+
+    
 
     public Layout getLayout() {
         Layout layout = new Layout(3,5);
