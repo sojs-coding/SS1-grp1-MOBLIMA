@@ -301,7 +301,7 @@ public class Initialization implements Serializable{
         layout.setObject(4,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(4,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
-        Cinema cinema = new Cinema("JR3".toCharArray(), layout);
+        cinema = new Cinema("JR3".toCharArray(), layout);
         gvJurong.addCinema(cinema);
 
         
@@ -317,7 +317,7 @@ public class Initialization implements Serializable{
         layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        Cinema cinema = new Cinema("WL1".toCharArray(), layout);
+        cinema = new Cinema("WL1".toCharArray(), layout);
         gvWoodlands.addCinema(cinema);
 
 
@@ -334,7 +334,7 @@ public class Initialization implements Serializable{
         layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        Cinema cinema = new Cinema("WL2".toCharArray(), layout);
+        cinema = new Cinema("WL2".toCharArray(), layout);
         gvWoodlands.addCinema(cinema);
 
         layout = new Layout(3,5);
@@ -348,7 +348,7 @@ public class Initialization implements Serializable{
         layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        Cinema cinema = new Cinema("WL3".toCharArray(), layout);
+        cinema = new Cinema("WL3".toCharArray(), layout);
         gvWoodlands.addCinema(cinema);
         cineplexManager.addCineplex(gvWoodlands);
 
@@ -379,7 +379,7 @@ public class Initialization implements Serializable{
         layout.setObject(4,2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(4,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
-        Cinema cinema = new Cinema("TM1".toCharArray(), layout);
+        cinema = new Cinema("TM1".toCharArray(), layout);
         gvTampines.addCinema(cinema);
 
         //Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
@@ -390,24 +390,24 @@ public class Initialization implements Serializable{
         layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(0,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(1,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(1,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(2,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(3,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3,3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(3,5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3,4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
-        Cinema cinema = new Cinema("TM2".toCharArray(), layout);
+        cinema = new Cinema("TM2".toCharArray(), layout);
         gvTampines.addCinema(cinema);
 
         layout = new Layout(5,5);
@@ -435,21 +435,8 @@ public class Initialization implements Serializable{
         gvTampines.addCinema(cinema);
         cineplexManager.addCineplex(gvTampines);
 
-
+    }
     
 
-    public Layout getLayout() {
-        Layout layout = new Layout(3,5);
-        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        return layout;
-    }
 
 }

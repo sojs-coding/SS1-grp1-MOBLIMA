@@ -16,7 +16,9 @@ import entity.booking.Ticket;
 import entity.cinema.Cinema;
 import entity.cinema.Cineplex;
 import entity.cinema.Layout;
+import entity.cinema.LayoutItem;
 import entity.cinema.LayoutObject;
+import entity.cinema.LayoutObjectFactory;
 import entity.cinema.Showtime;
 import entity.movie.Movie;
 
@@ -28,16 +30,27 @@ public class BookingUI {
     private MovieManager movieManager;
     private CineplexManager cineplexManager;
     private ShowtimeManager showtimeManager;
-    private Layout layout;
     private BookingManager bookingManager;
 
-    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager,Layout l,BookingManager b){
+    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager, BookingManager b){
         this.movieGoer = movieGoer;
         this.movieManager = m;
         this.cineplexManager = c;
         this.showtimeManager = showtimeManager;
-        this.layout = l;
         this.bookingManager = b;
+    }
+    public Layout createLayout(){
+        Layout layout = new Layout(3,5);
+        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
+        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        return layout;
     }
 
     public String getMaxCount(Map<String,Integer> movieCount){
@@ -176,8 +189,11 @@ public class BookingUI {
         
 
         // Loops through Showtime array to find corresponding showtime with input datetime
-        Cinema cinema = new Cinema("JR1".toCharArray(),layout);
+        //Dummy cinema and showtime
+        Cinema cinema = new Cinema("XXX".toCharArray(), createLayout());
         Showtime showtime = new Showtime(null, cinema, null);
+
+
         ArrayList<Showtime> showtimes = showtimeManager.getShowtimes();
 
         for(int i = 0; i < showtimes.size(); i++){
@@ -235,19 +251,18 @@ public class BookingUI {
                         }
                         int column = sc.nextInt();
                         if (!layout.isOccupied(row, column)){
-                            //Couple seat
+                            //Couple Seat
                             if(layout.getLayoutObject()[row][column].getSeatSymbol()== 'C'){
                                 System.out.println("Couple seats are available.\n");
-                                tickets.add(new Ticket(row,column,movieGoer.getAge())); 
+                                tickets.add(showtime.produceTicket(movieGoer.getAge(), row, column));
                                 layout.occupy(row, column);
                             }
                             //Single seat
                             else{
                                 System.out.println("Single seat is available.\n");
-                                tickets.add(new Ticket(row,column,movieGoer.getAge())); 
+                                tickets.add(showtime.produceTicket(movieGoer.getAge(), row, column)); 
                                 layout.occupy(row, column);
                             }
-                            //Generates count number of tickets
                         }
                         else{
                             System.out.println("Seat is taken.\n");
@@ -263,7 +278,7 @@ public class BookingUI {
 
                 } catch (Exception e) {
                     System.out.println("Invalid entry...");
-
+                    Layout layout = showtime.getLayout();
                     //Free the seats in cart
                     System.out.println("Removing tickets from cart...");
                     for(int i = 0; i < tickets.size(); i++){
