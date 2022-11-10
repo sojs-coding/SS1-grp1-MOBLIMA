@@ -321,8 +321,8 @@ public class Initialization implements Serializable{
         gvWoodlands.addCinema(cinema);
 
 
-        \\Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
-        \\showtimeManager.addShowtime(juraShowtime);
+        //Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
+        //showtimeManager.addShowtime(juraShowtime);
 
         layout = new Layout(3,5);
         layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
