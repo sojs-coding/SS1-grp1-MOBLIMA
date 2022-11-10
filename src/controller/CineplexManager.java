@@ -24,4 +24,20 @@ public class CineplexManager implements Serializable {
     public ArrayList<Cineplex> getCineplexes() {
         return cineplexes;
     }
+
+    public Cineplex searchCompany(String company) {
+		try{
+			for(int i = 0; i < cineplexes.size(); i++) {
+				Cineplex targetCineplex = cineplexes.get(i);
+				if(targetCineplex.getCompany().equals(company)) {
+					return targetCineplex;
+				}
+			}
+		}catch (IndexOutOfBoundsException e) {
+			System.out.printf("Cineplex cannot be found....");
+		}
+		return null;
+	}
+
+    
 }

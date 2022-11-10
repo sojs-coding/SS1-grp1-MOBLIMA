@@ -40,7 +40,7 @@ public class MovieGoerAuthenticator implements UserAuthenticator {
         } catch (FileNotFoundException e) {
             System.out.println("Staff account file unable to be found!");
             System.exit(0);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("IO error!" + e.getMessage());
             System.exit(0);
         }
