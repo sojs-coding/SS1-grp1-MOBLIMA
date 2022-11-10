@@ -127,4 +127,8 @@ public class Layout implements Serializable {
 		}
 		return true;
 	}
+
+	public LayoutObject[][] getLayoutObject() {
+		return layout;
+	}
 }
