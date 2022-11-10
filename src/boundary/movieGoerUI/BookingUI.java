@@ -221,7 +221,7 @@ public class BookingUI {
                         int row = sc.nextInt();
                         if(row == -1)
                             break;
-0                        if(row < -1){
+                        if(row < -1){
                             System.out.println("Exiting...");
 
                             //Free the seats in cart
@@ -313,8 +313,10 @@ public class BookingUI {
                     else
                         System.out.print(bookings.get(i).getTicket().getRow() + " " + ((bookings.get(i).getTicket().getColumn())-1) + "\n");
                 }
-                System.out.print("(Single Seat) Ticket row and column: ");
-                System.out.println(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn());
+                else{
+                    System.out.print("(Single Seat) Ticket row and column: ");
+                    System.out.println(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn());
+                }
             }
             i++;
             System.out.println("--------------------------------------------------------------------\n");
