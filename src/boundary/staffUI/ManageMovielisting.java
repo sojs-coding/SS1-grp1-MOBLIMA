@@ -1,6 +1,7 @@
 package boundary.staffUI;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.MovieManager;
@@ -30,52 +31,89 @@ public class ManageMovielisting {
 			ShowingStatus status = null;
 			System.out.println("Movie's Title: ");
 			title = sc.nextLine();
+			while(title.isEmpty())
+			{
+				System.out.println("Enter a valid title!");
+				title = sc.nextLine();
+				
+			}
 			System.out.println("Movie's Director:");
 			director = sc.nextLine();
+			while(director.isEmpty())
+			{
+				System.out.println("Enter a valid director name!");
+				director = sc.nextLine();
+			}
 			casts = addCast();
+			if(casts == null) /*check for invalid casts */
+			{
+				return;
+			}
 			System.out.println("Movie's Synopsis:");
             synopsis = sc.nextLine();
-			System.out.println("Movie's Type:");
-			System.out.println(" (1) MOVIE3D\n " +
-			                 " (2)BLOCKBUSTER\n "+
-			                  " (3)MOVIE2D\n ");
-			choice = sc.nextInt();
-			switch(choice)
+			while(synopsis.isEmpty())
 			{
-				case 1:
-				  type = MovieType.MOVIE3D;
-				  break;
-				case 2:
-				  type = MovieType.BLOCKBUSTER;
-				  break;
-				case 3:
-				  type = MovieType.MOVIE2D;
-				  break;
+				System.out.println("Enter a valid synopsis!");
+				synopsis = sc.nextLine();
+			}
+			try
+			{
+					System.out.println("Movie's Type: ");
+					System.out.println("  (1)MOVIE3D\n " +
+									" (2)BLOCKBUSTER\n "+
+									" (3)MOVIE2D\n ");
+					choice = sc.nextInt();
+			
+					switch(choice)
+					{
+						case 1:
+						type = MovieType.MOVIE3D;
+						break;
+						case 2:
+						type = MovieType.BLOCKBUSTER;
+						break;
+						case 3:
+						type = MovieType.MOVIE2D;
+						break;
 
+					}
+					System.out.println("Movie's Status:");
+					System.out.println("  (1) COMING SOON\n " +
+									" (2) PREVIEW\n "+
+									" (3) NOW SHOWING\n " +
+									" (4) END OF SHOWING\n");
+					choice = sc.nextInt();
+					switch(choice)
+					{
+						case 1:
+						status = ShowingStatus.COMING_SOON;
+						break;
+						case 2:
+						status = ShowingStatus.PREVIEW;
+						break;
+						case 3:
+						status = ShowingStatus.NOW_SHOWING;
+						break;
+						case 4:
+						status = ShowingStatus.END_OF_SHOWING;
+						break;
+					}
 			}
-			System.out.println("Movie's Status:");
-			System.out.println(" (1) COMING SOON\n " +
-			                   " (2) PREVIEW\n "+
-			                   " (3) NOW SHOWING\n " +
-							   " (4) END OF SHOWING\n");
-			choice = sc.nextInt();
-			switch(choice)
+			catch (InputMismatchException i)
 			{
-				case 1:
-				  status = ShowingStatus.COMING_SOON;
-				  break;
-			    case 2:
-				  status = ShowingStatus.PREVIEW;
-				  break;
-			    case 3:
-				  status = ShowingStatus.NOW_SHOWING;
-				  break;
-				case 4:
-				  status = ShowingStatus.END_OF_SHOWING;
-				  break;
+				System.out.println("Enter a valid input!");
+			    return;
 			}
-			System.out.println("Movie's Overall Rating:");
-			overallRating = sc.nextFloat();
+			try
+			{
+				System.out.println("Movie's Overall Rating:");
+			    overallRating = sc.nextFloat();
+			}
+			catch(Exception e)
+		    {
+			  System.out.println("Invalid input!");
+			  return;
+		    }
 
 			Movie movie = new Movie(title,null,synopsis,overallRating,null,director,casts);
 			movie.setType(type);
@@ -90,15 +128,28 @@ public class ManageMovielisting {
 	 }
 	 public String[] addCast()
 	 {
-
-        System.out.print("Number Of Cast: ");
-        int number = sc.nextInt();
-		sc.nextLine();
+        int number = 0;
+		try
+        {
+            System.out.print("Number Of Casts: ");
+            number = sc.nextInt();
+		    sc.nextLine();
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Entry is not an integer !");
+            return null;
+        }
 		String []moviecasts = new String[number];
         for (int i = 0; i < moviecasts.length; i++) 
 		{
             System.out.print("Movie's Cast " + (i+1) + " : ");
             moviecasts[i] = sc.nextLine();
+			if(moviecasts[i].isEmpty())
+			{
+				System.out.println("Enter a valid cast member name!");
+				return null;
+			}
             
         }
 		return moviecasts;
@@ -108,123 +159,155 @@ public class ManageMovielisting {
 	 {
 		 int option;
 		 Movie movie = new Movie(null, null, null, 0, null, null, null);
-		 try{
+		 try
+		 {
 			System.out.println("Which movie do you want to update?");
 		    System.out.println("Enter the movie title which you would like to update");
 		    String searchtitle = sc.nextLine();
 		    movie = moviemanager.searchMovie(searchtitle);
+			if(movie == null)
+			{
+                System.out.println("Movie does not exist...");
+                return;
+		    }
 		 }
-		 catch(NullPointerException e)
+		 catch(Exception e)
 		 {
-			System.out.println("movies does not exist!");
+			System.out.println("invalid entry!");
 			return;
 		 }
 		
 		 do
 		 {
 			updatemoviemenu();
-			System.out.print("Select an option: ");
-            option = sc.nextInt();
-			sc.nextLine();
+			try
+            {
+                System.out.print("Select an option: ");
+				option = sc.nextInt();
+				sc.nextLine();
+            }
+            catch(Exception ex)
+            {
+               System.out.println("Entry is not an integer !");
+               return;
+            }
 			switch(option)
 			{
 				case 1:
-				  try
-				  {
 					System.out.println("Enter the updated Title: ");
 					String title = sc.nextLine();
+					while(title.isEmpty())
+					{
+						System.out.println("Enter a valid title!");
+						title = sc.nextLine();
+						
+					}
 					movie.setTitle(title);
 					break;
-				  }
-				  catch(Exception e)
-				  {
-						System.out.println("Invalid entry!");
-						return;
-					
-				  }
 				case 2:
-				  ShowingStatus status = null;
-				  System.out.println("Enter the updated Status: ");
-				  System.out.println("Movie's Status:");
-			      System.out.println("(1) COMING SOON\n " +
-			                         "(2) PREVIEW\n "+
-			                         "(3) NOW SHOWING\n " +
-							         "(4) END OF SHOWING\n");
-			        int choice = sc.nextInt();
-			        switch(choice)
-			        {
-				       case 1:
-				         status = ShowingStatus.COMING_SOON;
-				         break;
-			           case 2:
-				         status = ShowingStatus.PREVIEW;
-				         break;
-			           case 3:
-				         status = ShowingStatus.NOW_SHOWING;
-				         break;
-				       case 4:
-				         status = ShowingStatus.END_OF_SHOWING;
-				         break;
-			        }
-					movie.setStatus(status);
-				  break;
+                     try
+					 {
+						ShowingStatus status = null;
+						System.out.println("Enter the updated Status: ");
+						System.out.println("Movie's Status:");
+						System.out.println(" (1) COMING SOON\n " +
+											"(2) PREVIEW\n "+
+											"(3) NOW SHOWING\n " +
+											"(4) END OF SHOWING\n");
+							int choice = sc.nextInt();
+							switch(choice)
+							{
+							case 1:
+								status = ShowingStatus.COMING_SOON;
+								break;
+							case 2:
+								status = ShowingStatus.PREVIEW;
+								break;
+							case 3:
+								status = ShowingStatus.NOW_SHOWING;
+								break;
+							case 4:
+								status = ShowingStatus.END_OF_SHOWING;
+								break;
+							}
+							movie.setStatus(status);
+							break;
+					 }
+					 catch (Exception e)
+					 {
+						System.out.println("Enter a valid input!");
+			            return;
+					 }
 				case 3:
-				  try
-				  {
 					System.out.println("Enter the updated Synopsis: ");
 					String synopsis = sc.nextLine();
-					movie.setTitle(synopsis);
+					while(synopsis.isEmpty())
+					{
+						System.out.println("Enter a valid updated synopsis!");
+						synopsis = sc.nextLine();
+					}
+					movie.setSynopsis(synopsis);
 					break;
-				  } 
-				  catch(Exception e)
-				  {
-						System.out.println("Invalid entry!");
-						return;
-					
-				  }
 				case 4:
-				  System.out.println("Enter the updated rating: ");
-				  Float overallrating = sc.nextFloat();
-				  movie.setOverallRating(overallrating);
-				  break;
+				    try
+					{
+						System.out.println("Enter the updated rating: ");
+						Float overallrating = sc.nextFloat();
+						movie.setOverallRating(overallrating);
+						break;
+					}
+					catch(Exception e)
+					{
+						System.out.println("Enter a valid updated rating!");
+			            return;
+					}
 				case 5:
-				   MovieType type = null;
-				   System.out.println("Movie's Type:");
-				   System.out.println("(1)MOVIE3D\n " +
-								      "(2)BLOCKBUSTER\n "+
-								      "(3)MOVIE2D\n ");
-				  int choose = sc.nextInt();
-				  switch(choose)
-				  {
-					case 1:
-					  type = MovieType.MOVIE3D;
-					  break;
-					case 2:
-					  type = MovieType.BLOCKBUSTER;
-					  break;
-					case 3:
-					  type = MovieType.MOVIE2D;
-					  break;
-				  }
-				  movie.setType(type);
-				  break;
+				    try
+					{
+						MovieType type = null;
+						System.out.println("Movie's Type:");
+						System.out.println("(1)MOVIE3D\n " +
+											"(2)BLOCKBUSTER\n "+
+											"(3)MOVIE2D\n ");
+						int choose = sc.nextInt();
+						switch(choose)
+						{
+							case 1:
+							type = MovieType.MOVIE3D;
+							break;
+							case 2:
+							type = MovieType.BLOCKBUSTER;
+							break;
+							case 3:
+							type = MovieType.MOVIE2D;
+							break;
+						}
+						movie.setType(type);
+						break;
+					}
+					catch (Exception e)
+					 {
+						System.out.println("Enter a valid input!");
+			            return;
+					 }
 				case 6:
-				  try
-				  {
 					System.out.println("Enter the updated Director: ");
 					String director = sc.nextLine();
+					while(director.isEmpty())
+					{
+						System.out.println("Enter a valid director!");
+						director = sc.nextLine();
+						
+					}
 					movie.setDirector(director);
 					break;
-				  }
-				  catch(Exception e)
-				  {
-						System.out.println("Invalid entry!");
-						return;
-					
-				  }
 				case 7:
 				  String [] casts;
 				  casts = addCast();
+				  if(casts == null) /*check for invalid casts */
+			      {
+				     return;
+			      }
 				  movie.setCasts(casts);
 				  break;
 				case 8:
@@ -278,9 +361,14 @@ public class ManageMovielisting {
 
 		    }
 			System.out.println("====================================");
-            System.out.print("Which movie do you want to remove?: ");
-			System.out.print("Enter full title of movie you want to remove?: ");
+            System.out.println("Which movie do you want to remove?: ");
+			System.out.println("Enter full title of movie you want to remove?: ");
 			String movietitle= sc.nextLine();
+			while(movietitle.isEmpty())
+			{
+				System.out.println("Enter a valid movie title!");
+				movietitle= sc.nextLine();
+			}
 			int counter = 0;
 			for (Movie movie : movieList) 
 			{
