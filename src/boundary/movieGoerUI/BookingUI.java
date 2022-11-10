@@ -9,10 +9,7 @@ import controller.BookingManager;
 import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
-import entity.booking.MovieGoer;
-import entity.booking.Booking;
-import entity.booking.Payment;
-import entity.booking.Ticket;
+import entity.booking.*;
 import entity.cinema.Cinema;
 import entity.cinema.Cineplex;
 import entity.cinema.Layout;
@@ -238,14 +235,17 @@ public class BookingUI {
                             //Couple seat
                             if(layout.getLayoutObject()[row][column].getSeatSymbol()== 'C'){
                                 System.out.println("Couple seats are available.\n");
-                                tickets.add(new Ticket(row,column,movieGoer.getAge())); 
-                                layout.occupy(row, column);
+                                ArrayList<TicketType> ticketTypes = new ArrayList<>();
+                                ticketTypes.add(TicketType.ELDERLY);
+                                showtime.produceTicket(row, column, ticketTypes);
                             }
                             //Single seat
                             else{
                                 System.out.println("Single seat is available.\n");
-                                tickets.add(new Ticket(row,column,movieGoer.getAge())); 
-                                layout.occupy(row, column);
+                                ArrayList<TicketType> ticketTypes = new ArrayList<>();
+                                ticketTypes.add(TicketType.ELDERLY);
+                                showtime.produceTicket(row, column, ticketTypes);
+                                cinema.cloneCinemaLayout()
                             }
                             //Generates count number of tickets
                         }

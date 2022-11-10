@@ -1,9 +1,11 @@
 package entity.cinema;
 import entity.booking.PersonAge;
 import entity.booking.Ticket;
+import entity.booking.TicketType;
 import entity.movie.Movie;
 import java.io.Serializable;
 import java.time.LocalDateTime; // Import the LocalDateTime class
+import java.util.ArrayList;
 
 /**
  Represents the Showtime for each movie being shown in the cinema
@@ -50,9 +52,9 @@ public class Showtime implements Serializable {
 	 * Occupies the Seat and
 	 * Instantiates a Ticket for the Seat
 	 */
-	public Ticket produceTicket(PersonAge age, int row, int column) {
+	public Ticket produceTicket(int row, int column, ArrayList<TicketType> ticketTypes) {
 		if (layout.occupy(row, column)) {
-			return new Ticket(row, column, age);
+			return new Ticket(row, column, this, ticketTypes);
 		}
 		return null;
 	}
