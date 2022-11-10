@@ -38,6 +38,12 @@ public class Initialization implements Serializable{
      */
     private ShowtimeManager showtimeManager;
 
+    /**
+     *
+     * @return
+     */
+    private HolidayManager holidayManager;
+
     public CineplexManager getCineplexManager() {
         return cineplexManager;
     }
@@ -53,6 +59,8 @@ public class Initialization implements Serializable{
     public ShowtimeManager getShowtimeManager() {
         return showtimeManager;
     }
+
+    public HolidayManager getHolidayManager() { return holidayManager;}
 
     /**
      * Constructor of initialization
