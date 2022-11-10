@@ -47,7 +47,7 @@ public class LayoutObject implements Serializable {
 	/**
 	 * To retrieve the display character
 	 */
-	protected char getSeatSymbol() {
+	public char getSeatSymbol() {
 		return displayChar;
 	}
 	/**
@@ -59,7 +59,7 @@ public class LayoutObject implements Serializable {
 	/**
 	 * To return the occupancy
 	 */
-	protected boolean isOccupied() {
+	public boolean isOccupied() {
 		return occupied;
 	}
 	/**

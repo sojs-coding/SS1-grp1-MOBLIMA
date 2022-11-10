@@ -211,40 +211,66 @@ public class BookingUI {
                 System.out.println("Returning to menu....");
                 return;
             case 2:
+                ArrayList<Ticket> tickets = new ArrayList<Ticket>();
                 try {
-                    System.out.println("How many tickets are you purchasing?");
-                    int count = sc.nextInt();
-                    ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-                    int i = 0;
-
-                    while (i < count){
+                    while (true){
                         showtime.displaySeating();
                         Layout layout = showtime.getLayout();
-                        System.out.printf("Please enter Seat %d that you want to purchase.\n", i+1);
-                        System.out.println("Row:");
+                        System.out.println("Enter the seat (row column) you want to purchase (-1 to proceed booking, -2 to return to home menu)");
+                        System.out.printf("Current tickets in cart: %d\n", tickets.size());
                         int row = sc.nextInt();
-                        System.out.println("Column:");
+                        if(row == -1)
+                            break;
+                        if(row < -1){
+                            System.out.println("Exiting...");
+
+                            //Free the seats in cart
+                            System.out.println("Removing tickets from cart...");
+                            for(int k = 0; k < tickets.size(); k++){
+                                int r = tickets.get(k).getRow();
+                                int column = tickets.get(k).getColumn();
+                                layout.free(r,column);
+                            }
+                            return;
+                        }
                         int column = sc.nextInt();
                         if (!layout.isOccupied(row, column)){
-                            System.out.println("Seat is available.");
-                            tickets.add(new Ticket(row,column,movieGoer.getAge())); 
-                            layout.occupy(row, column);
-                            i++;
+                            //Couple seat
+                            if(layout.getLayoutObject()[row][column].getSeatSymbol()== 'C'){
+                                System.out.println("Couple seats are available.\n");
+                                tickets.add(new Ticket(row,column,movieGoer.getAge())); 
+                                layout.occupy(row, column);
+                            }
+                            //Single seat
+                            else{
+                                System.out.println("Single seat is available.\n");
+                                tickets.add(new Ticket(row,column,movieGoer.getAge())); 
+                                layout.occupy(row, column);
+                            }
                             //Generates count number of tickets
                         }
                         else{
-                            System.out.println("Seat is taken.");
+                            System.out.println("Seat is taken.\n");
                         }
                     }
                     // Generates only one payment per MovieGoer
                     Payment payment = new Payment(cinema.getCode());
-                    for(int j = 0; j < count; j++){
+                    for(int j = 0; j < tickets.size(); j++){
                         Booking booking = new Booking(showtime, movieGoer, payment, tickets.get(j), j);
                         bookingManager.addBooking(booking);
                     }
                     return;
-                } catch (NullPointerException e) {
+
+                } catch (Exception e) {
                     System.out.println("Invalid entry...");
+
+                    //Free the seats in cart
+                    System.out.println("Removing tickets from cart...");
+                    for(int i = 0; i < tickets.size(); i++){
+                        int row = tickets.get(i).getRow();
+                        int column = tickets.get(i).getColumn();
+                        layout.free(row,column);
+                    }
                     return;
                 }
 
@@ -278,10 +304,22 @@ public class BookingUI {
                 System.out.println(dtf.format(bookings.get(i).getCentral().getDateTime()));
                 System.out.print("Payment Tid: ");
                 System.out.println(bookings.get(i).getPayment().getTid());
-                System.out.print("Ticket row and column: ");
-                System.out.println(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn());
+                //Print both seats for couple seat
+                if(bookings.get(i).getCentral().getLayout().getLayoutObject()[bookings.get(i).getTicket().getRow()][bookings.get(i).getTicket().getColumn()].getSeatSymbol() == 'C'){
+                    System.out.print("(Couple Seats) Ticket rows and columns: ");
+                    System.out.print(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn() + ", ");
+                    if(bookings.get(i).getCentral().getLayout().getLayoutObject()[bookings.get(i).getTicket().getRow()][bookings.get(i).getTicket().getColumn()+1].isOccupied())
+                        System.out.print(bookings.get(i).getTicket().getRow() + " " + ((bookings.get(i).getTicket().getColumn())+1) + "\n");
+                    else
+                        System.out.print(bookings.get(i).getTicket().getRow() + " " + ((bookings.get(i).getTicket().getColumn())-1) + "\n");
+                }
+                else{
+                    System.out.print("(Single Seat) Ticket row and column: ");
+                    System.out.println(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn());
+                }
             }
             i++;
+            System.out.println("--------------------------------------------------------------------\n");
         }
     }
 
@@ -321,6 +359,6 @@ public class BookingUI {
                 break;
             }
         }
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------\n");
     }
 }
