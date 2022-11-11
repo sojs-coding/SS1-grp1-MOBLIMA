@@ -253,14 +253,15 @@ public class BookingUI {
                                 System.out.println("Couple seats are available.\n");
                                 ArrayList<TicketType> ticketTypes = new ArrayList<>();
                                 ticketTypes.add(TicketType.ELDERLY);
-                                showtime.produceTicket(row, column, ticketTypes);
+                                tickets.add(showtime.produceTicket(row, column, ticketTypes));
+
                             }
                             //Single seat
                             else{
                                 System.out.println("Single seat is available.\n");
                                 ArrayList<TicketType> ticketTypes = new ArrayList<>();
                                 ticketTypes.add(TicketType.ELDERLY);
-                                showtime.produceTicket(row, column, ticketTypes);
+                                tickets.add(showtime.produceTicket(row, column, ticketTypes));
                                 cinema.cloneCinemaLayout();
                             }
                         }
