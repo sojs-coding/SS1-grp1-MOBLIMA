@@ -32,7 +32,7 @@ public class BookingUI {
         this.showtimeManager = showtimeManager;
         this.bookingManager = b;
     }
-    public Layout createLayout(){
+    public Layout defaultLayout(){
         Layout layout = new Layout(3,5);
         layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -121,10 +121,8 @@ public class BookingUI {
         return count;
     }
 
-    public void BookAndPurchase(){
+    private Movie movieSearch(){
         Scanner sc = new Scanner(System.in);
-
-        //Returns movie based on title
         Movie movie = new Movie(null, null, null, 0, null, null, null);
         try {
             printMovies(movieManager);
@@ -134,15 +132,20 @@ public class BookingUI {
             movie = movieManager.searchMovie(title);     
             if(movie == null){
                 System.out.println("Movie does not exist...");
-                return;
+                return null;
+            }
+            else{
+                return movie;
             }
         } catch (NoSuchElementException e) {
             System.out.println("Invalid entry...");
             sc.close();
-            return;
+            return null;
         }
+    }
 
-        //Returns cineplex 
+    private Cineplex cineplexSearch(){
+        Scanner sc = new Scanner(System.in);
         Cineplex cineplex = new Cineplex(null);
         String cineplexString;
         try {
@@ -153,15 +156,20 @@ public class BookingUI {
             cineplex = cineplexManager.searchCompany(cineplexString);
             if(cineplex == null){
                 System.out.println("Cineplex does not exist...");
-                return;
+                return null;
+            }
+            else{
+                return cineplex;
             }
         } catch (Exception e) {
             System.out.println("Invalid entry...");
             sc.close();
-            return;
+            return null;
         }
+    }
 
-        //Returns dateTime based on string given
+    private String dateTimeSearch(Cineplex cineplex,Movie movie){
+        Scanner sc = new Scanner(System.in);
         String avail;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
         try {
@@ -169,23 +177,35 @@ public class BookingUI {
             int count = printShowTimes(cineplex,movie,showtimeManager);
             if (count == 0){
                 System.out.println("There are no showtimes...");
-                return;
+                return null;
             } //ShowTimes corresponding to cinema and movie are given
             System.out.println("(3) What and which cinema do you prefer? YYTTMMddHHmm format");
             System.out.println("Enter the time and cinema...(E.g 202209011122 JR1)");
             avail = sc.nextLine();
+            return avail;
         } catch (Exception e) {
             System.out.println("Invalid entry...");
             sc.close();
-            return;
+            return null;
         }
-        
+    }
 
-        // Loops through Showtime array to find corresponding showtime with input datetime
-        //Dummy cinema and showtime
-        Cinema cinema = new Cinema("XXX".toCharArray(), CinemaClass.ELITE_CLUB, createLayout());
+    private void DeleteCart(Showtime showtime, ArrayList<Ticket> tickets){
+        Layout layout = showtime.getLayout();
+        //Free the seats in cart
+        System.out.println("Removing tickets from cart...");
+        for(int i = 0; i < tickets.size(); i++){
+            int row = tickets.get(i).getRow();
+            int column = tickets.get(i).getColumn();
+            layout.free(row,column);
+        }
+        return;
+    }
+
+    private Showtime findDateTime(String avail){
+        Cinema cinema = new Cinema("XXX".toCharArray(), CinemaClass.ELITE_CLUB, defaultLayout());
         Showtime showtime = new Showtime(null, cinema, null);
-
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
 
         ArrayList<Showtime> showtimes = showtimeManager.getShowtimes();
 
@@ -193,19 +213,21 @@ public class BookingUI {
             String code = new String(showtimes.get(i).getCinema().getCode());
             if (avail.equals(new String(dtf.format(showtimes.get(i).getDateTime()) + " " + code))){
                 showtime = showtimes.get(i);
-                cinema = showtimeManager.getShowtime(i).getCinema();
-                break;
+                return showtime;
             }
         }
 
-        //if no there is no showtime with corresonding dateTime we return back to movieGoerUI
-        if(showtime.getDateTime() == null){
+        if(showtime == null){//if no there is no showtime with corresonding dateTime we return back to movieGoerUI
             System.out.println("Invalid date and time entry...");
             System.out.println("Returning...");
-            return;
+            return null;
         }
-        
-        //Prints seating arrangements
+
+        return null;
+    }
+
+    private void PurchaseUI(Showtime showtime, Cinema cinema){
+        Scanner sc = new Scanner(System.in);
         showtime.displaySeating();
         System.out.println("The available seats are as shown above.");
         System.out.println("The ones with X are taken.");
@@ -232,15 +254,7 @@ public class BookingUI {
                             break;
                         if(row < -1){
                             System.out.println("Exiting...");
-
-                            //Free the seats in cart
-                            System.out.println("Removing tickets from cart...");
-                            for(int k = 0; k < tickets.size(); k++){
-                                int r = tickets.get(k).getRow();
-                                int column = tickets.get(k).getColumn();
-                                layout.free(r,column);
-                            }
-                            return;
+                            DeleteCart(showtime, tickets);
                         }
                         int column = sc.nextInt();
                         if (!layout.isOccupied(row, column)){
@@ -275,15 +289,7 @@ public class BookingUI {
 
                 } catch (Exception e) {
                     System.out.println("Invalid entry...");
-                    Layout layout = showtime.getLayout();
-                    //Free the seats in cart
-                    System.out.println("Removing tickets from cart...");
-                    for(int i = 0; i < tickets.size(); i++){
-                        int row = tickets.get(i).getRow();
-                        int column = tickets.get(i).getColumn();
-                        layout.free(row,column);
-                    }
-                    return;
+                    DeleteCart(showtime, tickets);
                 }
 
             default:
@@ -291,6 +297,36 @@ public class BookingUI {
                 System.out.println("Returning...");
                 return;
         }
+    }
+
+    public void BookAndPurchase(){
+        Scanner sc = new Scanner(System.in);
+
+        //Returns movie based on title
+        Movie movie = movieSearch();
+        if(movie == null)
+            return;
+
+        //Returns cineplex 
+       Cineplex cineplex = cineplexSearch();
+       if(cineplex == null)
+            return;
+
+        //Returns dateTime based on string given
+        String avail = dateTimeSearch(cineplex, movie);
+        if(avail == null)
+            return;
+        
+
+        // Loops through Showtime array to find corresponding showtime with input datetime
+        //Dummy cinema and showtime
+        Showtime showtime = findDateTime(avail);
+        Cinema cinema = showtime.getCinema();
+        if(showtime == null)
+            return;
+        
+        //PurchasingUI
+        PurchaseUI(showtime, cinema);
     }
 
 
@@ -320,7 +356,7 @@ public class BookingUI {
                 if(bookings.get(i).getCentral().getLayout().getLayoutObject()[bookings.get(i).getTicket().getRow()][bookings.get(i).getTicket().getColumn()].getSeatSymbol() == 'C'){
                     System.out.print("(Couple Seats) Ticket rows and columns: ");
                     System.out.print(bookings.get(i).getTicket().getRow() + " " + bookings.get(i).getTicket().getColumn() + ", ");
-                    if(bookings.get(i).getCentral().getLayout().getLayoutObject()[bookings.get(i).getTicket().getRow()][bookings.get(i).getTicket().getColumn()+1].isOccupied())
+                    if(i+1 < bookings.size() && bookings.get(i).getCentral().getLayout().getLayoutObject()[bookings.get(i).getTicket().getRow()][bookings.get(i).getTicket().getColumn()+1].isOccupied())
                         System.out.print(bookings.get(i).getTicket().getRow() + " " + ((bookings.get(i).getTicket().getColumn())+1) + "\n");
                     else
                         System.out.print(bookings.get(i).getTicket().getRow() + " " + ((bookings.get(i).getTicket().getColumn())-1) + "\n");
