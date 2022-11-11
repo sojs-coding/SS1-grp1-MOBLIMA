@@ -138,7 +138,7 @@ public class StaffLoginUI {
 					break;
 			}
 		}
-		while(choice != "5");
+		while(!choice.equals("5"));
 		System.out.println("Goodbye! ");
 		
 	}
