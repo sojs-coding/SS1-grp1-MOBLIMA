@@ -9,6 +9,7 @@ import controller.BookingManager;
 import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
+import controller.TicketPriceManager;
 import entity.booking.*;
 import entity.cinema.*;
 import entity.movie.Movie;
@@ -24,26 +25,15 @@ public class BookingUI {
     private CineplexManager cineplexManager;
     private ShowtimeManager showtimeManager;
     private BookingManager bookingManager;
+    private TicketPriceManager ticketPriceManager;
 
-    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager, BookingManager b){
+    public BookingUI(MovieGoer movieGoer, MovieManager m, CineplexManager c, ShowtimeManager showtimeManager, BookingManager b, TicketPriceManager t){
         this.movieGoer = movieGoer;
         this.movieManager = m;
         this.cineplexManager = c;
         this.showtimeManager = showtimeManager;
         this.bookingManager = b;
-    }
-    public Layout defaultLayout(){
-        Layout layout = new Layout(3,5);
-        layout.setObject(0,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(0,1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(0,4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(1,0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        layout.setObject(1,2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(1,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        layout.setObject(2,0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(2,1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        layout.setObject(2,3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        return layout;
+        this.ticketPriceManager = t;
     }
 
     public String getMaxCount(Map<String,Integer> movieCount){
@@ -100,7 +90,7 @@ public class BookingUI {
     }
 
     public static int printShowTimes(Cineplex cineplex, Movie movie, ShowtimeManager s){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
         ArrayList<Showtime> showTimes = s.getShowtimes();
         int count = 0;
         int i = 0;
@@ -171,7 +161,7 @@ public class BookingUI {
     private String dateTimeSearch(Cineplex cineplex,Movie movie){
         Scanner sc = new Scanner(System.in);
         String avail;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
         try {
             
             int count = printShowTimes(cineplex,movie,showtimeManager);
@@ -179,8 +169,8 @@ public class BookingUI {
                 System.out.println("There are no showtimes...");
                 return null;
             } //ShowTimes corresponding to cinema and movie are given
-            System.out.println("(3) What and which cinema do you prefer? YYTTMMddHHmm format");
-            System.out.println("Enter the time and cinema...(E.g 202209011122 JR1)");
+            System.out.println("(3) What and which cinema do you prefer? YYYY-MM-dd HH:mm format");
+            System.out.println("Enter the time and cinema...(E.g 2022-09-01 11:22 JR1)");
             avail = sc.nextLine();
             return avail;
         } catch (Exception e) {
@@ -203,9 +193,8 @@ public class BookingUI {
     }
 
     private Showtime findDateTime(String avail){
-        Cinema cinema = new Cinema("XXX".toCharArray(), CinemaClass.ELITE_CLUB, defaultLayout());
-        Showtime showtime = new Showtime(null, cinema, null);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
+        Showtime showtime = null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
 
         ArrayList<Showtime> showtimes = showtimeManager.getShowtimes();
 
@@ -217,8 +206,8 @@ public class BookingUI {
             }
         }
 
-        if(showtime == null){//if no there is no showtime with corresonding dateTime we return back to movieGoerUI
-            System.out.println("Invalid date and time entry...");
+        if(showtime == null){
+            System.out.println("Invalid Entry");
             System.out.println("Returning...");
             return null;
         }
@@ -299,6 +288,45 @@ public class BookingUI {
         }
     }
 
+   /*private void Paying(Cinema cinema, Movie movie){
+        //get movie, get cinema, 
+        Cinema cinema = cineplexManager.getCineplexes().get(0).getCinema(0);
+        TicketPriceManager ticketPriceManager = init.getTicketPriceManager();
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-11-12 13:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movie
+                )
+        );
+        cinema = cineplexManager.getCineplexes().get(1).findCinema("WL3".toCharArray());
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-11-17 19:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movie
+                )
+        );
+        for (int i = 0; i < showtimeManager.getShowtimes().size(); i++)
+        {
+            Showtime showtime = showtimeManager.getShowtime(i);
+            System.out.println(showtime.getMovie().getTitle());
+            System.out.println(showtime.getCinema().getCinemaClass());
+            System.out.println(showtime.getDateTime().getDayOfWeek());
+            System.out.println();
+
+            showtime.displaySeating();
+            ArrayList<TicketType> ticketTypes = new ArrayList<>();
+            ticketTypes.add(TicketType.STUDENT);
+            Ticket ticket = showtime.produceTicket(1,1, ticketTypes);
+            System.out.println(ticket.getTicketTypes());
+            System.out.println(ticketPriceManager.getPrice(ticket));
+            showtime.displaySeating();
+            System.out.println();
+            System.out.println();
+        }
+    }
+    }*/
     public void BookAndPurchase(){
         Scanner sc = new Scanner(System.in);
 
@@ -321,9 +349,9 @@ public class BookingUI {
         // Loops through Showtime array to find corresponding showtime with input datetime
         //Dummy cinema and showtime
         Showtime showtime = findDateTime(avail);
-        Cinema cinema = showtime.getCinema();
         if(showtime == null)
             return;
+        Cinema cinema = showtime.getCinema();
         
         //PurchasingUI
         PurchaseUI(showtime, cinema);
@@ -334,7 +362,7 @@ public class BookingUI {
         System.out.println("Printing your booking history");
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int i = 0;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMddHHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
 
         //Iterates through all bookings and print those that match movieGoer
         System.out.println("--------------------------------------------------------------------");
