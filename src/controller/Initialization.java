@@ -391,22 +391,22 @@ public class Initialization implements Serializable {
         layout.setObject(0, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(0, 5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(0, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(1, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(1, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(1, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(1, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(1, 5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(1, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(2, 5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(2, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(3, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        layout.setObject(3, 5, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
+        layout.setObject(3, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
         cinema = new Cinema("TM2".toCharArray(), layout);
         gvTampines.addCinema(cinema);
