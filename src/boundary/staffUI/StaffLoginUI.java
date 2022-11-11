@@ -2,8 +2,10 @@ package boundary.staffUI;
 
 import controller.StaffAuthenticator;
 import controller.BookingManager;
+import controller.CineplexManager;
 import controller.Initialization;
 import controller.MovieManager;
+import controller.ShowtimeManager;
 
 import java.util.Scanner;
 
@@ -37,6 +39,9 @@ public class StaffLoginUI {
 		{
 			MovieManager movielist  = initObj.getMovieManager();
 			BookingManager booklist =  initObj.getBookingManager();
+			CineplexManager cineplexManager = initObj.getCineplexManager();
+			ShowtimeManager showtimeManager = initObj.getShowtimeManager();
+			
 			System.out.println("==== Choose your options =====");
 			System.out.println("|(1) Configure system settings |");
 			System.out.println("|(2) Manage Movie Listing |");
@@ -90,7 +95,7 @@ public class StaffLoginUI {
 					}
 			    	break;
 			    case 3://manage cinemashowtime
-			    	ManageShowtime manage = new ManageShowtime();
+			    	ManageShowtime manage = new ManageShowtime(movielist,cineplexManager,showtimeManager);
 			    	int c;
 			    	System.out.println("How would you like your to manage your movies ");
 					System.out.println("|(1) Create cinema showtime |");

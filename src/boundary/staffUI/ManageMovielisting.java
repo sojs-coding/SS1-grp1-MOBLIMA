@@ -391,16 +391,6 @@ public class ManageMovielisting {
 				System.out.println( " Movie not succesfully removed  " );
 			}
 		
-			/*Set<Entry<String, Integer> > entrySet = movietable.entrySet();
-			int movieindex = 0;
-			for (Entry<String,Integer> entry : entrySet)
-			{
-                 if(entry.getKey().equals(movietitle))
-				 {
-					movieindex = entry.getValue();
-					break;
-				 }
-			}*/
 
 	    }
 	 }

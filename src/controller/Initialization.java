@@ -277,7 +277,7 @@ public class Initialization implements Serializable {
         ticketRule.addRule(new Before6pmRule());
         // Student Monday to Friday Before 6PM
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new StudentRule());
+        temp.addRule(new TicketTypeRule(TicketType.STUDENT));
         temp2 = TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(7);
@@ -288,7 +288,7 @@ public class Initialization implements Serializable {
         ticketPriceManager.addRule(temp2);
         // Elderly Monday to Friday Before 6PM
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new ElderlyRule());
+        temp.addRule(new TicketTypeRule(TicketType.ELDERLY));
         temp2 = TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(5);
@@ -303,7 +303,7 @@ public class Initialization implements Serializable {
         ticketRule.addRule(new DateRule(new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.THURSDAY))));
         // Student After 6PM Thursday
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new StudentRule());
+        temp.addRule(new TicketTypeRule(TicketType.STUDENT));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(10);
@@ -326,7 +326,7 @@ public class Initialization implements Serializable {
         ticketPriceManager.addRule(temp2);
         // Elderly After 6PM Thursday
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new ElderlyRule());
+        temp.addRule(new TicketTypeRule(TicketType.ELDERLY));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(10);
@@ -353,7 +353,7 @@ public class Initialization implements Serializable {
         ticketRule.addRule(new DateRule(new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.FRIDAY))));
         // Student After 6PM Friday
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new StudentRule());
+        temp.addRule(new TicketTypeRule(TicketType.STUDENT));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(14.5);
@@ -376,7 +376,7 @@ public class Initialization implements Serializable {
         ticketPriceManager.addRule(temp2);
         // Elderly After 6PM Friday
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new ElderlyRule());
+        temp.addRule(new TicketTypeRule(TicketType.ELDERLY));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(14.5);
@@ -402,7 +402,7 @@ public class Initialization implements Serializable {
         ticketRule.addRule(new DateRule(weekend));
         // Student Saturday to Sunday
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new StudentRule());
+        temp.addRule(new TicketTypeRule(TicketType.STUDENT));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(14.5);
@@ -425,7 +425,7 @@ public class Initialization implements Serializable {
         ticketPriceManager.addRule(temp2);
         // Elderly Saturday to Sunday
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new ElderlyRule());
+        temp.addRule(new TicketTypeRule(TicketType.ELDERLY));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(14.5);
@@ -451,7 +451,7 @@ public class Initialization implements Serializable {
         ticketRule.addRule(new PublicHolidayRule());
         // Eve of PH and PH
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new StudentRule());
+        temp.addRule(new TicketTypeRule(TicketType.STUDENT));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(14.5);
@@ -474,7 +474,7 @@ public class Initialization implements Serializable {
         ticketPriceManager.addRule(temp2);
         // Eve of PH and PH
         temp = TicketRule.copyTicketRule(ticketRule);
-        temp.addRule(new ElderlyRule());
+        temp.addRule(new TicketTypeRule(TicketType.ELDERLY));
         temp2 =  TicketRule.copyTicketRule(temp);
         temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
         temp2.setPrice(14.5);
