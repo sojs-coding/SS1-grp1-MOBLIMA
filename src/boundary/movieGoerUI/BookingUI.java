@@ -14,10 +14,11 @@ import entity.cinema.Cinema;
 import entity.cinema.Cineplex;
 import entity.cinema.Layout;
 import entity.cinema.LayoutItem;
-import entity.cinema.LayoutObject;
 import entity.cinema.LayoutObjectFactory;
 import entity.cinema.Showtime;
 import entity.movie.Movie;
+import entity.ticket.Ticket;
+import entity.ticket.TicketType;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

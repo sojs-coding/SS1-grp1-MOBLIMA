@@ -1,7 +1,7 @@
-package entity.booking;
+package entity.ticket;
 
-import entity.cinema.LayoutObject;
 import entity.cinema.Showtime;
+import entity.ticket.TicketType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,5 +29,9 @@ public class Ticket implements Serializable {
 
 	public int getColumn() {
 		return column;
+	}
+
+	public Showtime getShowtime() {
+		return showtime;
 	}
 }

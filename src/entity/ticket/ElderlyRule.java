@@ -1,4 +1,6 @@
-package entity.booking;
+package entity.ticket;
+
+import entity.booking.PriceRule;
 
 public class ElderlyRule implements PriceRule {
     /**

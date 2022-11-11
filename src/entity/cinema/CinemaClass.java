@@ -8,6 +8,7 @@ package entity.cinema;
  */
 public enum CinemaClass {
 	PLATINUM_MOVIE_SUITES,
+	DOLBY_ATMOS_2D,
 	ELITE_CLUB,
 	ULTIMA
 }

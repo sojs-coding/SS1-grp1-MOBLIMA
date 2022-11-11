@@ -1,7 +1,6 @@
 package entity.cinema;
-import entity.booking.PersonAge;
-import entity.booking.Ticket;
-import entity.booking.TicketType;
+import entity.ticket.Ticket;
+import entity.ticket.TicketType;
 import entity.movie.Movie;
 import java.io.Serializable;
 import java.time.LocalDateTime; // Import the LocalDateTime class

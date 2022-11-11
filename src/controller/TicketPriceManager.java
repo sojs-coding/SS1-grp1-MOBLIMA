@@ -1,13 +1,12 @@
 package controller;
 
-import entity.booking.PersonAge;
-import entity.booking.PriceRule;
-import entity.booking.Ticket;
-import entity.booking.TicketRule;
+import entity.ticket.Ticket;
+import entity.ticket.TicketRule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TicketPriceManager {
+public class TicketPriceManager implements Serializable {
     private ArrayList<TicketRule> ticketRules;
 
     private double defaultPrice;

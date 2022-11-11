@@ -1,8 +1,11 @@
-package entity.booking;
+package entity.ticket;
 
+import entity.booking.PriceRule;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TicketRule {
+public class TicketRule implements Serializable {
     private ArrayList<PriceRule> priceRules;
     private double price;
 
@@ -29,5 +32,13 @@ public class TicketRule {
                 return false;
         }
         return true;
+    }
+
+    public static TicketRule copyTicketRule(TicketRule other) {
+        TicketRule ticketRule = new TicketRule(other.getPrice());
+        for (int i = 0; i < other.priceRules.size(); i++) {
+            ticketRule.addRule(other.priceRules.get(i));
+        }
+        return ticketRule;
     }
 }

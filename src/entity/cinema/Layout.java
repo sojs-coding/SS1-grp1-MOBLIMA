@@ -76,13 +76,25 @@ public class Layout implements Serializable {
 		}
 	}
 	public boolean setObject(int row, int column, LayoutObject layoutObject) {
-		for (int i = 0; i < layoutObject.getSize(); i++) {
-			if (layout[row][column+i] != null) {
-				return false;
+		try {
+			for (int i = 0; i < layoutObject.getSize(); i++) {
+				if (layout[row][column + i] != null) {
+					return false;
+				}
 			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Layout Object was set out of bounds:" + e);
+			return false;
 		}
 		for (int i = 0; i < layoutObject.getSize(); i++) {
-			layout[row][column+i] = layoutObject;
+			try {
+				layout[row][column + i] = layoutObject;
+			} catch (Exception e) {
+				for (int j = i; j >= 0; j--) {
+					layout[row][column + i] = null;
+				}
+				return false;
+			}
 		}
 		return true;
 	}
