@@ -2,22 +2,27 @@ package entity.booking;
 
 import entity.cinema.Showtime;
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import controller.TicketPriceManager;
 import entity.ticket.Ticket;
 
 public class Booking implements Serializable {
     private Showtime central;
     private MovieGoer user;
     private Payment payment;
-    private Ticket ticket;
+    private ArrayList<Ticket> ticket;
     private int id;
+    private float totalPrice = 0;
+    private TicketPriceManager manager;
 
-    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, Ticket ticket, int id){
+    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, ArrayList<Ticket> ticket, int id, TicketPriceManager ticketPriceManager){
         this.central = central;
         this.user = movieGoer;
         this.payment = payment;
         this.ticket = ticket;
         this.id = id;
+        this.manager = ticketPriceManager;
     }
 
     /*If no booking can be found in BookingManager, this is returned*/
@@ -40,7 +45,7 @@ public class Booking implements Serializable {
         return user;
     }
 
-    public Ticket getTicket() {
+    public ArrayList<Ticket> getTicket() {
         return ticket;
     }
 
@@ -60,11 +65,20 @@ public class Booking implements Serializable {
         this.user = user;
     }
 
-    public void setTicket(Ticket ticket) {
+    public void setTicket(ArrayList<Ticket> ticket) {
         this.ticket = ticket;
     }
 
     public void setCentral(Showtime central) {
         this.central = central;
+    }
+
+    public float calculateTotalPrice(){
+        float totalPrice = 0;
+        for(int i = 0;i < this.ticket.size(); i++){
+            totalPrice += manager.getPrice(ticket.get(i));
+        }
+
+        return totalPrice;
     }
 }

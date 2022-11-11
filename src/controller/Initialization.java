@@ -8,6 +8,7 @@ import entity.movie.ShowingStatus;
 import java.io.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -586,8 +587,13 @@ public class Initialization implements Serializable {
         gvJurong.addCinema(cinema);
 
 
-        Showtime juraShowtime = new Showtime(LocalDateTime.now(), cinema, movieManager.getMovie(0));
-        showtimeManager.addShowtime(juraShowtime);
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-11-17 19:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(0)
+                )
+        );
 
 
         layout = new Layout(5, 5);
@@ -615,8 +621,13 @@ public class Initialization implements Serializable {
         gvJurong.addCinema(cinema);
         cineplexManager.addCineplex(gvJurong);
 
-        Showtime juraShowtime2 = new Showtime(LocalDateTime.now(), cinema, movieManager.getMovie(0));
-        showtimeManager.addShowtime(juraShowtime2);
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-11-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(0)
+                )
+        );
 
         layout = new Layout(5, 7);
         layout.setObject(0, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -646,6 +657,14 @@ public class Initialization implements Serializable {
 
         cinema = new Cinema("JR3".toCharArray(), CinemaClass.DOLBY_ATMOS_2D, layout);
         gvJurong.addCinema(cinema);
+
+        showtimeManager.addShowtime(
+            new Showtime(
+                    LocalDateTime.parse("2022-11-17 14:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                    cinema,
+                    movieManager.getMovie(0)
+            )
+    );
 
 
         Cineplex gvWoodlands = new Cineplex("Woodlands");

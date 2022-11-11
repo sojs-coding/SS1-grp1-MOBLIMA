@@ -7,6 +7,7 @@ import java.util.*;
 public class BookingManager implements Serializable {
 
 	private ArrayList<Booking> bookings = new ArrayList<Booking>();
+	public int IDCount = 0;
 	/**
 	 * 
 	 * @param booking
@@ -53,7 +54,6 @@ public class BookingManager implements Serializable {
 				Booking curr = iter.next();
 				if(curr.getId() == id){
 					/*Success case */
-					System.out.println("Retrieval was successful..."); 
 					return curr;
 					}
 				}
@@ -67,5 +67,13 @@ public class BookingManager implements Serializable {
 
 	public ArrayList<Booking> getBookings() {
 		return bookings;
+	}
+
+	public void setIDCount(int iDCount) {
+		IDCount = iDCount;
+	}
+
+	public int getIDCount() {
+		return IDCount;
 	}
 }
