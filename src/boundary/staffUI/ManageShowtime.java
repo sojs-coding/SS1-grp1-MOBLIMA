@@ -31,7 +31,7 @@ public class ManageShowtime {
         int num = sc.nextInt();
 		ArrayList<Movie> movielist = movieManager.getMovies();
 		Movie movie = new Movie(null, null, null, 0, null, null, null);
-		Cinema cinema = new Cinema(null, null);
+		Cinema cinema = new Cinema(null, null, null);
         LocalDateTime localDateTime;
 		DateTimeFormatter DATE_TIME_FORMATTER;
 		for (int i = 0; i < num; i++)

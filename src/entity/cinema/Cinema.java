@@ -32,13 +32,13 @@ public class Cinema implements Serializable {
 	 * @param code The Cinema's code is validated to be only 3 characters long
 	 * @param layout The Cinema's layout
 	 */
-	public Cinema(char[] code, Layout layout) {
+	public Cinema(char[] code, CinemaClass cinemaClass, Layout layout) {
 		this.code = new char[3];
 		if (code.length != 3) { // code isn't of size 3
 			throw new IllegalArgumentException();
 		}
 		this.code = code;
-
+		this.cinemaClass = cinemaClass;
 		this.layout = layout;
 	}
 

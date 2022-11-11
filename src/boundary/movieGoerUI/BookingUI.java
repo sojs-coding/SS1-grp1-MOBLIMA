@@ -10,12 +10,7 @@ import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import entity.booking.*;
-import entity.cinema.Cinema;
-import entity.cinema.Cineplex;
-import entity.cinema.Layout;
-import entity.cinema.LayoutItem;
-import entity.cinema.LayoutObjectFactory;
-import entity.cinema.Showtime;
+import entity.cinema.*;
 import entity.movie.Movie;
 import entity.ticket.Ticket;
 import entity.ticket.TicketType;
@@ -188,7 +183,7 @@ public class BookingUI {
 
         // Loops through Showtime array to find corresponding showtime with input datetime
         //Dummy cinema and showtime
-        Cinema cinema = new Cinema("XXX".toCharArray(), createLayout());
+        Cinema cinema = new Cinema("XXX".toCharArray(), CinemaClass.ELITE_CLUB, createLayout());
         Showtime showtime = new Showtime(null, cinema, null);
 
 

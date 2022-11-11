@@ -88,7 +88,7 @@ public class Layout implements Serializable {
 		}
 		for (int i = 0; i < layoutObject.getSize(); i++) {
 			try {
-				layout[row][column + i] = layoutObject;
+				layout[row][column + i] = new LayoutObject(layoutObject);
 			} catch (Exception e) {
 				for (int j = i; j >= 0; j--) {
 					layout[row][column + i] = null;

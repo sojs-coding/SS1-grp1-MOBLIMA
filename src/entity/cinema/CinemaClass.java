@@ -7,6 +7,7 @@ package entity.cinema;
  @since 2022-11-1
  */
 public enum CinemaClass {
+	NORMAL,
 	PLATINUM_MOVIE_SUITES,
 	DOLBY_ATMOS_2D,
 	ELITE_CLUB,

@@ -149,6 +149,8 @@ public class Initialization implements Serializable {
             }
             Initialization.INSTANCE.initMovie();
             Initialization.INSTANCE.initCineplex();
+            Initialization.INSTANCE.initHolidays();
+            Initialization.INSTANCE.initTicketPrices();
             System.out.println("Initialized");
         }
         return Initialization.INSTANCE;
@@ -247,6 +249,7 @@ public class Initialization implements Serializable {
     private void initTicketPrices() {
         TicketRule temp;
         TicketRule ticketRule;
+        TicketRule temp2;
         ArrayList<DayOfWeek> weekdays = new ArrayList<DayOfWeek>();
         weekdays.add(DayOfWeek.MONDAY);
         weekdays.add(DayOfWeek.TUESDAY);
@@ -255,42 +258,45 @@ public class Initialization implements Serializable {
         weekdays.add(DayOfWeek.FRIDAY);
 
         ArrayList<DayOfWeek> weekend = new ArrayList<DayOfWeek>();
-        weekdays.add(DayOfWeek.SATURDAY);
-        weekdays.add(DayOfWeek.SUNDAY);
+        weekend.add(DayOfWeek.SATURDAY);
+        weekend.add(DayOfWeek.SUNDAY);
 
         ArrayList<DayOfWeek> friNweekend = new ArrayList<DayOfWeek>();
-        weekdays.add(DayOfWeek.SATURDAY);
-        weekdays.add(DayOfWeek.SUNDAY);
-        weekdays.add(DayOfWeek.FRIDAY);
+        friNweekend.add(DayOfWeek.SATURDAY);
+        friNweekend.add(DayOfWeek.SUNDAY);
+        friNweekend.add(DayOfWeek.FRIDAY);
 
         ArrayList<DayOfWeek> monToThurs = new ArrayList<DayOfWeek>();
-        weekdays.add(DayOfWeek.MONDAY);
-        weekdays.add(DayOfWeek.TUESDAY);
-        weekdays.add(DayOfWeek.WEDNESDAY);
-        weekdays.add(DayOfWeek.THURSDAY);
+        monToThurs.add(DayOfWeek.MONDAY);
+        monToThurs.add(DayOfWeek.TUESDAY);
+        monToThurs.add(DayOfWeek.WEDNESDAY);
+        monToThurs.add(DayOfWeek.THURSDAY);
         // Monday to Friday Before 6PM
-
         ticketRule = new TicketRule(7);
         ticketRule.addRule(new DateRule(weekdays));
         ticketRule.addRule(new Before6pmRule());
         // Student Monday to Friday Before 6PM
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new StudentRule());
-        temp.setPrice(7);
-        ticketPriceManager.addRule(temp);
-        temp = TicketRule.copyTicketRule(temp);
-        temp.addRule(new PlatinumMovieRule());
-        temp.setPrice(16);
-        ticketPriceManager.addRule(temp);
+        temp2 = TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(7);
+        ticketPriceManager.addRule(temp2);
+        temp2 = TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
+        temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
         // Elderly Monday to Friday Before 6PM
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new ElderlyRule());
-        temp.setPrice(5);
-        ticketPriceManager.addRule(temp);
-        temp = TicketRule.copyTicketRule(temp);
-        temp.addRule(new PlatinumMovieRule());
-        temp.setPrice(16);
-        ticketPriceManager.addRule(temp);
+        temp2 = TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(5);
+        ticketPriceManager.addRule(temp2);
+        temp2 = TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
+        temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
         // After 6PM Thursday
         ticketRule = new TicketRule(10);
         ticketRule.addRule(new After6pmRule());
@@ -298,33 +304,49 @@ public class Initialization implements Serializable {
         // Student After 6PM Thursday
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new StudentRule());
-        TicketRule temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new DolbyAtmosRule());
-        temp2.setPrice(14);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new UltimaRule());
-        temp2.setPrice(14);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(10);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new EliteClubRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(14);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new PlatinumMovieRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
+        temp2.setPrice(14);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(14);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
         // Elderly After 6PM Thursday
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new ElderlyRule());
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new DolbyAtmosRule());
-        temp2.setPrice(14);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(10);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new UltimaRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(14);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new EliteClubRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(14);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new PlatinumMovieRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(14);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
         // After 6PM Friday
         ticketRule = new TicketRule(14.5);
         ticketRule.addRule(new After6pmRule());
@@ -333,96 +355,215 @@ public class Initialization implements Serializable {
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new StudentRule());
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new DolbyAtmosRule());
-        temp2.setPrice(15.5);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new UltimaRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new EliteClubRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new PlatinumMovieRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
         // Elderly After 6PM Friday
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new ElderlyRule());
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new DolbyAtmosRule());
-        temp2.setPrice(15.5);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new UltimaRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new EliteClubRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new PlatinumMovieRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(16);
-        // Saturday to Sunday and eve of PH and PH
+        ticketPriceManager.addRule(temp2);
+        // Saturday to Sunday
         ticketRule = new TicketRule(14.5);
         ticketRule.addRule(new DateRule(weekend));
-        ticketRule.addRule(new PublicHolidayRule());
-        // Student Saturday to Sunday and eve of PH and PH
+        // Student Saturday to Sunday
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new StudentRule());
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new DolbyAtmosRule());
-        temp2.setPrice(15.5);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new UltimaRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new EliteClubRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new PlatinumMovieRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(16);
-        // Elderly Saturday to Sunday and eve of PH and PH
+        ticketPriceManager.addRule(temp2);
+        // Elderly Saturday to Sunday
         temp = TicketRule.copyTicketRule(ticketRule);
         temp.addRule(new ElderlyRule());
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new DolbyAtmosRule());
-        temp2.setPrice(15.5);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new UltimaRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new EliteClubRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
         temp2 =  TicketRule.copyTicketRule(temp);
-        temp2.addRule(new PlatinumMovieRule());
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(16);
-        // Friday to Sunday and eve of PH and PH
+        ticketPriceManager.addRule(temp2);
+        // Eve of PH and PH
+        ticketRule = new TicketRule(14.5);
+        ticketRule.addRule(new PublicHolidayRule());
+        // Eve of PH and PH
+        temp = TicketRule.copyTicketRule(ticketRule);
+        temp.addRule(new StudentRule());
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
+        temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
+        // Eve of PH and PH
+        temp = TicketRule.copyTicketRule(ticketRule);
+        temp.addRule(new ElderlyRule());
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
+        temp2.setPrice(16);
+        ticketPriceManager.addRule(temp2);
+        // Friday to Sunday
         ticketRule = new TicketRule(14.5);
         ticketRule.addRule(new DateRule(friNweekend));
+        temp = ticketRule;
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
+        temp2.setPrice(15.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
+        temp2.setPrice(25);
+        // Eve of PH and PH
+        ticketRule = new TicketRule(14.5);
         ticketRule.addRule(new PublicHolidayRule());
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new DolbyAtmosRule());
+        temp = ticketRule;
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(14.5);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(15.5);
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new UltimaRule());
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(15.5);
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new EliteClubRule());
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
         temp2.setPrice(15.5);
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new PlatinumMovieRule());
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(25);
         // Monday to Thursday
         ticketRule = new TicketRule(10);
         ticketRule.addRule(new DateRule(monToThurs));
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new DolbyAtmosRule());
+        temp = ticketRule;
+
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.NORMAL));
+        temp2.setPrice(10);
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.DOLBY_ATMOS_2D));
         temp2.setPrice(14);
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new UltimaRule());
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ULTIMA));
         temp2.setPrice(14);
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new EliteClubRule());
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.ELITE_CLUB));
         temp2.setPrice(14);
-        temp2 =  TicketRule.copyTicketRule(ticketRule);
-        temp2.addRule(new PlatinumMovieRule());
+        ticketPriceManager.addRule(temp2);
+        temp2 =  TicketRule.copyTicketRule(temp);
+        temp2.addRule(new CinemaClassRule(CinemaClass.PLATINUM_MOVIE_SUITES));
         temp2.setPrice(25);
     }
 
@@ -441,7 +582,7 @@ public class Initialization implements Serializable {
         layout.setObject(2, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        Cinema cinema = new Cinema("JR1".toCharArray(), layout);
+        Cinema cinema = new Cinema("JR1".toCharArray(), CinemaClass.NORMAL, layout);
         gvJurong.addCinema(cinema);
 
 
@@ -470,7 +611,7 @@ public class Initialization implements Serializable {
         layout.setObject(4, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(4, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(4, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        cinema = new Cinema("JR2".toCharArray(), layout);
+        cinema = new Cinema("JR2".toCharArray(), CinemaClass.ELITE_CLUB, layout);
         gvJurong.addCinema(cinema);
         cineplexManager.addCineplex(gvJurong);
 
@@ -503,7 +644,7 @@ public class Initialization implements Serializable {
         layout.setObject(4, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(4, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
-        cinema = new Cinema("JR3".toCharArray(), layout);
+        cinema = new Cinema("JR3".toCharArray(), CinemaClass.DOLBY_ATMOS_2D, layout);
         gvJurong.addCinema(cinema);
 
 
@@ -519,7 +660,7 @@ public class Initialization implements Serializable {
         layout.setObject(1, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        cinema = new Cinema("WL1".toCharArray(), layout);
+        cinema = new Cinema("WL1".toCharArray(),CinemaClass.PLATINUM_MOVIE_SUITES, layout);
         gvWoodlands.addCinema(cinema);
 
 
@@ -536,7 +677,7 @@ public class Initialization implements Serializable {
         layout.setObject(2, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(2, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
-        cinema = new Cinema("WL2".toCharArray(), layout);
+        cinema = new Cinema("WL2".toCharArray(), CinemaClass.DOLBY_ATMOS_2D, layout);
         gvWoodlands.addCinema(cinema);
 
         layout = new Layout(3, 5);
@@ -550,7 +691,7 @@ public class Initialization implements Serializable {
         layout.setObject(2, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(2, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        cinema = new Cinema("WL3".toCharArray(), layout);
+        cinema = new Cinema("WL3".toCharArray(),CinemaClass.PLATINUM_MOVIE_SUITES, layout);
         gvWoodlands.addCinema(cinema);
         cineplexManager.addCineplex(gvWoodlands);
 
@@ -581,7 +722,7 @@ public class Initialization implements Serializable {
         layout.setObject(4, 2, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(4, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
-        cinema = new Cinema("TM1".toCharArray(), layout);
+        cinema = new Cinema("TM1".toCharArray(),CinemaClass.ULTIMA, layout);
         gvTampines.addCinema(cinema);
 
         //Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
@@ -609,7 +750,7 @@ public class Initialization implements Serializable {
         layout.setObject(3, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(3, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
 
-        cinema = new Cinema("TM2".toCharArray(), layout);
+        cinema = new Cinema("TM2".toCharArray(),CinemaClass.ELITE_CLUB, layout);
         gvTampines.addCinema(cinema);
 
         layout = new Layout(5, 5);
@@ -633,7 +774,7 @@ public class Initialization implements Serializable {
         layout.setObject(4, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(4, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         layout.setObject(4, 4, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
-        cinema = new Cinema("TM3".toCharArray(), layout);
+        cinema = new Cinema("TM3".toCharArray(),CinemaClass.DOLBY_ATMOS_2D, layout);
         gvTampines.addCinema(cinema);
         cineplexManager.addCineplex(gvTampines);
 
