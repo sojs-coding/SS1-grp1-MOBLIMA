@@ -1,20 +1,26 @@
 package entity.booking;
 
+import entity.cinema.LayoutObject;
+import entity.cinema.Showtime;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Ticket implements Serializable {
-
+	private Showtime showtime;
+	private ArrayList<TicketType> ticketTypes;
 	private int row;
 	private int column;
-	private PersonAge age;
 
-	public Ticket(int row, int column, PersonAge age) {
+	public Ticket(int row, int column, Showtime showtime, ArrayList<TicketType> ticketTypes) {
+		this.showtime = showtime;
+		this.ticketTypes = ticketTypes;
 		this.row = row;
 		this.column = column;
-		this.age = age;
 	}
-	public PersonAge getAge() {
-		return age;
+
+	public ArrayList<TicketType> getTicketTypes() {
+		return ticketTypes;
 	}
 
 	public int getRow() {
@@ -24,12 +30,4 @@ public class Ticket implements Serializable {
 	public int getColumn() {
 		return column;
 	}
-
-	//public int getSeatId() { return seatId; }
-
-	public void setAge(PersonAge age) {
-		this.age = age;
-	}
-
-	//public void setSeatId(int seatId) { this.seatId = seatId; }
 }

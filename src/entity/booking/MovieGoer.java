@@ -11,7 +11,6 @@ public class MovieGoer implements Serializable {
 	 */
 	private char[] mobile;
 	private String email;
-	private PersonAge age;
 
 	public MovieGoer(String username, char[] mobile, String email) {
 		setEmail(email);
@@ -42,12 +41,5 @@ public class MovieGoer implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public PersonAge getAge() {
-		return age;
-	}
-	public void setAge(PersonAge age) {
-		this.age = age;
 	}
 }

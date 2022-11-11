@@ -1,11 +1,15 @@
 package boundary.staffUI;
 
 import controller.StaffAuthenticator;
+import controller.BookingManager;
+import controller.Initialization;
+import controller.MovieManager;
 
 import java.util.Scanner;
 
 public class StaffLoginUI {
 	private Scanner sc = new Scanner(System.in);
+    private Initialization initObj = Initialization.getINSTANCE();
 
 	public void login()
 	{
@@ -31,6 +35,8 @@ public class StaffLoginUI {
 		int choice;
 		do
 		{
+			MovieManager movielist  = initObj.getMovieManager();
+			BookingManager booklist =  initObj.getBookingManager();
 			System.out.println("==== Choose your options =====");
 			System.out.println("|(1) Configure system settings |");
 			System.out.println("|(2) Manage Movie Listing |");
@@ -62,7 +68,7 @@ public class StaffLoginUI {
 					}
 			    	break;
 			    case 2://manage movie listings
-			    	ManageMovielisting movielist = new ManageMovielisting();
+                    ManageMovielisting managemovielisting = new ManageMovielisting(movielist);
 			    	int e;
 			    	System.out.println("How would you like to manage your movielisting ");
 					System.out.println("|(1) Create movie listing |");
@@ -73,13 +79,13 @@ public class StaffLoginUI {
 					switch(e)
 					{
 					     case 1:
-					    	 movielist.createmovielisting();
+					    	 managemovielisting.createmovielisting();
 					    	 break;
 					     case 2:
-					    	 movielist.updatemovielisting();
+					    	 managemovielisting.updatemovielisting();
 					    	 break;
 					     case 3:
-					    	 movielist.removemovielisting();
+					    	 managemovielisting.removemovielisting();
 					    	 break;
 					}
 			    	break;
@@ -107,7 +113,7 @@ public class StaffLoginUI {
 			    	break;
 			    case 4:	//list top 5 current movies
 			    	int option;
-			    	ListTop5 list = new ListTop5();
+			    	ListTop5 list = new ListTop5(movielist,booklist);
 					System.out.println("How would you like your top 5 movies to be sorted by ");
 					System.out.println("|(1) Top 5 based on user ratings |");
 					System.out.println("|(2) Top 5 based on overall movie sales |");
