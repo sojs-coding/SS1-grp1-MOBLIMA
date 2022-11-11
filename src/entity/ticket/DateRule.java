@@ -3,12 +3,14 @@ package entity.ticket;
 import entity.booking.PriceRule;
 
 import java.time.DayOfWeek;
+import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DateRule implements PriceRule {
-    private ArrayList<DayOfWeek> days;
+    private AbstractCollection<DayOfWeek> days;
 
-    public DateRule(ArrayList<DayOfWeek> days) {
+    public DateRule(AbstractCollection<DayOfWeek> days) {
         this.days = days;
     }
 
@@ -19,7 +21,7 @@ public class DateRule implements PriceRule {
     @Override
     public boolean isValid(Ticket ticket) {
         for (int i = 0; i < days.size(); i++) {
-            if (ticket.getShowtime().getDateTime().getDayOfWeek() == days.get(i))
+            if (ticket.getShowtime().getDateTime().getDayOfWeek() == days.toArray()[i])
                 return true;
         }
         return false;

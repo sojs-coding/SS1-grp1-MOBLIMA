@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class StartUpUI {
     public void start() {
-        int choice = 0;
+        String choice;
         Boolean isRunning = true;
         while (isRunning) {
             System.out.println("=====================================");
@@ -20,17 +20,17 @@ public class StartUpUI {
 
 
             Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextInt();
+            choice = scanner.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     StaffLoginUI staffLoginUI = new StaffLoginUI();
                     staffLoginUI.login();
                     break;
-                case 2:
+                case "2":
                     MovieGoerUI movieGoerUI = new MovieGoerUI();
                     movieGoerUI.login();
                     break;
-                case 3:
+                case "3":
                     isRunning = false;
                     System.out.println("bye");
                     break;

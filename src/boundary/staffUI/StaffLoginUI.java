@@ -27,14 +27,14 @@ public class StaffLoginUI {
 			StaffMainMenu();
 		} else {
 			System.out.println("Login unsuccessful!");
-			System.out.println("Pleae try again");
+			System.out.println("Please try again");
 			login();
 		}
 	}
 	
 	public void StaffMainMenu()
 	{   
-		int choice;
+		String choice;
 		do
 		{
 			MovieManager movielist  = initObj.getMovieManager();
@@ -51,93 +51,94 @@ public class StaffLoginUI {
 			System.out.println("=============================");
 			
 			System.out.println("Enter your choice: ");
-			choice = sc.nextInt();
+			choice = sc.nextLine();
 			switch(choice)
 			{
-			    case 1://configure system settings
+			    case "1"://configure system settings
 			    	SystemSettingUI configure = new SystemSettingUI();
 			    	System.out.println("How would you like to configure System settings ");
 			    	System.out.println("|(1) Configure holidays |");
 			    	System.out.println("|(2) Configure ticket prices |");
 			    	System.out.println("=============================");
-			    	int c2;
-			    	c2 = sc.nextInt();
+			    	String c2;
+			    	c2 = sc.nextLine();
 					switch(c2)
 					{
-					     case 1:
+					     case "1":
 					    	 configure.configureHoliday();
 					    	 break;
-					     case 2:
+					     case "2":
 					         configure.configureTicketPrice();
 					    	 break;
 					}
 			    	break;
-			    case 2://manage movie listings
+			    case "2"://manage movie listings
                     ManageMovielisting managemovielisting = new ManageMovielisting(movielist);
-			    	int e;
+			    	String e;
 			    	System.out.println("How would you like to manage your movielisting ");
 					System.out.println("|(1) Create movie listing |");
 					System.out.println("|(2) Update movie listing|");
 					System.out.println("|(3) Remove movie listing|");
 					System.out.println("=============================");
-					e = sc.nextInt();
+					e = sc.nextLine();
 					switch(e)
 					{
-					     case 1:
+					     case "1":
 					    	 managemovielisting.createmovielisting();
 					    	 break;
-					     case 2:
+					     case "2":
 					    	 managemovielisting.updatemovielisting();
 					    	 break;
-					     case 3:
+					     case "3":
 					    	 managemovielisting.removemovielisting();
 					    	 break;
 					}
 			    	break;
-			    case 3://manage cinemashowtime
+			    case "3"://manage cinemashowtime
 			    	ManageShowtime manage = new ManageShowtime(movielist,cineplexManager,showtimeManager);
-			    	int c;
+			    	String c;
 			    	System.out.println("How would you like your to manage your movies ");
 					System.out.println("|(1) Create cinema showtime |");
 					System.out.println("|(2) Update cinema showtime|");
 					System.out.println("|(3) Remove cinema showtime|");
 					System.out.println("=============================");
-					c = sc.nextInt();
+					c = sc.nextLine();
 					switch(c)
 					{
-					     case 1:
+					     case "1":
 					    	 manage.createCinemaShowtime();
 					    	 break;
-					     case 2:
+					     case "2":
 					    	 manage.updateCinemaShowtime();
 					    	 break;
-					     case 3:
+					     case "3":
 					    	 manage.removeCinemaShowtime();
 					    	 break;
 					}
 			    	break;
-			    case 4:	//list top 5 current movies
-			    	int option;
+			    case "4":	//list top 5 current movies
+			    	String option;
 			    	ListTop5 list = new ListTop5(movielist,booklist);
 					System.out.println("How would you like your top 5 movies to be sorted by ");
 					System.out.println("|(1) Top 5 based on user ratings |");
 					System.out.println("|(2) Top 5 based on overall movie sales |");
 					System.out.println("=============================");
-					option = sc.nextInt();
+					option = sc.nextLine();
 					switch(option)
 					{
-					     case 1:
+					     case "1":
 					    	 list.printTop5MoviesByRatings();
 					    	 break;
-					     case 2:
+					     case "2":
 					    	 list.printTop5MoviesBySales();
 					    	 break;
 					}
 			    	break;
+				case "5":
+					break;
 			}
-			
 		}
-		while(choice < 5);
+		while(choice != "5");
 		System.out.println("Goodbye! ");
 		
 	}
