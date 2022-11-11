@@ -86,9 +86,10 @@ public class Layout implements Serializable {
 			System.out.println("Layout Object was set out of bounds:" + e);
 			return false;
 		}
-		for (int i = 0; i < layoutObject.getSize(); i++) {
+		layout[row][column] = new LayoutObject(layoutObject);
+		for (int i = 1; i < layoutObject.getSize(); i++) {
 			try {
-				layout[row][column + i] = new LayoutObject(layoutObject);
+				layout[row][column + i] = layout[row][column];
 			} catch (Exception e) {
 				for (int j = i; j >= 0; j--) {
 					layout[row][column + i] = null;
