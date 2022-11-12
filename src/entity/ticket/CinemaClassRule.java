@@ -20,4 +20,9 @@ public class CinemaClassRule implements PriceRule {
             return true;
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "CinemaClassRule{" + cinemaClass + '}';
+    }
 }

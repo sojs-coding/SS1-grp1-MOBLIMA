@@ -26,4 +26,9 @@ public class DateRule implements PriceRule {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "DateRule{" + days + '}';
+    }
 }

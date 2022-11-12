@@ -27,4 +27,9 @@ public class PublicHolidayRule implements PriceRule {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "PublicHolidayRule";
+    }
 }

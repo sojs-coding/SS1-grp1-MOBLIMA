@@ -13,4 +13,9 @@ public class After6pmRule implements PriceRule {
             return true;
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "After6pmRule";
+    }
 }

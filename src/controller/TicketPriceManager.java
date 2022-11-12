@@ -29,6 +29,10 @@ public class TicketPriceManager implements Serializable {
         }
     }
 
+    public ArrayList<TicketRule> getTicketRules() {
+        return ticketRules;
+    }
+
     public double getPrice(Ticket ticket) {
         TicketRule ticketRule;
         for (int i = 0; i < ticketRules.size(); i++) {
