@@ -54,6 +54,7 @@ public class ManageShowtime {
 		catch(Exception e)
 		{
 			System.out.println("Invalid input!...");
+			return;
 		}
 
 		for (int i = 0; i < number; i++)
@@ -67,8 +68,6 @@ public class ManageShowtime {
                 System.out.println("Movie does not exist...");
                 return;
             }
-			
-			
             try 
 			{
 				printCineplex(cineplexManager);
@@ -92,49 +91,24 @@ public class ManageShowtime {
 			System.out.println(" (3) Enter the  cinema code to be added to the showtime");
 			System.out.println(" Enter in format : Woodlands(WL1) , Jurong(JR1) , Tampines(TM1)");
 			String cinemacode = sc.nextLine();
-			for(Showtime showtime : showtimeManager.getShowtimes())
+			Cinema targetcinema = null;
+			ArrayList<Cineplex> cineplexlist = cineplexManager.getCineplexes();
+			for(Cineplex cineplexer : cineplexlist)
 			{
-                 if( new String(showtime.getCinema().getCode()).equals( cinemacode) )
-				 {
-					System.out.println("Cinema code already exists in showtime!");
-					return;
-				 }
-			}
-		Cinema targetcinema = null;
-		ArrayList<Cineplex> cineplexlist = cineplexManager.getCineplexes();
-		for(Cineplex cineplexer : cineplexlist)
-		{
-			for(Cinema cinema : cineplexer.getCinemas())
-			{
-				if(new String(cinemacode).equals(new String(cinema.getCode())))
+				for(Cinema cinema : cineplexer.getCinemas())
 				{
-					targetcinema = cineplex.findCinema(cinemacode.toCharArray());
+					if(new String(cinemacode).equals(new String(cinema.getCode())))
+					{
+						targetcinema = cineplex.findCinema(cinemacode.toCharArray());
+					}
 				}
 			}
-		}
-		 if(targetcinema == null)
-		 {
-			System.out.println("Cinema code cant be found in the cineplex");
-			return;
-		 }
-
-			int counter = 0;
-			for(Cineplex cineplexer : cineplexManager.getCineplexes())
+			if(targetcinema == null)
 			{
-				for(Cinema cinematest : cineplexer.getCinemas())
-				{
-                     if( new String (cinematest.getCode()).equals(cinemacode))
-					 {
-                        counter = 1;
-						break;
-					 }
-				}
-			}
-			if(counter == 0)
-			{
-				System.out.println("Cinema code does not exist at all!");
+				System.out.println("Cinema code cant be found in the cineplex");
 				return;
 			}
+
 			//need copy layout from cineplex
 			Cinema cinema = cineplex.findCinema(cinemacode.toCharArray());
 			try
@@ -144,12 +118,20 @@ public class ManageShowtime {
 				String dateTime = sc.nextLine();
 				DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 				localDateTime = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
+				for(Showtime showtime : showtimeManager.getShowtimes())
+				{
+					if(showtime.getDateTime().isEqual(localDateTime))
+					{
+						System.out.println("Date is already existing in showtime !");
+						return;
+					}
+				}
 			}
-		   catch (Exception e) 
-		   {
-			 System.out.println("Date is invalid !");
-			 return;
-		   }
+		    catch (Exception e) 
+		    {
+			  System.out.println("Date is invalid !");
+			  return;
+		    }
 			Showtime showtime = new Showtime(localDateTime,cinema,movie);
 			showtimeManager.addShowtime(showtime);
 
@@ -208,13 +190,26 @@ public class ManageShowtime {
 			System.out.println("Cinema code cant be found in the cineplex");
 			return;
 		 }
-
+		 LocalDateTime localDateTime;
+		 try
+			{
+				System.out.println(" Enter the date and time for this cinema showtime");
+				System.out.println(" yyyy-MM-dd HH:mm ");
+				String dateTime = sc.nextLine();
+				DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				localDateTime = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
+			}
+		    catch (Exception e) 
+		    {
+			  System.out.println("Date is invalid !");
+			  return;
+		    }
 
         int index = 0;
 		Showtime targetshowtime = null;
 		for(Showtime showtime : showtimeManager.getShowtimes())
 		{
-            if (showtime.getMovie() == movie && showtime.getCinema() == targetcinema)
+            if (showtime.getMovie() == movie && showtime.getCinema() == targetcinema && showtime.getDateTime().isEqual(localDateTime))
 			{
 				targetshowtime = showtimeManager.getShowtime(index);
 			}
@@ -240,18 +235,6 @@ public class ManageShowtime {
 		{
 			System.out.println("Enter a valid code !");
 			newcinemacode = sc.nextLine();
-		}
-		for(Showtime showtime : showtimeManager.getShowtimes()) //check if cinema code already exists
-		{
-			     if(newcinemacode.equals(cinemacode)) //means no update of the old cinema code
-				 {
-					break;
-				 }
-                 else if( new String(showtime.getCinema().getCode()).equals( newcinemacode) )
-				 {
-					System.out.println("Cinema code already exists in showtime!");
-					return;
-				 }
 		}
 		int counter = 0;
 		for(Cineplex cineplexer : cineplexManager.getCineplexes())
@@ -304,7 +287,7 @@ public class ManageShowtime {
 	public  void removeCinemaShowtime()
 	{
         Movie movie = new Movie(null, null, null, 0, null, null, null);
-
+        DateTimeFormatter DATE_TIME_FORMATTER;
 		System.out.println("Which showtime would you like to remove?");
 		printShowTimes(showtimeManager);
 		System.out.println("Enter the movie title for which you would like to remove showtime for :");
@@ -359,11 +342,25 @@ public class ManageShowtime {
 			System.out.println("Enter a valid code that is on showtime!");
 			return;
 		}
+		LocalDateTime localDateTime;
+		try
+		   {
+			   System.out.println(" Enter the date and time for this cinema showtime");
+			   System.out.println(" yyyy-MM-dd HH:mm ");
+			   String dateTime = sc.nextLine();
+			   DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			   localDateTime = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
+		   }
+		   catch (Exception e) 
+		   {
+			 System.out.println("Date is invalid !");
+			 return;
+		   }
 		int index = 0;
 		//find index and check thoroughly if targetcinema is really the one to be removed
 		for(Showtime showtime : showtimeManager.getShowtimes())
 		{
-            if (showtime.getMovie().getTitle() == movie.getTitle() && showtime.getCinema() == targetcinema)
+            if (showtime.getMovie().getTitle() == movie.getTitle() && showtime.getCinema() == targetcinema && showtime.getDateTime().isEqual(localDateTime))
 			{
 				showtimeManager.removeShowtime(index);
 				System.out.println("Showtime successfully removed"); 
