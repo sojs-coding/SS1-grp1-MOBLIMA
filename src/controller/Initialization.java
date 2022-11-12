@@ -52,6 +52,10 @@ public class Initialization implements Serializable {
      * A manager to manage all the Ticket Prices
      */
     private TicketPriceManager ticketPriceManager;
+    /**
+     * An Authenticator for MovieGoer
+     */
+    private transient MovieGoerAuthenticator movieGoerAuthenticator;
  
 
     public CineplexManager getCineplexManager() {
@@ -78,6 +82,10 @@ public class Initialization implements Serializable {
         return ticketPriceManager;
     }
 
+    public MovieGoerAuthenticator getMovieGoerAuthenticator() {
+        return movieGoerAuthenticator;
+    }
+
     /**
      * Constructor of initialization
      */
@@ -91,6 +99,7 @@ public class Initialization implements Serializable {
         showtimeManager = new ShowtimeManager();
         holidayManager = new HolidayManager();
         ticketPriceManager = new TicketPriceManager(10);
+        movieGoerAuthenticator = new MovieGoerAuthenticator();
     }
 
     /**

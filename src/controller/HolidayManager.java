@@ -5,15 +5,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class HolidayManager implements Serializable {
-    ArrayList<LocalDate> localDateTimeArrayList;
+    TreeSet<LocalDate> localDateTimeArrayList;
 
     public HolidayManager() {
-        localDateTimeArrayList = new ArrayList<>();
+        localDateTimeArrayList = new TreeSet<>();
     }
 
-    public ArrayList<LocalDate> getLocalDates() {
+    public TreeSet<LocalDate> getLocalDates() {
         return localDateTimeArrayList;
     }
 

@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.TreeSet;
 
 public class PublicHolidayRule implements PriceRule, Serializable {
     /**
@@ -15,7 +17,7 @@ public class PublicHolidayRule implements PriceRule, Serializable {
      */
     @Override
     public boolean isValid(Ticket ticket) {
-        ArrayList<LocalDate> localDate = Initialization.getINSTANCE().getHolidayManager().getLocalDates();
+        TreeSet<LocalDate> localDate = Initialization.getINSTANCE().getHolidayManager().getLocalDates();
         // Public Holiday
         if (localDate.contains(ticket.getShowtime().getDateTime().toLocalDate()))
         {
