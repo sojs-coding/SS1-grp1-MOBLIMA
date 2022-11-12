@@ -3,6 +3,7 @@ package boundary.staffUI;
 import controller.HolidayManager;
 import controller.Initialization;
 import controller.TicketPriceManager;
+import entity.cinema.CinemaClass;
 import entity.ticket.*;
 
 import java.time.DayOfWeek;
@@ -44,16 +45,21 @@ public class SystemSettingUI {
 					break;
 				case "2":
 					//deleteTicketPrice
+					deleteTicketPriceRules();
 					break;
 				case "3":
 					//updateTicketPrice
+					updateTicketPriceRules();
 					break;
 			}
 		} while (!choose.equals("0"));
 	}
 
 	private void addTicketTypeRule(TicketRule ticketRule) {
-		String choose = "-1";
+		System.out.println(ticketRule.toString());
+		ticketRule.removeRule(new TicketTypeRule(TicketType.ELDERLY));
+		ticketRule.removeRule(new TicketTypeRule(TicketType.STUDENT));
+		String choose;
 		System.out.println("Ticket Type: ");
 		System.out.println("Press 0 for None");
 		System.out.println("Press 1 for Elderly");
@@ -75,8 +81,17 @@ public class SystemSettingUI {
 		}while (!choose.equals("0"));
 	}
 
+	private void toggleDayOfWeek(EnumSet<DayOfWeek> daysOfWeek, DayOfWeek dayOfWeek) {
+		if (daysOfWeek.contains(dayOfWeek))
+			daysOfWeek.remove(dayOfWeek);
+		else
+			daysOfWeek.add(dayOfWeek);
+	}
+
 	private void addDaysOfWeekRule(TicketRule ticketRule) {
+		System.out.println(ticketRule.toString());
 		EnumSet<DayOfWeek> daysOfWeek = EnumSet.noneOf(DayOfWeek.class);
+		ticketRule.removeRule(new DateRule(daysOfWeek));
 		String choose;
 		System.out.println("Day of week: ");
 		System.out.println("Press 0 for Exit");
@@ -88,41 +103,47 @@ public class SystemSettingUI {
 		System.out.println("Press 6 for Saturday");
 		System.out.println("Press 7 for Sunday");
 		do {
+			System.out.printf("Select a choice (Toggle) : ");
 			choose = sc.nextLine();
 			switch (choose) {
 				case "0":
+					if (daysOfWeek.isEmpty())
+						return;
 					ticketRule.addRule(new DateRule(daysOfWeek));
 					return;
 				case "1":
-					daysOfWeek.add(DayOfWeek.MONDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.MONDAY);
 					break;
 				case "2":
-					daysOfWeek.add(DayOfWeek.TUESDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.TUESDAY);
 					break;
 				case "3":
-					daysOfWeek.add(DayOfWeek.WEDNESDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.WEDNESDAY);
 					break;
 				case "4":
-					daysOfWeek.add(DayOfWeek.THURSDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.THURSDAY);
 					break;
 				case "5":
-					daysOfWeek.add(DayOfWeek.FRIDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.FRIDAY);
 					break;
 				case "6":
-					daysOfWeek.add(DayOfWeek.SATURDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.SATURDAY);
 					break;
 				case "7":
-					daysOfWeek.add(DayOfWeek.SUNDAY);
+					toggleDayOfWeek(daysOfWeek, DayOfWeek.SUNDAY);
 					break;
 				default:
 					System.out.println("Invalid option! Try again!");
 					break;
 			}
 			System.out.println("Updated Ticket Price Rules : " + daysOfWeek);
-		} while (!choose.equals("0"));
+		} while (true);
 	}
 
 	private void addTimingRule(TicketRule ticketRule) {
+		System.out.println(ticketRule.toString());
+		ticketRule.removeRule(new Before6pmRule());
+		ticketRule.removeRule(new After6pmRule());
 		String choose;
 		System.out.println("Press 0 for None");
 		System.out.println("Press 1 for Before 6pm");
@@ -131,7 +152,7 @@ public class SystemSettingUI {
 			choose = sc.nextLine();
 			switch (choose) {
 				case "0":
-					break;
+					return;
 				case "1":
 					ticketRule.addRule(new Before6pmRule());
 					return;
@@ -142,7 +163,28 @@ public class SystemSettingUI {
 					System.out.println("Invalid option! Try again!");
 					break;
 			}
-		} while (!choose.equals("0"));
+		} while (true);
+	}
+
+	private void addPublicHolidayRule(TicketRule ticketRule) {
+		System.out.println(ticketRule.toString());
+		ticketRule.removeRule(new PublicHolidayRule());
+		String choose;
+		System.out.println("Press 0 for None");
+		System.out.println("Press 1 for Public Holiday");
+		do {
+			choose = sc.nextLine();
+			switch (choose) {
+				case "0":
+					return;
+				case "1":
+					ticketRule.addRule(new PublicHolidayRule());
+					return;
+				default:
+					System.out.println("Invalid option! Try again!");
+					break;
+			}
+		} while (true);
 	}
 
 	private void addTicketPriceRules() {
@@ -154,6 +196,173 @@ public class SystemSettingUI {
 		addTicketTypeRule(ticketRule);
 		addDaysOfWeekRule(ticketRule);
 		addTimingRule(ticketRule);
+		addPublicHolidayRule(ticketRule);
+		for (TicketRule t : setClassPrice(ticketRule)) {
+			insertTicketRule(t);
+		}
+	}
+
+	private void setRulePrice(TicketRule ticketRule) {
+		String sPrice;
+		double price;
+		System.out.println("=====================================");
+		System.out.println("PRICE OF RULE");
+		System.out.println("=====================================");
+
+		do {
+			System.out.printf("Current Price : %.2f\n", ticketRule.getPrice());
+			System.out.printf("Price for %s\n", ticketRule.toString());
+			sPrice = sc.nextLine();
+
+			try {
+				price = Double.parseDouble(sPrice);
+				price = (double)Math.round(price * 100d) / 100d;
+				ticketRule.setPrice(price);
+				return;
+			} catch (NumberFormatException e) {
+				System.out.println("Please return a valid input! Try again!");
+			}
+		} while(true);
+	}
+
+	private List<TicketRule> setClassPrice(TicketRule ticketRule) {
+		String sPrice;
+		double price;
+		ArrayList<TicketRule> ticketRules = new ArrayList<>();
+		System.out.println("=====================================");
+		System.out.println("PRICE OF CLASS BASED ON THE RULES");
+		System.out.println("=====================================");
+		System.out.println("Input NA if price does not exist");
+		for (CinemaClass cinemaClass : CinemaClass.values()) {
+			do {
+				System.out.printf("Price for %s\n:", cinemaClass.toString());
+				sPrice = sc.nextLine();
+				if (sPrice.toLowerCase(Locale.ROOT).equals("na")) {
+					break;
+				}
+				try {
+					price = Double.parseDouble(sPrice);
+					price = (double)Math.round(price * 100d) / 100d;
+					TicketRule temp = TicketRule.copyTicketRule(ticketRule);
+					temp.addRule(new CinemaClassRule(cinemaClass));
+					ticketRules.add(temp);
+					break;
+				} catch (NumberFormatException e) {
+					System.out.println("Please return a valid input! Try again!");
+				}
+			} while(true);
+		}
+		return ticketRules;
+	}
+
+	private boolean insertTicketRule(TicketRule ticketRule) {
+		String choose;
+		System.out.println("=====================================");
+		System.out.println("TICKET RULE PRIORITY SCREEN");
+		System.out.println("=====================================");
+		System.out.println(ticketRule.toString());
+		ArrayList<TicketRule> ticketRules = ticketPriceManager.getTicketRules();
+		System.out.println("Input -1 to Cancel!");
+		for (int i = 0; i < ticketRules.size(); i++) {
+			System.out.printf("%d) %s\n", i, ticketRules.get(i));
+		}
+		System.out.printf("%d) LOWEST\n", ticketRules.size());
+		do {
+			System.out.printf("Select a Rule : ");
+			choose = sc.nextLine();
+			int choice;
+			try {
+				choice = Integer.parseInt(choose);
+				if ( !(choice >= -1 && choice <= ticketRules.size()) ) {
+					throw new NumberFormatException();
+				}
+				if (choice == -1) {
+					return false;
+				}
+				if (choice != ticketRules.size())
+					ticketRules.add(choice, ticketRule);
+				else
+					ticketRules.add(ticketRule);
+				return true;
+			} catch (NumberFormatException e) {
+				System.out.printf("Invalid choice! Try again! -1 to %d\n", ticketRules.size());
+			}
+		} while (true);
+	}
+
+	public boolean deleteTicketPriceRules() {
+		String choose;
+		System.out.println("=====================================");
+		System.out.println("TICKET RULE DELETION SCREEN");
+		System.out.println("=====================================");
+
+		ArrayList<TicketRule> ticketRules = ticketPriceManager.getTicketRules();
+		System.out.println("Input -1 to Cancel!");
+		for (int i = 0; i < ticketRules.size(); i++) {
+			System.out.printf("%d) %s\n", i, ticketRules.get(i));
+		}
+		do {
+			choose = sc.nextLine();
+			int choice;
+			try {
+				choice = Integer.parseInt(choose);
+				if ( !(choice >= -1 && choice < ticketRules.size()) ) {
+					throw new NumberFormatException();
+				}
+				if (choice == -1) {
+					return false;
+				}
+				ticketRules.remove(choice);
+				return true;
+			} catch (NumberFormatException e) {
+				System.out.printf("Invalid choice! Try again! -1 to %d\n", ticketRules.size()-1);
+			}
+		} while (true);
+	}
+
+	public boolean updateTicketPriceRules() {
+		String choose;
+		System.out.println("=====================================");
+		System.out.println("TICKET RULE UPDATE SCREEN");
+		System.out.println("=====================================");
+
+		ArrayList<TicketRule> ticketRules = ticketPriceManager.getTicketRules();
+		System.out.println("Input -1 to Cancel!");
+		for (int i = 0; i < ticketRules.size(); i++) {
+			System.out.printf("%d) %s\n", i, ticketRules.get(i));
+		}
+		do {
+			choose = sc.nextLine();
+			int choice;
+			try {
+				choice = Integer.parseInt(choose);
+				if ( !(choice >= -1 && choice < ticketRules.size()) ) {
+					throw new NumberFormatException();
+				}
+				if (choice == -1) {
+					return false;
+				}
+				// UPDATE
+				TicketRule temp = TicketRule.copyTicketRule(ticketRules.get(choice));
+				TicketRule rule = ticketRules.get(choice);
+				ticketRules.remove(choice);
+				boolean result = updateTicketPriceRule(rule);
+				if (!result)
+					ticketRules.add(choice, temp);
+				return result;
+			} catch (NumberFormatException e) {
+				System.out.printf("Invalid choice! Try again! -1 to %d\n", ticketRules.size()-1);
+			}
+		} while (true);
+	}
+
+	private boolean updateTicketPriceRule(TicketRule ticketRule) {
+		addTicketTypeRule(ticketRule);
+		addDaysOfWeekRule(ticketRule);
+		addTimingRule(ticketRule);
+		addPublicHolidayRule(ticketRule);
+		setRulePrice(ticketRule);
+		return insertTicketRule(ticketRule);
 	}
 
 	public  void configureHoliday()
@@ -185,7 +394,7 @@ public class SystemSettingUI {
 			    	 break;
 			 }
 		 }
-		 while(choose != 0);
+		 while(true);
 	}
 
 	public void printHolidayList() {
