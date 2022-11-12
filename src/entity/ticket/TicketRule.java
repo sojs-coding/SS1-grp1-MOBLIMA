@@ -18,6 +18,18 @@ public class TicketRule implements Serializable {
         priceRules.add(priceRule);
     }
 
+    public void removeRule(PriceRule priceRule) {
+        for (int i = 0; i < priceRules.size(); i++) {
+            try {
+                if (priceRules.get(i).getClass().equals(priceRule.getClass())) {
+                    priceRules.remove(i);
+                }
+            } catch (IndexOutOfBoundsException e){
+
+            }
+        }
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
@@ -40,5 +52,10 @@ public class TicketRule implements Serializable {
             ticketRule.addRule(other.priceRules.get(i));
         }
         return ticketRule;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketRule{" + priceRules + '}';
     }
 }

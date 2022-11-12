@@ -94,12 +94,10 @@ public class ManageShowtime {
 			String cinemacode = sc.nextLine();
 			for(Showtime showtime : showtimeManager.getShowtimes())
 			{
-                 while( new String(showtime.getCinema().getCode()).equals( cinemacode) )
+                 if( new String(showtime.getCinema().getCode()).equals( cinemacode) )
 				 {
 					System.out.println("Cinema code already exists in showtime!");
-					System.out.println(" (3) Enter the  cinema code to be added to the showtime");
-			        System.out.println(" Enter in format : Woodlands(WL1) , Jurong(JR1) , Tampines(TM1)");
-			        cinemacode = sc.nextLine();
+					return;
 				 }
 			}
 			int counter = 0;
@@ -227,12 +225,14 @@ public class ManageShowtime {
 		}
 		for(Showtime showtime : showtimeManager.getShowtimes()) //check if cinema code already exists
 		{
-                 while( new String(showtime.getCinema().getCode()).equals( newcinemacode) )
+			     if(newcinemacode.equals(cinemacode)) //means no update of the old cinema code
+				 {
+					break;
+				 }
+                 else if( new String(showtime.getCinema().getCode()).equals( newcinemacode) )
 				 {
 					System.out.println("Cinema code already exists in showtime!");
-					System.out.println(" (3) Enter the  cinema code to be added to the showtime");
-			        System.out.println(" Enter in format : Woodlands(WL1) , Jurong(JR1) , Tampines(TM1)");
-			        newcinemacode = sc.nextLine();
+					return;
 				 }
 		}
 		int counter = 0;
@@ -259,19 +259,22 @@ public class ManageShowtime {
 			return;
 		}
 		String newdateTime = null;
+		LocalDateTime newlocalDateTime;
 		try
 		{
-			System.out.println(" Enter the updated datetime");
-			System.out.println(" yyyy-MM-dd HH:mm ");
-			newdateTime= sc.nextLine();
-			DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				System.out.println(" (4) Enter the date and time for this cinema showtime");
+				System.out.println(" yyyy-MM-dd HH:mm ");
+				newdateTime = sc.nextLine();
+				DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				newlocalDateTime = LocalDateTime.parse(newdateTime, DATE_TIME_FORMATTER);
+				
 		}
-		catch (DateTimeParseException e)
+		catch (Exception e) 
 		{
-			System.out.println("Date is invalid !");
-			return;
+			 System.out.println("Date is invalid !");
+			 return;
 		}
-		LocalDateTime newlocalDateTime = LocalDateTime.parse(newdateTime, DATE_TIME_FORMATTER);
+		
 		targetshowtime.setCinema(newcinema);
 		targetshowtime.setDateTime(newlocalDateTime);
 		targetshowtime.setMovie(newmovie);

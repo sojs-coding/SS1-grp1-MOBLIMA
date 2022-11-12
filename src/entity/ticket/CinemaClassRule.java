@@ -3,7 +3,9 @@ package entity.ticket;
 import entity.booking.PriceRule;
 import entity.cinema.CinemaClass;
 
-public class CinemaClassRule implements PriceRule {
+import java.io.Serializable;
+
+public class CinemaClassRule implements PriceRule, Serializable {
     private CinemaClass cinemaClass;
 
     public CinemaClassRule(CinemaClass cinemaClass) {
@@ -19,5 +21,10 @@ public class CinemaClassRule implements PriceRule {
         if (ticket.getShowtime().getCinema().getCinemaClass() == cinemaClass)
             return true;
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "CinemaClassRule{" + cinemaClass + '}';
     }
 }
