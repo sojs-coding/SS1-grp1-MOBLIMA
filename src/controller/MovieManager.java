@@ -10,16 +10,30 @@ public class MovieManager implements Serializable {
 
 	private ArrayList<Movie> movies;
 
+	/**
+	 * Constructor of Class MovieManager
+	 */
 	public MovieManager() {
 		movies = new ArrayList<Movie>();
 	}
 
+	/**
+	 * Overloading of the constructor of Class MovieManager with ArrayList parameter
+	 * @param movies
+	 */
+	public MovieManager(ArrayList<Movie> movies) {
+		this.movies = movies;
+	}
+	/**
+	 * Accessor of the ArrayList of movie objects
+	 * @return
+	 */
 	public ArrayList<Movie> getMovies() {
 		return movies;
 	}
 
 	/**
-	 * 
+	 * Add a movie object into the ArrayList of movie objects
 	 * @param movie
 	 */
 	public void addMovie(Movie movie) {
@@ -27,7 +41,7 @@ public class MovieManager implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Remove a movie object from the ArrayList of movie objects according to the parameter id
 	 * @param id
 	 */
 	public boolean removeMovie(int id) {
@@ -42,7 +56,7 @@ public class MovieManager implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Return a movie object from the ArrayList of movie objects according to the parameter id
 	 * @param id
 	 */
 	public Movie getMovie(int id) {
@@ -55,7 +69,7 @@ public class MovieManager implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Search a movie object from the ArrayList of movie objects according to the String parameter movie
 	 * @param movie
 	 */
 	public Movie searchMovie(String movie) {
