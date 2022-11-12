@@ -1,4 +1,4 @@
-package entity.booking;
+package entity.ticket;
 
 import entity.ticket.Ticket;
 

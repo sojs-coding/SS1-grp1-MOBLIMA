@@ -1,6 +1,5 @@
 package entity.ticket;
 
-import entity.booking.PriceRule;
 import entity.cinema.CinemaClass;
 
 import java.io.Serializable;

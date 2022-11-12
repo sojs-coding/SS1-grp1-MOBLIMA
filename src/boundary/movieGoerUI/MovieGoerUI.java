@@ -86,6 +86,12 @@ public class MovieGoerUI {
         if (MovieGoerAuthenticator.user != null) {
             movieGoerMenu(MovieGoerAuthenticator.user);
         }
+        else{
+            System.out.print("Incorrect mobile/password ");
+            System.out.print("Please Re-enter");
+            MovieGoerUI movieGoerUI = new MovieGoerUI();
+            movieGoerUI.login()
+            }
     
         /*String email;
         String email2;

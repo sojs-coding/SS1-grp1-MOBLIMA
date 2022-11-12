@@ -10,13 +10,20 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Class to configure the system settings
+ */
 public class SystemSettingUI {
 	private Scanner sc;
-
+    /**
+	 * Constructor for the SystemSettingUi class
+	 */
 	public SystemSettingUI() {
 		sc = new Scanner(System.in);
 	}
-
+    /**
+	 * Method to display options for configuring system settings
+	 */
 	public void configure() {
 		System.out.println("How would you like to configure System settings ");
 		System.out.println("|(1) Configure holidays |");
@@ -34,12 +41,16 @@ public class SystemSettingUI {
 				break;
 		}
 	}
-
+    /**
+	 * method for configuring the holiday
+	 */
 	public void configureHoliday() {
 		HolidayConfigurationUI holidayConfigurationUI = new HolidayConfigurationUI();
 		holidayConfigurationUI.configure();
 	}
-
+    /**
+	 * method for configuring the ticket price
+	 */
 	public void configureTicketPrice()
 	{
 		TicketConfigurationUI ticketConfigurationUI = new TicketConfigurationUI();
