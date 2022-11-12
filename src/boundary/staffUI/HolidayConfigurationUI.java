@@ -12,17 +12,27 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.TreeSet;
-
+/**
+ * Class to configure the holidays
+ */
 public class HolidayConfigurationUI {
 
     private Scanner sc;
+    /**
+     *  Class variable of holiday manager which managers the holidays
+     */
     private HolidayManager holidayManager;
-
+    /**
+     * Constructor for the holidayconfigurationUI 
+     * Initializes holidaymanager as an instance variable
+     */
     public HolidayConfigurationUI() {
         this.holidayManager = Initialization.getINSTANCE().getHolidayManager();
         sc = new Scanner(System.in);
     }
-
+    /**
+     * Method that displays options to configure what the staff wants
+     */
     public void configure()
     {
         String choose;
@@ -51,7 +61,9 @@ public class HolidayConfigurationUI {
         }
         while(true);
     }
-
+    /**
+     * Method that adds holiday date  to holidaymanager
+     */
     public void addHoliday() {
         String date;
         LocalDate localDate;
@@ -76,7 +88,10 @@ public class HolidayConfigurationUI {
             }
         } while (true);
     }
-
+    /**
+     * methods that deletes a holdiay date 
+     * @return returns false 
+     */
     public boolean deleteHoliday() {
         String choose;
         System.out.println("=====================================");
