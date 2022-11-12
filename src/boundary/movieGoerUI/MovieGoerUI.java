@@ -4,10 +4,16 @@ import controller.MovieGoerAuthenticator;
 import entity.booking.MovieGoer;
 import controller.Initialization;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File; 
+import java.io.FileNotFoundException;
 
 public class MovieGoerUI {
     private Initialization initObj = Initialization.getINSTANCE();
-    public void showAvailableSeats(){
+    /* public void showAvailableSeats(){
         int rowLength = 10;
         int row =0;
         for (int i = 0; i < rowLength / 2; i++) {
@@ -40,6 +46,29 @@ public class MovieGoerUI {
         System.out.print(" | E N T R A N C E |");
 
         System.out.print("\n\n\n\n");
+    } */
+    
+    
+    public void registerMovieGoer(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Mobile : ");
+        String newMobile = sc.nextLine();
+        System.out.print("Name : ");
+        String newName = sc.nextLine();
+        System.out.print("Password : ");
+        String newPass = sc.nextLine();
+        System.out.print("Email : ");
+        String newEmail = sc.nextLine();
+        try (FileWriter f = new FileWriter("moviegoeracc.txt", true);
+                BufferedWriter b = new BufferedWriter(f);
+                PrintWriter p = new PrintWriter(b);) {
+
+            p.println(newMobile+";"+newName+";"+newPass+";"+newEmail);
+
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        System.out.println("Successfully Registered! Thank you!");
     }
     
 
@@ -54,6 +83,7 @@ public class MovieGoerUI {
         if (MovieGoerAuthenticator.user != null) {
             movieGoerMenu(MovieGoerAuthenticator.user);
         }
+    
         /*String email;
         String email2;
         int choices;
