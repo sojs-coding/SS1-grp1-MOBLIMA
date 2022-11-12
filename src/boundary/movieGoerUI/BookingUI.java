@@ -374,8 +374,8 @@ public class BookingUI {
             if(new String(bookings.get(i).getPhoneNumber()).equals(new String(movieGoer.getMobile()))){
                 Booking temp = bookings.get(i);
                 System.out.println((i+1) + ") Movie: " + temp.getCentral().getMovie().getTitle() + ", Cinema: " + new String(temp.getCentral().getCinema().getCode()));
+                i++;
             }
-            i++;
         }
         System.out.println("--------------------------------------------------------------------");
         Scanner sc = new Scanner(System.in);
@@ -389,7 +389,7 @@ public class BookingUI {
             return;
         }
         
-        if(choice < 1 || choice > i+1){
+        if(choice < 1 || choice > i){
             System.out.println("Invalid entry...");
             System.out.println("Returning...");
             return;
