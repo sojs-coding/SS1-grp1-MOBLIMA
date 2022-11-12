@@ -100,6 +100,24 @@ public class ManageShowtime {
 					return;
 				 }
 			}
+		Cinema targetcinema = null;
+		ArrayList<Cineplex> cineplexlist = cineplexManager.getCineplexes();
+		for(Cineplex cineplexer : cineplexlist)
+		{
+			for(Cinema cinema : cineplexer.getCinemas())
+			{
+				if(new String(cinemacode).equals(new String(cinema.getCode())))
+				{
+					targetcinema = cineplex.findCinema(cinemacode.toCharArray());
+				}
+			}
+		}
+		 if(targetcinema == null)
+		 {
+			System.out.println("Cinema code cant be found in the cineplex");
+			return;
+		 }
+
 			int counter = 0;
 			for(Cineplex cineplexer : cineplexManager.getCineplexes())
 			{
@@ -303,7 +321,7 @@ public class ManageShowtime {
             return;
         }
 		int check = 0;
-		//Check if any movie in database is wrongly keyed in to be removed
+		/*Check if any movie in database is wrongly keyed in to be removed*/
 		for(Showtime showtime : showtimeManager.getShowtimes())
 		{
                  if( movie.getTitle().equals(showtime.getMovie().getTitle()) )
@@ -347,13 +365,15 @@ public class ManageShowtime {
 		{
             if (showtime.getMovie().getTitle() == movie.getTitle() && showtime.getCinema() == targetcinema)
 			{
-                break;
+				showtimeManager.removeShowtime(index);
+				System.out.println("Showtime successfully removed"); 
+				return;      
 			}
 			index++;
 		}
-		showtimeManager.removeShowtime(index);
+		System.out.println("Showtime not successfully removed"); 
 
-		System.out.println("Showtime successfully removed");
+		
 
 	}
 
