@@ -151,7 +151,7 @@ public class Movie implements Serializable {
 	}
 
 	/**
-	 * Accessor for enum ArrayList variable reviews
+	 * Accessor for ArrayList of review objects
 	 * @return reviews
 	 */
 	public ArrayList<Review> getReviews() {
@@ -159,7 +159,7 @@ public class Movie implements Serializable {
 	}
 
 	/**
-	 * Accessor for enum variable in ArrayList of Review with parameter id
+	 * Accessor for review object in ArrayList of review objects with parameter id
 	 * @param id
 	 * @return reviews.get(id)
 	 */
@@ -168,7 +168,7 @@ public class Movie implements Serializable {
 	}
 
 	/**
-	 * Add an enum variable into the ArrayList of Review
+	 * Add a review object into the ArrayList of review objects
 	 * @param review
 	 */
 	public void addReview(Review review) {
@@ -176,7 +176,7 @@ public class Movie implements Serializable {
 	}
 
 	/**
-	 * Set an enum variable into the ArrayList of Review into the parameter id
+	 * Set a review object into the ArrayList of review objects into the parameter id
 	 * @param review
 	 * @param id
 	 */
