@@ -75,6 +75,11 @@ public class Layout implements Serializable {
 			System.out.println();
 		}
 	}
+	/**
+	 * Sets an object to the designated row and column
+	 * @param row The row index
+	 * @param column The column index
+	 */
 	public boolean setObject(int row, int column, LayoutObject layoutObject) {
 		try {
 			for (int i = 0; i < layoutObject.getSize(); i++) {
@@ -133,14 +138,20 @@ public class Layout implements Serializable {
 	public void free(int row, int column) {
 		layout[row][column].free();
 	}
-
+	/**
+	 * Checks if  the specified row and column has an object
+	 * @param row The row index
+	 * @param column The column index
+	 */
 	private boolean hasObject(int row, int column) {
 		if (layout[row][column] == null) {
 			return false;
 		}
 		return true;
 	}
-
+	/**
+	 * @return the LayoutObject
+	 */
 	public LayoutObject[][] getLayoutObject() {
 		return layout;
 	}

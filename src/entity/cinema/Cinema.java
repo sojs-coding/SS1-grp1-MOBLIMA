@@ -54,7 +54,9 @@ public class Cinema implements Serializable {
 	public Layout cloneCinemaLayout() {
 		return new Layout(layout);
 	}
-
+	/**
+	 * @returns the CinemaClass
+	 */
 	public CinemaClass getCinemaClass() {
 		return cinemaClass;
 	}

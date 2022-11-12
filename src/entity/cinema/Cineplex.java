@@ -36,7 +36,10 @@ public class Cineplex implements Serializable {
 	public void addCinema(Cinema cinema) {
 		cinemas.add(cinema);
 	}
-
+	/**
+	 * @returns cinema of the cineplex by a certain id
+	 * @param id the index id of the cinema in the cineplex
+	 */
 	public Cinema getCinema(int id) {
 		try {
 			return cinemas.get(id);
@@ -45,7 +48,10 @@ public class Cineplex implements Serializable {
 		}
 		return null;
 	}
-
+	/**
+	* @returns cinema of cineplex based on the code of the cinema
+	* @param code The cinema code
+	 */
 	public Cinema findCinema(char[] code) {
 		for (int i = 0; i < cinemas.size(); i++) {
 			String strCode = new String(cinemas.get(i).getCode());
@@ -56,11 +62,15 @@ public class Cineplex implements Serializable {
 		}
 		return null;
 	}
-
+	/**
+	 * @returns all the cinemas in cineplex
+	 */
 	public ArrayList<Cinema> getCinemas() {
 		return cinemas;
 	}
-
+	/**
+	 * @returns company of cineplex
+	 */
 	public String getCompany() {
 		return company;
 	}
