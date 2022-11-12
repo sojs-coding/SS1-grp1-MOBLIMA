@@ -191,10 +191,10 @@ public class Initialization implements Serializable {
                       "A wealthy New York City investment banking executive, Patrick Bateman, hides his alternate psychopathic ego from his co-workers and friends as he delves deeper into his violent, hedonistic fantasies.",
                       "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
                       "25 years after a streak of brutal murders shocked the quiet town of Woodsboro, Calif., a new killer dons the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town's deadly past.",
-                      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."}
+                      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."};
      
-        for(int count = 0; i < 10; count++){
-            StringBuilder sb = new StringBuilder(s[i]);
+        for(int count = 0; count < 10; count++){
+            StringBuilder sb = new StringBuilder(s[count]);
             int i = 0;
             while (i + 40 < sb.length() && (i = sb.lastIndexOf(" ", i + 40)) != -1) {
                 sb.replace(i, i + 1, "\n");
@@ -260,6 +260,7 @@ public class Initialization implements Serializable {
         movieManager.addMovie(movie8);
         movieManager.addMovie(movie9);
         movieManager.addMovie(movie10);
+        }
     }
 
     private void initHolidays() {
