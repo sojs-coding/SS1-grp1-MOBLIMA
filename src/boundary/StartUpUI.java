@@ -28,8 +28,17 @@ public class StartUpUI {
                     break;
                 case "2":
                     MovieGoerUI movieGoerUI = new MovieGoerUI();
-                    movieGoerUI.login();
-                    break;
+                    System.out.println("1. Login");
+                    System.out.println("2. Register");
+                    choice = scanner.nextLine();
+                    switch (choice) {
+                        case "1":
+                            movieGoerUI.login();
+                            break;
+                        case "2":
+                            movieGoerUI.registerMovieGoer();
+                            break;
+                    }
                 case "3":
                     isRunning = false;
                     System.out.println("bye");
