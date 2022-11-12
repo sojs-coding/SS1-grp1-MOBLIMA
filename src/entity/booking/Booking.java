@@ -12,12 +12,14 @@ public class Booking implements Serializable {
     private MovieGoer user;
     private Payment payment;
     private ArrayList<Ticket> ticket;
+    private char[] phoneNumber;
     private int id;
     private float totalPrice = 0;
 
-    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, ArrayList<Ticket> ticket, int id){
+    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, ArrayList<Ticket> ticket, int id, char[] p){
         this.central = central;
         this.user = movieGoer;
+        this.phoneNumber = p;
         this.payment = payment;
         this.ticket = ticket;
         this.id = id;
@@ -78,5 +80,9 @@ public class Booking implements Serializable {
         }
 
         return totalPrice;
+    }
+
+    public char[] getPhoneNumber() {
+        return phoneNumber;
     }
 }

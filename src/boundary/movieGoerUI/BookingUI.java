@@ -286,7 +286,7 @@ public class BookingUI {
                     }
                     // Generates only one payment per MovieGoer
                     Payment payment = new Payment(cinema.getCode());
-                    Booking booking = new Booking(showtime, movieGoer, payment, tickets, bookingManager.getIDCount());
+                    Booking booking = new Booking(showtime, movieGoer, payment, tickets, bookingManager.getIDCount(), movieGoer.getMobile());
                     bookingManager.getBookings().add(booking);
                     Paying(bookingManager.getIDCount());
                     bookingManager.setIDCount(bookingManager.getIDCount()+1);
@@ -323,9 +323,10 @@ public class BookingUI {
                 System.out.println("Ticket Price: "+ ticketPriceManager.getPrice(ticket));
                 ticket.setPrice(ticketPriceManager.getPrice(ticket));
             }
-            
         }
-        System.out.println("---------------------------------------");    
+        System.out.println("---------------------------------------");
+        System.out.printf("           Total Price: %.2f           \n",bookingManager.getBooking(bookingID).calculateTotalPrice());
+        System.out.println("---------------------------------------\n");
     }
     
     public void BookAndPurchase(){
@@ -368,11 +369,39 @@ public class BookingUI {
         System.out.println("--------------------------------------------------------------------");
         System.out.printf("                           Bookings of %s                            \n",movieGoer.getName());
         System.out.println("--------------------------------------------------------------------");
-        while (i < bookings.size()){ //Find B
-            if(bookings.get(i).getUser() == movieGoer){
+        //Prints brief summary and allows user to select which to view
+        while (i < bookings.size()){ 
+            if(new String(bookings.get(i).getPhoneNumber()).equals(new String(movieGoer.getMobile()))){
+                Booking temp = bookings.get(i);
+                System.out.println((i+1) + ") Movie: " + temp.getCentral().getMovie().getTitle() + ", Cinema: " + new String(temp.getCentral().getCinema().getCode()));
+                i++;
+            }
+        }
+        System.out.println("--------------------------------------------------------------------");
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        System.out.println("Which booking do you want to view? Key in the index (1,2 etc)");
+        try{
+            choice = sc.nextInt();
+        }catch(Exception e){
+            System.out.println("Invalid entry...");
+            System.out.println("Returning...");
+            return;
+        }
+        
+        if(choice < 1 || choice > i){
+            System.out.println("Invalid entry...");
+            System.out.println("Returning...");
+            return;
+        }
+        i = 0;
+        
+        while (i < bookings.size()){ 
+            if(new String(bookings.get(i).getPhoneNumber()).equals(new String(movieGoer.getMobile())) && choice == i+1){
                 System.out.println("Booking ID: "+ bookings.get(i).getId());
                 Booking temp = bookings.get(i);
                 System.out.println();
+
                 for(int j = 0; j < temp.getTicket().size(); j++){
                     Ticket individual = temp.getTicket().get(j);
 

@@ -22,13 +22,12 @@ public class ManageMovielisting {
 
 	 public  void createmovielisting()
 	 {
-		    //create a new movie listing by adding a movie from movie manager
 			int choice;
 			String title,director,synopsis;
-			float overallRating;
 			MovieType type = null;
 			String[] casts;
 			ShowingStatus status = null;
+			double overallRating = 0;
 			System.out.println("Movie's Title: ");
 			title = sc.nextLine();
 			while(title.isEmpty())
@@ -104,17 +103,6 @@ public class ManageMovielisting {
 				System.out.println("Enter a valid input!");
 			    return;
 			}
-			try
-			{
-				System.out.println("Movie's Overall Rating:");
-			    overallRating = sc.nextFloat();
-			}
-			catch(Exception e)
-		    {
-			  System.out.println("Invalid input!");
-			  return;
-		    }
-
 			Movie movie = new Movie(title,null,synopsis,overallRating,null,director,casts);
 			movie.setType(type);
 			movie.setStatus(status);
