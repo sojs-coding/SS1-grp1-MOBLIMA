@@ -241,7 +241,7 @@ public class BookingUI {
                 String age;
                 System.out.println("Are you a student or elderly?");
                 age = sc2.nextLine();
-                if (age instanceof String && (age.toUpperCase() == "ELDERLY" || age.toUpperCase() == "STUDENT")){
+                if ((age instanceof String && age != "") && (age.toUpperCase() == "ELDERLY" || age.toUpperCase() == "STUDENT")){
                     System.out.println("Invalid Entry...");
                     System.out.println("Returning...");
                     return;
@@ -257,9 +257,10 @@ public class BookingUI {
                         int row = sc2.nextInt();
                         if(row == -1)
                             break;
-                        if(row < -1){
+                        if(row == -2){
                             System.out.println("Exiting...");
                             DeleteCart(showtime, tickets);
+                            return;
                         }
                         int column = sc2.nextInt();
                         if (!layout.isOccupied(row, column)){
@@ -294,6 +295,7 @@ public class BookingUI {
                 } catch (Exception e) {
                     System.out.println("Invalid entry...");
                     DeleteCart(showtime, tickets);
+                    return;
                 }
 
             default:
