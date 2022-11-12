@@ -59,7 +59,7 @@ public class MovieGoerUI {
         String newPass = sc.nextLine();
         System.out.print("Email : ");
         String newEmail = sc.nextLine();
-        try (FileWriter f = new FileWriter("./cinemadata/moviegoeracc.txt" , true);
+        try (FileWriter f = new FileWriter( "./cinemadata/moviegoeracc.txt" , true);
                 BufferedWriter b = new BufferedWriter(f);
                 PrintWriter p = new PrintWriter(b);) {
 
