@@ -3,7 +3,9 @@ package entity.ticket;
 import entity.booking.PriceRule;
 import entity.cinema.CinemaClass;
 
-public class CinemaClassRule implements PriceRule {
+import java.io.Serializable;
+
+public class CinemaClassRule implements PriceRule, Serializable {
     private CinemaClass cinemaClass;
 
     public CinemaClassRule(CinemaClass cinemaClass) {

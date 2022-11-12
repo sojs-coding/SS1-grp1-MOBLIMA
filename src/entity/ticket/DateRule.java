@@ -2,12 +2,13 @@ package entity.ticket;
 
 import entity.booking.PriceRule;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DateRule implements PriceRule {
+public class DateRule implements PriceRule, Serializable {
     private AbstractCollection<DayOfWeek> days;
 
     public DateRule(AbstractCollection<DayOfWeek> days) {

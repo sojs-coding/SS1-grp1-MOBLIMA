@@ -2,7 +2,9 @@ package entity.ticket;
 
 import entity.booking.PriceRule;
 
-public class TicketTypeRule implements PriceRule {
+import java.io.Serializable;
+
+public class TicketTypeRule implements PriceRule, Serializable {
     TicketType ticketType;
 
     public TicketTypeRule(TicketType ticketType) {

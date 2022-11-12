@@ -2,7 +2,9 @@ package entity.ticket;
 
 import entity.booking.PriceRule;
 
-public class After6pmRule implements PriceRule {
+import java.io.Serializable;
+
+public class After6pmRule implements PriceRule, Serializable {
     /**
      * @param ticket
      * @return
