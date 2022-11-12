@@ -1,6 +1,4 @@
 package boundary.movieGoerUI;
-
-import com.sun.jdi.InvalidTypeException;
 import controller.MovieManager;
 import entity.movie.Movie;
 import entity.movie.Review;
@@ -38,22 +36,21 @@ public class MovieUI {
 	 */
 	public void searchMovie() {
 		String movieString;
-		int count = 1;
+		int j = 0;
 		System.out.println("Please enter a string: ");
-		movieString = sc.nextLine();
-		for(int i = 0; i < movieMgr.getMovies().size(); i++) {
-			String movieTitle = movieMgr.getMovie(i).getTitle();
-			for(int j = 0; j < movieTitle.length() - movieString.length(); j++) {
-				String strCompare = movieTitle.substring(j, j+movieString.length());
-				if(strCompare.compareToIgnoreCase(movieString) == 0) {
-					System.out.printf("%d) %s",count++, movieTitle);
-					System.out.println();
-					break;
-				}
+		try{
+			movieString = sc.nextLine();
+			for(j = 0; j < movieMgr.getMovies().size(); j++) {
+				if(movieMgr.getMovie(j).getTitle().equals(movieString))
+					System.out.println(movieMgr.getMovie(j).getTitle()+ " exists.");
+					return;
 			}
+		} catch(Exception e){
+			System.out.println("Invalid Entry");
+			return;
 		}
-		if(count == 1)
-			System.out.println("There is no movie with that string.");
+		
+		System.out.println("There is no movie with that string.");
 	}
 
 	/**

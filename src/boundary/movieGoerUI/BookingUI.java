@@ -11,6 +11,7 @@ import controller.TicketPriceManager;
 import entity.booking.*;
 import entity.cinema.*;
 import entity.movie.Movie;
+import entity.movie.ShowingStatus;
 import entity.ticket.Ticket;
 import entity.ticket.TicketType;
 import java.time.format.DateTimeFormatter;
@@ -98,8 +99,9 @@ public class BookingUI {
         System.out.println("                           Movie List                             ");
         System.out.println("--------------------------------------------------------------------");
         while (i < movies.size()){
-            System.out.println(movies.get(i).getTitle());
-            i++;
+            if(movies.get(i).getStatus() != ShowingStatus.END_OF_SHOWING)
+                System.out.println(movies.get(i).getTitle());
+                i++;
         }
         System.out.println("--------------------------------------------------------------------");
     }
@@ -444,50 +446,9 @@ public class BookingUI {
         ArrayList<Booking> bookings = bookingManager.getBookings();
         int i = 0;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
-
-        //Iterates through all bookings and print those that match movieGoer
-        System.out.println("--------------------------------------------------------------------");
-        System.out.printf("                           Bookings of %s                            \n",movieGoer.getName());
-        System.out.println("--------------------------------------------------------------------");
-        //Prints brief summary and allows user to select which to view
+        
         while (i < bookings.size()){ 
             if(new String(bookings.get(i).getPhoneNumber()).equals(new String(movieGoer.getMobile()))){
-                Booking temp = bookings.get(i);
-                System.out.println((i+1) + ") Movie: " + temp.getCentral().getMovie().getTitle() + ", Cinema: " + new String(temp.getCentral().getCinema().getCode()));
-                
-                System.out.print("   Seats: ");
-                for(int j = 0; j < temp.getTicket().size(); j++){
-                    if(j == temp.getTicket().size()-1){
-                        System.out.printf("%d %d",temp.getTicket().get(j).getRow(),temp.getTicket().get(j).getColumn());
-                    }
-                    else{
-                        System.out.printf("%d %d,",temp.getTicket().get(j).getRow(),temp.getTicket().get(j).getColumn());
-                    }
-                }
-                System.out.println();
-                i++;
-            }
-        }
-        System.out.println("--------------------------------------------------------------------");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Which booking do you want to view? Key in the index (1,2 etc)");
-        try{
-            avail = sc.nextInt();
-        }catch(Exception e){
-            System.out.println("Invalid entry...");
-            System.out.println("Returning...");
-            return;
-        }
-        
-        if(avail < 1 || avail > i){
-            System.out.println("Invalid entry...");
-            System.out.println("Returning...");
-            return;
-        }
-        i = 0;
-        
-        while (i < bookings.size()){ 
-            if(new String(bookings.get(i).getPhoneNumber()).equals(new String(movieGoer.getMobile())) && avail == i+1){
                 System.out.println("Booking ID: "+ bookings.get(i).getId());
                 Booking temp = bookings.get(i);
                 System.out.println();
@@ -504,6 +465,7 @@ public class BookingUI {
                         System.out.println(temp.getCentral().getMovie().getTitle());
                         System.out.print("Date and Time of Movie: ");
                         System.out.println(dtf.format(temp.getCentral().getDateTime()));
+                        System.out.println("Cinema Class: "+temp.getCentral().getCinema().getCinemaClass());
                         System.out.print("Payment Tid: ");
                         System.out.println(temp.getPayment().getTid());
                         //Print both seats for couple seat
@@ -554,20 +516,24 @@ public class BookingUI {
 
         //Find the max number of tickets with movie and print
         int count = 5;
+        int j = 0;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("                  Top 5 Movies (By Ticket Sales)                    ");
         System.out.println("--------------------------------------------------------------------");
         while (count > 0){
             if(!movieCount.isEmpty()){
                 String topMovie = getMaxCount(movieCount);
-                System.out.printf("(1): %s , Ticket Sales: %d\n",topMovie,movieCount.get(topMovie));
+                System.out.printf("%d: %s , Ticket Sales: %d\n",j+1,topMovie,movieCount.get(topMovie));
                 movieCount.remove(topMovie);
+                j++;
+                count--;
             }
             else{
-                System.out.println("There are less than 5 movies premiered...");
                 break;
             }
         }
+        if (count > 0)
+            System.out.println("There is less than 5 movies....");
         System.out.println("--------------------------------------------------------------------\n");
     }
 }

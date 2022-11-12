@@ -609,12 +609,52 @@ public class Initialization implements Serializable {
         Cinema cinema = new Cinema("JR1".toCharArray(), CinemaClass.NORMAL, layout);
         gvJurong.addCinema(cinema);
 
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-25 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(8)
+                )
+        );
+
 
         showtimeManager.addShowtime(
                 new Showtime(
                         LocalDateTime.parse("2022-11-17 19:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                         cinema,
                         movieManager.getMovie(0)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-11-17 17:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(0)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(1)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-13 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(2)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-14 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(3)
                 )
         );
 
@@ -646,9 +686,41 @@ public class Initialization implements Serializable {
 
         showtimeManager.addShowtime(
                 new Showtime(
-                        LocalDateTime.parse("2022-11-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        LocalDateTime.parse("2022-11-19 19:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                         cinema,
                         movieManager.getMovie(0)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-11-19 19:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(0)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(1)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-13 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(2)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-14 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(3)
                 )
         );
 
@@ -683,11 +755,11 @@ public class Initialization implements Serializable {
 
         showtimeManager.addShowtime(
             new Showtime(
-                    LocalDateTime.parse("2022-11-17 14:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                    LocalDateTime.parse("2022-11-17 19:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                     cinema,
                     movieManager.getMovie(0)
             )
-    );
+        );
 
 
         Cineplex gvWoodlands = new Cineplex("Woodlands");
@@ -704,6 +776,32 @@ public class Initialization implements Serializable {
         layout.setObject(2, 3, LayoutObjectFactory.getLayoutObject(LayoutItem.COUPLE_SEAT));
         cinema = new Cinema("WL1".toCharArray(),CinemaClass.PLATINUM_MOVIE_SUITES, layout);
         gvWoodlands.addCinema(cinema);
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(1)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-13 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(2)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-14 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(3)
+                )
+        );
+
+        
 
 
         //Showtime juraShowtime = new Showtime(LocalDateTime.now(),cinema,movieManager.getMovie(0));
@@ -722,6 +820,30 @@ public class Initialization implements Serializable {
         cinema = new Cinema("WL2".toCharArray(), CinemaClass.DOLBY_ATMOS_2D, layout);
         gvWoodlands.addCinema(cinema);
 
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(1)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-13 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(2)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-14 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(3)
+                )
+        );
+
         layout = new Layout(3, 5);
         layout.setObject(0, 0, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
         layout.setObject(0, 1, LayoutObjectFactory.getLayoutObject(LayoutItem.SINGLE_SEAT));
@@ -736,6 +858,30 @@ public class Initialization implements Serializable {
         cinema = new Cinema("WL3".toCharArray(),CinemaClass.PLATINUM_MOVIE_SUITES, layout);
         gvWoodlands.addCinema(cinema);
         cineplexManager.addCineplex(gvWoodlands);
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-12 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(1)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-13 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(2)
+                )
+        );
+
+        showtimeManager.addShowtime(
+                new Showtime(
+                        LocalDateTime.parse("2022-12-14 20:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        cinema,
+                        movieManager.getMovie(3)
+                )
+        );
 
         Cineplex gvTampines = new Cineplex("Tampines");
         layout = new Layout(5, 7);

@@ -81,7 +81,7 @@ public class MovieGoerUI {
         String mobile = sc.nextLine();
         System.out.print("Password : ");
         String pass = sc.nextLine();
-        MovieGoerAuthenticator movieGoerAuthenticator = initObj.getMovieGoerAuthenticator();
+        MovieGoerAuthenticator movieGoerAuthenticator = new MovieGoerAuthenticator();
         movieGoerAuthenticator.login(mobile, pass);
         if (MovieGoerAuthenticator.user != null) {
             movieGoerMenu(MovieGoerAuthenticator.user);

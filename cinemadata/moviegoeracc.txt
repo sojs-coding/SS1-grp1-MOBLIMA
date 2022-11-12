@@ -1,1 +1,5 @@
 12345678;user1;pass;user@gmail.com
+12345678;James;password;bob@gmail.com
+99999999;Jordan;1234;bob@gmail.com
+11111111;Bob;1111;bob@gmail.com
+22222222;Bob;2222;bob@gmail.com
