@@ -215,10 +215,12 @@ public class BookingUI {
     }
 
     private TicketType IdentifyAge(String age){
-        if(age == "STUDENT"){
+        if(age.equals("STUDENT")){
             return TicketType.STUDENT;
         }
-        return TicketType.ELDERLY;
+        else{
+            return TicketType.ELDERLY;
+        }
     }
 
     private void PurchaseUI(Showtime showtime, Cinema cinema, Movie movie){
@@ -374,6 +376,17 @@ public class BookingUI {
             if(new String(bookings.get(i).getPhoneNumber()).equals(new String(movieGoer.getMobile()))){
                 Booking temp = bookings.get(i);
                 System.out.println((i+1) + ") Movie: " + temp.getCentral().getMovie().getTitle() + ", Cinema: " + new String(temp.getCentral().getCinema().getCode()));
+                
+                System.out.print("   Seats: ");
+                for(int j = 0; j < temp.getTicket().size(); j++){
+                    if(j == temp.getTicket().size()-1){
+                        System.out.printf("%d %d",temp.getTicket().get(j).getRow(),temp.getTicket().get(j).getColumn());
+                    }
+                    else{
+                        System.out.printf("%d %d,",temp.getTicket().get(j).getRow(),temp.getTicket().get(j).getColumn());
+                    }
+                }
+                System.out.println();
                 i++;
             }
         }
