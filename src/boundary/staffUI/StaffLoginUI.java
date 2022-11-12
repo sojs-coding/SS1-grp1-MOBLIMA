@@ -55,22 +55,8 @@ public class StaffLoginUI {
 			switch(choice)
 			{
 			    case "1"://configure system settings
-			    	SystemSettingUI configure = new SystemSettingUI();
-			    	System.out.println("How would you like to configure System settings ");
-			    	System.out.println("|(1) Configure holidays |");
-			    	System.out.println("|(2) Configure ticket prices |");
-			    	System.out.println("=============================");
-			    	String c2;
-			    	c2 = sc.nextLine();
-					switch(c2)
-					{
-					     case "1":
-					    	 configure.configureHoliday();
-					    	 break;
-					     case "2":
-					         configure.configureTicketPrice();
-					    	 break;
-					}
+					SystemSettingUI configure = new SystemSettingUI();
+					configure.configure();
 			    	break;
 			    case "2"://manage movie listings
                     ManageMovielisting managemovielisting = new ManageMovielisting(movielist);

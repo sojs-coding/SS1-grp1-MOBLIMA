@@ -13,7 +13,7 @@ public class HolidayManager implements Serializable {
         localDateTimeArrayList = new ArrayList<>();
     }
 
-    public ArrayList<LocalDate> getLocalDateTimeArrayList() {
+    public ArrayList<LocalDate> getLocalDates() {
         return localDateTimeArrayList;
     }
 
@@ -28,6 +28,10 @@ public class HolidayManager implements Serializable {
      */
     public void addDate(String date) {
         localDateTimeArrayList.add(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd")));
+    }
+
+    public void addDate(LocalDate date) {
+        localDateTimeArrayList.add(date);
     }
 
     public void removeDate(int index) {
