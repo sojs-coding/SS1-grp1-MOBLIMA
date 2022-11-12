@@ -59,7 +59,7 @@ public class MovieGoerUI {
         String newPass = sc.nextLine();
         System.out.print("Email : ");
         String newEmail = sc.nextLine();
-        try (FileWriter f = new FileWriter("moviegoeracc.txt", true);
+        try (FileWriter f = new FileWriter("./cinemadata/moviegoeracc.txt" , true);
                 BufferedWriter b = new BufferedWriter(f);
                 PrintWriter p = new PrintWriter(b);) {
 
@@ -69,6 +69,9 @@ public class MovieGoerUI {
             i.printStackTrace();
         }
         System.out.println("Successfully Registered! Thank you!");
+        MovieGoerUI movieGoerUI = new MovieGoerUI();
+        System.out.println("Please Login");
+        movieGoerUI.login();
     }
     
 
