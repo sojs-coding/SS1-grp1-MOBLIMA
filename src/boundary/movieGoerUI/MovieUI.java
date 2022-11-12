@@ -12,11 +12,18 @@ public class MovieUI {
 
 	Scanner sc = new Scanner(System.in);
 	private MovieManager movieMgr;
-	
+
+	/**
+	 * Constructor of MovieUI
+	 * @param movieMgr
+	 */
 	MovieUI(MovieManager movieMgr){
 		this.movieMgr = movieMgr;
 	}
-	
+
+	/**
+	 * Print all the movies that are in the database
+	 */
 	public void printAllMovies() {
 		for(int i = 0; i < movieMgr.getMovies().size(); i++) {
 			Movie movie = movieMgr.getMovie(i);
@@ -25,7 +32,10 @@ public class MovieUI {
 			System.out.println();
 		}
 	}
-	
+
+	/**
+	 * Request a string from the user and search and display the movie title that matches the string
+	 */
 	public void searchMovie() {
 		String movieString;
 		int count = 1;
@@ -45,32 +55,43 @@ public class MovieUI {
 		if(count == 1)
 			System.out.println("There is no movie with that string.");
 	}
-	
+
+	/**
+	 * Request the full movie title from the user and display the details of the movie
+	 */
 	public void viewMovieDetails() {
 		String movieTitle;
 		System.out.println("Please enter the full title of the movie: ");
 		movieTitle = sc.nextLine();
 		Movie movie = movieMgr.searchMovie(movieTitle);
+		StringBuilder sb = new StringBuilder(movie.getSynopsis());
+		int i = 0;
+		while (i + 120 < sb.length() && (i = sb.lastIndexOf(" ", i + 120)) != -1) {
+			sb.replace(i, i + 1, "\n");
+		}
 		String[] casts = movie.getCasts();
 		ArrayList<Review> reviews = movie.getReviews();
 		System.out.println("Title: " + movie.getTitle());
 		System.out.print("Casts: ");
-		for(int i = 0; i < casts.length; i++) {
-			System.out.print(casts[i] + ", ");
+		for(int j = 0; j < casts.length; j++) {
+			System.out.print(casts[j] + ", ");
 		}
 		System.out.println();
 		System.out.println("Director: " + movie.getTitle());
-		System.out.println("Synopsis: " + movie.getSynopsis());
+		System.out.println("Synopsis: " + sb.toString());
 		System.out.println("Movie Type: " + movie.getType().toString());
 		System.out.print("Reviews: ");
-		for(int i = 0; i < reviews.size(); i++) {
-			Review review = reviews.get(i);
+		for(int j = 0; j < reviews.size(); j++) {
+			Review review = reviews.get(j);
 			System.out.printf(review.getReview() + " Rating: %d/5",review.getRating());
 			System.out.println();
 		}
 		System.out.println("Status: " + movie.getStatus());
 	}
-	
+
+	/**
+	 * Request the title, and then the review and rating of the movie from the user
+	 */
 	public void leaveReview() {
 		
 		Review review;
