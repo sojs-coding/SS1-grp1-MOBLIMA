@@ -91,59 +91,53 @@ public class MovieGoerUI {
             System.out.println("(1) List movies available: ");
             System.out.println("(2) Search movies available: ");
             System.out.println("(3) View Movie Details: ");
-            System.out.println("(4) Check seat availability: ");
-            System.out.println("(5) Book and purchase ticket: ");
-            System.out.println("(6) Show booking history");
-            System.out.println("(7) View Top 5 movies ranked by ticket sales: ");
-            System.out.println("(8) Leave Rating");
-            System.out.println("(9) Quit");
+            System.out.println("(4) Book and purchase ticket: ");
+            System.out.println("(5) Show booking history");
+            System.out.println("(6) View Top 5 movies ranked by ticket sales: ");
+            System.out.println("(7) Leave Rating");
+            System.out.println("(8) Quit");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Enter your choice:");
-            int choices = scanner.nextInt();
+            String choices = scanner.nextLine();
             switch (choices) {
-                case 1:
+                case "1":
                     System.out.println("(1) List movies available");
                     //get
                     //function to show get availble movies
                     movieUI.printAllMovies();
                     break;
-                case 2:
+                case "2":
                     System.out.println("(2) Search movies available");
                     //searchMovie();
                     //search function
                     movieUI.searchMovie();
                     break;
-                case 3:
+                case "3":
                     System.out.println("(3) View Movie Details");
                     //get movie details
                     movieUI.viewMovieDetails();
                     break;
-                case 4:
-                    System.out.println("(4) Check seat availability ");
-                    showAvailableSeats();
-                    //this function is currently static need to define classes first
-                    break;
-                case 5:
-                    System.out.println("(5) Book and purchase ticket");
+                case "4":
+                    System.out.println("(4) Book and purchase ticket");
                     bookingUI.BookAndPurchase();
                     //function to book and purchase
                     break;
-                case 6:
-                    System.out.println("(6) Show booking history");
+                case "5":
+                    System.out.println("(5) Show booking history");
                     bookingUI.BookingHistory();
                     // function to get booing details
                     break;
-                case 7:
-                    System.out.println("(7) View Top 5 movies ranked by ticket sales ");
+                case "6":
+                    System.out.println("(6) View Top 5 movies ranked by ticket sales ");
                     bookingUI.TopFiveMovie();
                     //function to get top 5
                     break;
-                case 8:
-                    System.out.println("(8) Leave Rating");
+                case "7":
+                    System.out.println("(7) Leave Rating");
                     //leave ratings
                     movieUI.leaveReview();
                     break;
-                case 9:
+                case "8":
                     isStillrunning = false;
                     System.out.println("bye");
                     break;
