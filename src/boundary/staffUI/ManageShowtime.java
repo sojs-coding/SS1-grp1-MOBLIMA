@@ -9,25 +9,33 @@ import entity.movie.Movie;
 import controller.CineplexManager;
 import controller.MovieManager;
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.time.format.DateTimeFormatter;  
 import java.util.*;
-import java.time.format.DateTimeParseException;  
 
-
-
-
-
-
+/**
+ * Represents Class to create/update/remove showtime
+ */
 public class ManageShowtime {
 	
 	Scanner sc = new Scanner(System.in);
-
+	/*
+	 * The moviemanager class as a variable
+	 */
 	private MovieManager movieManager;
+	/*
+	 * The cineplexmanager class as a variable
+	 */
 	private CineplexManager cineplexManager;
+	/*
+	 * The showtimemanager class as a variable
+	 */
 	private ShowtimeManager showtimeManager;
-
+	/**
+	 * The constructor of manageshowtime
+	 * @param moviemanager The moviemanager to be used for ManageShowtime
+	 * @param cineplexManager The cineplexmanager to be used for ManageShowtime
+	 * @param showtimeManager The showtimemanager to be used for ManageShowtime
+	 */
 	public ManageShowtime(MovieManager moviemanager,CineplexManager cineplexManager,ShowtimeManager showtimeManager)
 	{
         this.movieManager = moviemanager;
@@ -35,7 +43,9 @@ public class ManageShowtime {
 		this.showtimeManager = showtimeManager;
 		
 	}
-
+	/**
+	 *  Creates a cinema showtime and adds it into the showtimes list
+	 */
 	public  void createCinemaShowtime()
 	{
 		ArrayList<Movie> movielist = movieManager.getMovies();
@@ -45,7 +55,7 @@ public class ManageShowtime {
 		DateTimeFormatter DATE_TIME_FORMATTER;
         String num = null;
 		int number = 0;
-
+        
 		try{
 			System.out.println("How many showtimes do you want to add?");
 			num = sc.nextLine();
@@ -141,7 +151,9 @@ public class ManageShowtime {
         
 		System.out.println("Showtime successfully created");
 	}
-	
+	/**
+	 *  update any showtime currently in the showtimes list
+	 */
 	public void updateCinemaShowtime()
 	{
 		Movie movie = new Movie(null, null, null, 0, null, null, null);
@@ -283,7 +295,9 @@ public class ManageShowtime {
 		
 		System.out.println("Showtime successfully updated");
 	}
-	
+	/**
+	 * remove any showtime in the showtimes list
+	 */
 	public  void removeCinemaShowtime()
 	{
         Movie movie = new Movie(null, null, null, 0, null, null, null);
@@ -373,7 +387,10 @@ public class ManageShowtime {
 		
 
 	}
-
+    /**
+	 * print all movies avaliable in the movielist 
+	 * @param movielist movielist that contains all the movies
+	 */
 	public static void printMovies(ArrayList<Movie> movielist)
 	{
         System.out.println("--------------------------------------------------------------------");
@@ -385,7 +402,10 @@ public class ManageShowtime {
         }
         System.out.println("--------------------------------------------------------------------");
     }
-
+    /**
+	 * prints all cinemas currently in the cineplex
+	 * @param cineplex cineplex that contains the cinema
+	 */
 	public static void printCinemas(Cineplex cineplex)
 	{
         ArrayList<Cinema> cinemas = cineplex.getCinemas();
@@ -399,7 +419,10 @@ public class ManageShowtime {
         }
         System.out.println("--------------------------------------------------------------------");
     }
-
+    /**
+	 * print all showtimes current in the showtimes list
+	 * @param showtimeManager
+	 */
 	public static void printShowTimes(ShowtimeManager showtimeManager)
 	{
 
@@ -414,11 +437,12 @@ public class ManageShowtime {
 		}
         System.out.println("--------------------------------------------------------------------");
     }
-
-
-
-	public static void printCineplex(CineplexManager cineplex){
-        ArrayList<Cineplex> c = cineplex.getCineplexes();
+    /**
+	 * prints all the cineplex in the cineplex list
+	 * @param cineplexlist contains the all the cineplex
+	 */
+	public static void printCineplex(CineplexManager cineplexlist){
+        ArrayList<Cineplex> c = cineplexlist.getCineplexes();
         int i = 0;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("                           Cineplex List                            ");

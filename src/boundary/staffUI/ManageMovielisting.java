@@ -9,17 +9,28 @@ import entity.movie.Movie;
 import entity.movie.MovieType;
 import entity.movie.ShowingStatus;
 
-
+/**
+ *  Represents Class to create/update/remove movie 
+ */
 public class ManageMovielisting {
 
 	private Scanner sc = new Scanner(System.in);
+	/**
+	 * The moviemanager class as a variable
+	 */
 	private MovieManager moviemanager;
-
+    
+	/**
+	 * The constructor of ManageMovielisting
+	 * @param moviemanager The moviemanager to be used for ManageMovielisting
+	 */
 	ManageMovielisting(MovieManager moviemanager)
 	{
 		this.moviemanager = moviemanager;
 	}
-
+	/**
+	 * Create a new movie and adding the movie into moviemanager
+	 */
 	 public  void createmovielisting()
 	 {
 			int choice;
@@ -114,6 +125,10 @@ public class ManageMovielisting {
 		   
 	   
 	 }
+	 /**
+	  * Method to display adding cast
+	  * @return returns the cast members 
+	  */
 	 public String[] addCast()
 	 {
         int number = 0;
@@ -143,6 +158,9 @@ public class ManageMovielisting {
 		return moviecasts;
 
 	 }
+	 /**
+	  * Update any movie listed in movie manager
+	  */
 	 public  void updatemovielisting()
 	 {
 		 int option;
@@ -310,23 +328,9 @@ public class ManageMovielisting {
 		
 		 
 	 }
-	 public static void updatemoviemenu()
-	 {
-
-        System.out.println();
-        System.out.format(  "====================================\n" +
-                "|           Select Option          |\n" +
-                "====================================\n" +
-                "| (1) Edit Title                   |\n" +
-                "| (2) Edit Movie Status               |\n" +
-                "| (3) Edit Synopsis                   |\n" +
-                "| (4) Edit overallrating               |\n" +
-                "| (5) Edit Movie type               |\n" +
-                "| (6) Edit Director               |\n" +
-                "| (7) Edit Movie casts           |\n" +
-                "| (8) Back                         |\n" +
-                "====================================\n");
-    }
+	 /**
+	  * Remove any movie currently inside moviemanager
+	  */
 	 public  void removemovielisting()
 	 {
 		int index = 0,size;
@@ -381,6 +385,26 @@ public class ManageMovielisting {
 		
 
 	    }
+	 }
+	  /**
+	  * Method used to display the menu for editing the movie
+	  */
+	  public static void updatemoviemenu()
+	  {
+ 
+		 System.out.println();
+		 System.out.format(  "====================================\n" +
+				 "|           Select Option          |\n" +
+				 "====================================\n" +
+				 "| (1) Edit Title                   |\n" +
+				 "| (2) Edit Movie Status               |\n" +
+				 "| (3) Edit Synopsis                   |\n" +
+				 "| (4) Edit overallrating               |\n" +
+				 "| (5) Edit Movie type               |\n" +
+				 "| (6) Edit Director               |\n" +
+				 "| (7) Edit Movie casts           |\n" +
+				 "| (8) Back                         |\n" +
+				 "====================================\n");
 	 }
 
 }

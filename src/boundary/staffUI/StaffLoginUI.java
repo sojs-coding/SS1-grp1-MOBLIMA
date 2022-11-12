@@ -9,13 +9,22 @@ import controller.ShowtimeManager;
 
 import java.util.Scanner;
 
+/**
+ * Class for StaffLogin UI to display options for the staff user
+ */
 public class StaffLoginUI {
-	private Scanner sc = new Scanner(System.in);
-    private Initialization initObj = Initialization.getINSTANCE();
 
+	private Scanner sc = new Scanner(System.in);
+	/**
+	 * Instance variable of Initialization
+	 */
+    private Initialization initObj = Initialization.getINSTANCE();
+    /*
+	 * login screen for the cinema staff user
+	 */
 	public void login()
 	{
-		System.out.println("CINEMA STAFF USER:");
+		System.out.println("==========CINEMA STAFF USER=========");
 		System.out.println("Please enter the login details ");
 		System.out.println("Enter Staff Username:");
 		String username = sc.nextLine();

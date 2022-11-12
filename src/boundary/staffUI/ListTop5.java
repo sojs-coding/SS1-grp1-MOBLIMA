@@ -6,19 +6,32 @@ import entity.movie.Movie;
 import controller.BookingManager;
 import entity.booking.Booking;
 
-
+/**
+ * Class to List top 5 movies based on ticket sales or overall rating
+ */
 public class ListTop5 {
 	
+    /**
+     * The moviemanager class as a variable
+     */
 	 private MovieManager moviemanager;
+     /**
+      * The booking manager class as a variable
+      */
      private BookingManager bookingmanager;
-
+    
+    /**
+     * @param moviemanager moviemanager to be used for listtop5
+     * @param bookingmanager bookingmanager to be used for listtop5
+     */
     ListTop5(MovieManager moviemanager,BookingManager bookingmanager)
 	{
 		this.moviemanager = moviemanager;
         this.bookingmanager = bookingmanager;
 	}
-
-
+    /**
+     * Prints the top 5 movies based on their overall rating
+     */
 	 public void printTop5MoviesByRatings() 
 	 {
 		 ArrayList<Movie> movies = moviemanager.getMovies();
@@ -57,6 +70,11 @@ public class ListTop5 {
 		 
 		
 	 }
+     /**
+      * method to get the highest number of tickets sold in the moviecount 
+      * @param movieCount moviecount is a hashmap containing the movie title and the count value
+      * @return returns the movie with the highest number of tickets sold
+      */
 	 public String getMaxCount(Map<String,Integer> movieCount){
         int max = 0;
         String maxString = "";
@@ -74,6 +92,9 @@ public class ListTop5 {
         return maxString;
 
     }
+    /**
+     * prints the top 5 movies based on their ticket sales
+     */
 	 public  void printTop5MoviesBySales()
 	 {	
 
@@ -110,10 +131,15 @@ public class ListTop5 {
 
 		 
 	 }
-	 private static HashMap<String, Float> sortbyratings (LinkedHashMap <String, Float> temp )
+     /**
+      * @param hashmap hashmap contains the value for movie title and overall rating
+      * @return returns the sorted hashmap
+      * method to sort the linkedhashmap based on the overall rating
+      */
+	 private static HashMap<String, Float> sortbyratings (LinkedHashMap <String, Float> hashmap )
 	 {
 		  //get all the entries from the hashtable and put it in a List
-          List<Map.Entry<String, Float>> list = new ArrayList<Map.Entry<String, Float>>(temp.entrySet());
+          List<Map.Entry<String, Float>> list = new ArrayList<Map.Entry<String, Float>>(hashmap.entrySet());
           
 		  //sort the entries based on the value by custom Comparator
           Collections.sort(list, new Comparator<Map.Entry<String, Float>>()

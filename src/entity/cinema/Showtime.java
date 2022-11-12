@@ -79,36 +79,37 @@ public class Showtime implements Serializable {
 		return cinema;
 	}
 	/**
-	 * Get the movie of the showtime
-	*/
+	 * returns the movie object
+	 */
 	public Movie getMovie() {
 		return movie;
 	}
-	/**
-	 * Changes the cinema of the showtime
-	 * @param cinema The new cinema the showtime is going to be in
-	*/
+   /**
+	* Changes the cinema and its layout
+	* @param cinema cinema which was set
+    */
 	public void setCinema(Cinema cinema) {
 		this.cinema = cinema;
 		this.layout = cinema.cloneCinemaLayout();
 	}
 	/**
-	 * Changes the movie of the showtime
-	 * @param movie The new movie the showtime is going to show
-	*/
+	 * Changes the movie
+	 * @param movie movie which was set
+	 */
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
-	/**
-	 * Changes the dateTime of the showtime
-	 * @param datetime The new dateTime the showtime is going to show at
-	*/
+    /**
+	 * Changes the datetime
+	 * @param datetime datetime which was set
+	 */
 	public void setDateTime(LocalDateTime datetime) {
 		this.datetime = datetime;
 	}
-	/**
-	 * Returns the layout of the showtime/cinema
-	*/
+    /**
+	 * method to get the layout object
+	 * @return returns the layout object
+	 */
 	public Layout getLayout() 
 	{
 		return layout;
