@@ -208,6 +208,7 @@ public class Initialization implements Serializable {
             while (i + 40 < sb.length() && (i = sb.lastIndexOf(" ", i + 40)) != -1) {
                 sb.replace(i, i + 1, "\n");
             }
+        }
      
         Movie movie1 = new Movie("Jurassic Park",
                 ShowingStatus.NOW_SHOWING,
@@ -259,6 +260,7 @@ public class Initialization implements Serializable {
                 s[9],
                 4.3, MovieType.BLOCKBUSTER, "Christopher Nolan", new String[]{"Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"});
 
+                    
         movieManager.addMovie(movie1);
         movieManager.addMovie(movie2);
         movieManager.addMovie(movie3);
@@ -269,7 +271,7 @@ public class Initialization implements Serializable {
         movieManager.addMovie(movie8);
         movieManager.addMovie(movie9);
         movieManager.addMovie(movie10);
-        }
+        
     }
 
     private void initHolidays() {
