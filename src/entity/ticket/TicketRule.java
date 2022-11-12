@@ -1,7 +1,5 @@
 package entity.ticket;
 
-import entity.booking.PriceRule;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -1,13 +1,9 @@
 package entity.ticket;
 
 import controller.Initialization;
-import entity.booking.PriceRule;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.TreeSet;
 
 public class PublicHolidayRule implements PriceRule, Serializable {
