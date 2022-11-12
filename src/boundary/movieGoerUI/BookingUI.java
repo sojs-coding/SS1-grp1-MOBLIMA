@@ -241,7 +241,7 @@ public class BookingUI {
                 String age;
                 System.out.println("Are you a student or elderly?");
                 age = sc2.nextLine();
-                if ((age instanceof String && age != "") && (age.toUpperCase() == "ELDERLY" || age.toUpperCase() == "STUDENT")){
+                if (!age.toUpperCase().equals("STUDENT") && !age.toUpperCase().equals("ELDERLY")){
                     System.out.println("Invalid Entry...");
                     System.out.println("Returning...");
                     return;
@@ -403,10 +403,10 @@ public class BookingUI {
                         System.out.println("Price: " + individual.getPrice());
                         System.out.println("--------------------------------------------------------------------");
                     }
-                    i++;
                     System.out.printf("                      Total Price: %.2f                            \n",temp.calculateTotalPrice());
                     System.out.println("--------------------------------------------------------------------\n");
                 }
+                i++;
             }
         }
 
