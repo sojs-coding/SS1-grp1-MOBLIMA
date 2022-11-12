@@ -214,6 +214,13 @@ public class BookingUI {
         return null;
     }
 
+    private TicketType IdentifyAge(String age){
+        if(age == "STUDENT"){
+            return TicketType.STUDENT;
+        }
+        return TicketType.ELDERLY;
+    }
+
     private void PurchaseUI(Showtime showtime, Cinema cinema, Movie movie){
         Scanner sc = new Scanner(System.in);
         showtime.displaySeating();
@@ -230,6 +237,16 @@ public class BookingUI {
                 System.out.println("Returning to menu....");
                 return;
             case 2:
+                Scanner sc2 = new Scanner(System.in);
+                String age;
+                System.out.println("Are you a student or elderly?");
+                age = sc2.nextLine();
+                if (age instanceof String && (age.toUpperCase() == "ELDERLY" || age.toUpperCase() == "STUDENT")){
+                    System.out.println("Invalid Entry...");
+                    System.out.println("Returning...");
+                    return;
+                }
+                age = age.toUpperCase();
                 ArrayList<Ticket> tickets = new ArrayList<Ticket>();
                 try {
                     while (true){
@@ -237,28 +254,27 @@ public class BookingUI {
                         Layout layout = showtime.getLayout();
                         System.out.println("Enter the seat (row column) you want to purchase (-1 to proceed booking, -2 to return to home menu)");
                         System.out.printf("Current tickets in cart: %d\n", tickets.size());
-                        int row = sc.nextInt();
+                        int row = sc2.nextInt();
                         if(row == -1)
                             break;
                         if(row < -1){
                             System.out.println("Exiting...");
                             DeleteCart(showtime, tickets);
                         }
-                        int column = sc.nextInt();
+                        int column = sc2.nextInt();
                         if (!layout.isOccupied(row, column)){
                             //Couple Seat
                             if(layout.getLayoutObject()[row][column].getSeatSymbol()== 'C'){
                                 System.out.println("Couple seats are available.\n");
                                 ArrayList<TicketType> ticketTypes = new ArrayList<>();
-                                ticketTypes.add(TicketType.ELDERLY);
+                                ticketTypes.add(IdentifyAge(age));
                                 tickets.add(showtime.produceTicket(row, column, ticketTypes));
-
                             }
                             //Single seat
                             else{
                                 System.out.println("Single seat is available.\n");
                                 ArrayList<TicketType> ticketTypes = new ArrayList<>();
-                                ticketTypes.add(TicketType.ELDERLY);
+                                ticketTypes.add(IdentifyAge(age));
                                 tickets.add(showtime.produceTicket(row, column, ticketTypes));
                                 cinema.cloneCinemaLayout();
                             }
@@ -269,7 +285,7 @@ public class BookingUI {
                     }
                     // Generates only one payment per MovieGoer
                     Payment payment = new Payment(cinema.getCode());
-                    Booking booking = new Booking(showtime, movieGoer, payment, tickets, bookingManager.getIDCount(),ticketPriceManager);
+                    Booking booking = new Booking(showtime, movieGoer, payment, tickets, bookingManager.getIDCount());
                     bookingManager.getBookings().add(booking);
                     Paying(bookingManager.getIDCount());
                     bookingManager.setIDCount(bookingManager.getIDCount()+1);
@@ -292,11 +308,20 @@ public class BookingUI {
         System.out.println("---------------------------------------");
         System.out.println("Booking Summary:");
         for(int i = 0; i < bookingManager.getBooking(bookingID).getTicket().size(); i++){
-            Ticket temp = bookingManager.getBooking(bookingID).getTicket().get(i);
+            Showtime showtime = bookingManager.getBooking(bookingID).getCentral();
+            Ticket ticket = bookingManager.getBooking(bookingID).getTicket().get(i);
             System.out.println("---------------------------------------");
             System.out.println("Ticket " + (i+1));
-            System.out.println("Ticket Type: "+temp.getTicketTypes());
-            System.out.println("Ticket Price: "+ticketPriceManager.getPrice(temp));
+            System.out.println("Ticket Type: "+ticket.getTicketTypes());
+            if (showtime.getLayout().getLayoutObject()[ticket.getRow()][ticket.getColumn()].getSeatSymbol()=='C'){
+                System.out.println("Ticket Price: "+ ticketPriceManager.getPrice(ticket) + " * 2 = " + ticketPriceManager.getPrice(ticket)*2);
+                ticket.setPrice(ticketPriceManager.getPrice(ticket)*2);
+            }
+            else{
+                System.out.println("Ticket Price: "+ ticketPriceManager.getPrice(ticket));
+                ticket.setPrice(ticketPriceManager.getPrice(ticket));
+            }
+            
         }
         System.out.println("---------------------------------------");    
     }
@@ -373,7 +398,7 @@ public class BookingUI {
                             System.out.print("(Single Seat) Ticket row and column: ");
                             System.out.println(individual.getRow() + " " + individual.getColumn());
                         }
-                        System.out.println("Price: " + ticketPriceManager.getPrice(individual));
+                        System.out.println("Price: " + individual.getPrice());
                         System.out.println("--------------------------------------------------------------------");
                     }
                     i++;

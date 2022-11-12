@@ -11,6 +11,7 @@ public class Ticket implements Serializable {
 	private ArrayList<TicketType> ticketTypes;
 	private int row;
 	private int column;
+	private double price = 0;
 
 	public Ticket(int row, int column, Showtime showtime, ArrayList<TicketType> ticketTypes) {
 		this.showtime = showtime;
@@ -33,5 +34,13 @@ public class Ticket implements Serializable {
 
 	public Showtime getShowtime() {
 		return showtime;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double d) {
+		this.price = d;
 	}
 }

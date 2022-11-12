@@ -14,15 +14,13 @@ public class Booking implements Serializable {
     private ArrayList<Ticket> ticket;
     private int id;
     private float totalPrice = 0;
-    private TicketPriceManager manager;
 
-    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, ArrayList<Ticket> ticket, int id, TicketPriceManager ticketPriceManager){
+    public Booking(Showtime central, MovieGoer movieGoer, Payment payment, ArrayList<Ticket> ticket, int id){
         this.central = central;
         this.user = movieGoer;
         this.payment = payment;
         this.ticket = ticket;
         this.id = id;
-        this.manager = ticketPriceManager;
     }
 
     /*If no booking can be found in BookingManager, this is returned*/
@@ -73,10 +71,10 @@ public class Booking implements Serializable {
         this.central = central;
     }
 
-    public float calculateTotalPrice(){
-        float totalPrice = 0;
+    public double calculateTotalPrice(){
+        double totalPrice = 0;
         for(int i = 0;i < this.ticket.size(); i++){
-            totalPrice += manager.getPrice(ticket.get(i));
+            totalPrice += ticket.get(i).getPrice();
         }
 
         return totalPrice;
