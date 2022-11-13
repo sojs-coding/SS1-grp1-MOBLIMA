@@ -181,6 +181,8 @@ public class MovieGoerUI {
                     isStillrunning = false;
                     System.out.println("bye");
                     break;
+                default:
+                    System.out.println("Please enter an integer number ranged from 1-8");
             }
         }
 
