@@ -1,10 +1,18 @@
 package entity.movie;
 
 import java.io.Serializable;
-
+/**
+ * Class representing the review of a movie by the user
+ */
 public class Review implements Serializable {
-
+    
+	/**
+	 * A formal assessment of the movie the user watched
+	 */
 	private String review;
+	/**
+	 * The rating which determines how much the user enjoyed the movie
+	 */
 	private int rating;
 
 	/**

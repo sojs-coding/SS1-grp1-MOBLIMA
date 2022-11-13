@@ -1,5 +1,8 @@
 package entity.movie;
 
+/**
+ * Represents the Enumerator values of ShowingStatus
+ */
 public enum ShowingStatus {
 	COMING_SOON,
 	PREVIEW,
