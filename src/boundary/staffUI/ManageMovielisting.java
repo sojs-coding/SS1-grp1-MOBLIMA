@@ -165,6 +165,11 @@ public class ManageMovielisting {
 	 {
 		 int option;
 		 Movie movie = new Movie(null, null, null, 0, null, null, null);
+		 ArrayList<Movie> movieList = moviemanager.getMovies();
+		 for (Movie movies : movieList) 
+		 {
+                System.out.println(movies.getTitle());
+		 }
 		 try
 		 {
 			System.out.println("Which movie do you want to update?");

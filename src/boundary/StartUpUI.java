@@ -5,7 +5,9 @@ import boundary.staffUI.StaffLoginUI;
 import controller.MovieGoerAuthenticator;
 
 import java.util.Scanner;
-
+/**
+ * Display the options for the user to choose his role
+ */
 public class StartUpUI {
     public void start() {
         String choice;
