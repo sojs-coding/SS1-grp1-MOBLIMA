@@ -116,7 +116,7 @@ public class MovieGoerUI {
     }
 
     public void movieGoerMenu(MovieGoer user) {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("=====================================");
         System.out.println("Welcome to Movie-Goer Page");
         boolean isStillrunning = true;
@@ -124,6 +124,7 @@ public class MovieGoerUI {
         MovieUI movieUI = new MovieUI(initObj.getMovieManager());
 
         while (isStillrunning) {
+            Scanner scanner = new Scanner(System.in);
             System.out.println("--------------------------------------------------------------------");
             System.out.println("                           Booking Menu                             ");
             System.out.println("--------------------------------------------------------------------");
@@ -137,50 +138,51 @@ public class MovieGoerUI {
             System.out.println("(8) Quit");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Enter your choice:");
-            String choices = scanner.nextLine();
+            int choices = scanner.nextInt();
             switch (choices) {
-                case "1":
+                case 1:
                     System.out.println("(1) List movies available");
                     //get
                     //function to show get availble movies
                     movieUI.printAllMovies();
                     break;
-                case "2":
+                case 2:
                     System.out.println("(2) Search movies available");
                     //searchMovie();
                     //search function
                     movieUI.searchMovie();
                     break;
-                case "3":
+                case 3:
                     System.out.println("(3) View Movie Details");
                     //get movie details
                     movieUI.viewMovieDetails();
                     break;
-                case "4":
+                case 4:
                     System.out.println("(4) Book and purchase ticket");
                     bookingUI.BookAndPurchase();
                     //function to book and purchase
                     break;
-                case "5":
+                case 5:
                     System.out.println("(5) Show booking history");
                     bookingUI.BookingHistory();
                     // function to get booing details
                     break;
-                case "6":
+                case 6:
                     System.out.println("(6) View Top 5 movies ranked by ticket sales ");
                     bookingUI.TopFiveMovie();
                     //function to get top 5
                     break;
-                case "7":
+                case 7:
                     System.out.println("(7) Leave Rating");
                     //leave ratings
                     movieUI.leaveReview();
                     break;
-                case "8":
+                case 8:
                     isStillrunning = false;
                     System.out.println("bye");
                     break;
             }
         }
+
     }
 }
