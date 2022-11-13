@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class LayoutObject implements Serializable {
 	/**
-	 * The occupancy of each
+	 * The occupancy of each layout object
 	 */
 	private boolean occupied;
 	/**
