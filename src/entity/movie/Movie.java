@@ -2,9 +2,21 @@ package entity.movie;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/**
+ * Represents a movie in a cinema
+ */
 public class Movie implements Serializable {
 
+    /**
+	 * Constructor for the Movie class
+	 * @param title title of the movie
+	 * @param status status of the movie
+	 * @param synopsis synopsis is a brief summary of the movie
+	 * @param d the overallrating of the movie
+	 * @param type the type of movie
+	 * @param director the director of the movie
+	 * @param casts the casts starring in the movie
+	 */
 	public Movie(String title, ShowingStatus status, String synopsis, double d, MovieType type, String director, String[] casts) {
 		this.title = title;
 		this.status = status;
@@ -15,14 +27,37 @@ public class Movie implements Serializable {
 		this.casts = casts;
 		this.reviews = new ArrayList<Review>();
 	}
-
-	private String title;
+    /**
+	 * title of the movie
+	 */
+	private String title; 
+	/**
+	 * status of the movie
+	 */
 	private ShowingStatus status;
+	/**
+	 * synopsis is a brief summary of the movie
+	 */
 	private String synopsis;
+	/**
+	 * average rating of the movie based on user ratings
+	 */
 	private double overallRating;
+	/**
+	 * type of the movie
+	 */
 	private MovieType type;
+	/**
+	 * the director of the movie
+	 */
 	private String director;
+	/**
+	 * the casts starring in the movie
+	 */
 	private String[] casts;
+	/**
+	 * the reviews by users who have watched the movie
+	 */
 	private ArrayList<Review> reviews;
 
 	/**
