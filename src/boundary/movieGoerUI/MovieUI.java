@@ -36,14 +36,18 @@ public class MovieUI {
 	 */
 	public void searchMovie() {
 		String movieString;
+		String movieTitle;
 		int j = 0;
 		System.out.println("Please enter a string: ");
 		try{
 			movieString = sc.nextLine();
+			movieString = "(.*)" + movieString + "(.*)" ;
 			for(j = 0; j < movieMgr.getMovies().size(); j++) {
-				if(movieMgr.getMovie(j).getTitle().equals(movieString))
-					System.out.println(movieMgr.getMovie(j).getTitle()+ " exists.");
+				movieTitle = movieMgr.getMovie(j).getTitle();
+				if(movieTitle.matches(movieString)){
+					System.out.println("The movie "+ movieTitle + " exists.");
 					return;
+				}
 			}
 		} catch(Exception e){
 			System.out.println("Invalid Entry");
