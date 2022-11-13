@@ -64,32 +64,37 @@ public class MovieUI {
 	public void viewMovieDetails() {
 		Scanner sc = new Scanner(System.in);
 		String movieTitle;
-		System.out.println("Please enter the full title of the movie: ");
-		movieTitle = sc.nextLine();
-		Movie movie = movieMgr.searchMovie(movieTitle);
-		StringBuilder sb = new StringBuilder(movie.getSynopsis());
-		int i = 0;
-		while (i + 120 < sb.length() && (i = sb.lastIndexOf(" ", i + 120)) != -1) {
-			sb.replace(i, i + 1, "\n");
-		}
-		String[] casts = movie.getCasts();
-		ArrayList<Review> reviews = movie.getReviews();
-		System.out.println("Title: " + movie.getTitle());
-		System.out.print("Casts: ");
-		for(int j = 0; j < casts.length; j++) {
-			System.out.print(casts[j] + ", ");
-		}
-		System.out.println();
-		System.out.println("Director: " + movie.getTitle());
-		System.out.println("Synopsis: " + sb.toString());
-		System.out.println("Movie Type: " + movie.getType().toString());
-		System.out.print("Reviews: ");
-		for(int j = 0; j < reviews.size(); j++) {
-			Review review = reviews.get(j);
-			System.out.printf(review.getReview() + " Rating: %d/5",review.getRating());
+		try {
+			System.out.println("Please enter the full title of the movie: ");
+			movieTitle = sc.nextLine();
+			Movie movie = movieMgr.searchMovie(movieTitle);
+			StringBuilder sb = new StringBuilder(movie.getSynopsis());
+			int i = 0;
+			while (i + 120 < sb.length() && (i = sb.lastIndexOf(" ", i + 120)) != -1) {
+				sb.replace(i, i + 1, "\n");
+			}
+			String[] casts = movie.getCasts();
+			ArrayList<Review> reviews = movie.getReviews();
+			System.out.println("Title: " + movie.getTitle());
+			System.out.print("Casts: ");
+			for (int j = 0; j < casts.length; j++) {
+				System.out.print(casts[j] + ", ");
+			}
 			System.out.println();
+			System.out.println("Director: " + movie.getTitle());
+			System.out.println("Synopsis: " + sb.toString());
+			System.out.println("Movie Type: " + movie.getType().toString());
+			System.out.print("Reviews: ");
+			for (int j = 0; j < reviews.size(); j++) {
+				Review review = reviews.get(j);
+				System.out.printf(review.getReview() + " Rating: %d/5", review.getRating());
+				System.out.println();
+			}
+			System.out.println("Status: " + movie.getStatus());
 		}
-		System.out.println("Status: " + movie.getStatus());
+		catch(NullPointerException e){
+			System.out.println("You have entered an invalid movie title. Please try again with a valid input");
+		}
 	}
 
 	/**
@@ -111,7 +116,7 @@ public class MovieUI {
 				System.out.println("Enter your thoughts on the movie: ");
 				reviewStr = sc.nextLine();
 				System.out.println("Enter your rating (0-5): ");
-				String temp = sc.next();
+				String temp = sc.nextLine();
 				try{
 					rating = Integer.parseInt(temp);
 					if (rating >= 0 && rating <= 5) {

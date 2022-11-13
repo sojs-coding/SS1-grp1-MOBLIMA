@@ -11,7 +11,7 @@ public class StartUpUI {
         String choice;
         while (true) {
             System.out.println("=====================================");
-            System.out.println("Welcome to MOLIMA");
+            System.out.println("Welcome to MOBLIMA");
             System.out.println("Are you an Admin or Movie-goer? ");
             System.out.println("1. Admin Module");
             System.out.println("2. Movie-goer Module");
