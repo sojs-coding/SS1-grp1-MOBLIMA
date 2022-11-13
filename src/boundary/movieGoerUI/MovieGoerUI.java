@@ -90,7 +90,7 @@ public class MovieGoerUI {
             System.out.print("Incorrect mobile/password ");
             System.out.print("Please Re-enter");
             MovieGoerUI movieGoerUI = new MovieGoerUI();
-            movieGoerUI.login()
+            movieGoerUI.login();
             }
     
         /*String email;
