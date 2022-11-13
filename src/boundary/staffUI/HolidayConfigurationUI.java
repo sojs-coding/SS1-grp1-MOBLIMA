@@ -41,7 +41,7 @@ public class HolidayConfigurationUI {
             System.out.println("How would you like to configure holiday");
             System.out.println("1) Add holiday");
             System.out.println("2) Delete holiday");
-            System.out.println("0) Exit");
+            System.out.printf("0) Exit\n");
             choose = sc.nextLine();
             switch(choose)
             {
@@ -74,7 +74,7 @@ public class HolidayConfigurationUI {
 
         do {
             System.out.println("To cancel, input: 0");
-            System.out.printf("Please input a date in this Format(yyyyMMdd)\n:");
+            System.out.printf("Please input a date in this Format(yyyyMMdd)\n");
             date = sc.nextLine();
             if (date.toLowerCase(Locale.ROOT).equals("0")) {
                 return;
@@ -82,6 +82,7 @@ public class HolidayConfigurationUI {
             try{
                 localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd"));
                 holidayManager.addDate(localDate);
+                System.out.printf("You've added %s\n", localDate.toString());
                 return;
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid input/date! Check your format/date!");
@@ -118,12 +119,15 @@ public class HolidayConfigurationUI {
                     return false;
                 }
                 i = 0;
+                LocalDate temp = null;
                 for (LocalDate localDate : localDates) {
                     if (i++ == choice) {
+                        temp = localDate;
                         localDates.remove(localDate);
                         break;
                     }
                 }
+                System.out.printf("You have removed %s\n", temp.toString());
                 return true;
             } catch (NumberFormatException e) {
                 System.out.printf("Invalid choice! Try again! -1 to %d\n", localDates.size()-1);

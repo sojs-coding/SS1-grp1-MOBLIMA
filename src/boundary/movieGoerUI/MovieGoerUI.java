@@ -59,12 +59,15 @@ public class MovieGoerUI {
         String newPass = sc.nextLine();
         System.out.print("Email : ");
         String newEmail = sc.nextLine();
-        try (FileWriter f = new FileWriter( "./cinemadata/moviegoeracc.txt" , true);
-                BufferedWriter b = new BufferedWriter(f);
-                PrintWriter p = new PrintWriter(b);) {
+        try {
+            FileWriter f = new FileWriter( "./cinemadata/moviegoeracc.txt" , true);
+            BufferedWriter b = new BufferedWriter(f);
+            PrintWriter p = new PrintWriter(b);
+            p.printf("\n"+newMobile+";"+newName+";"+newPass+";"+newEmail);
 
-            p.println(newMobile+";"+newName+";"+newPass+";"+newEmail);
-
+            p.close();
+            b.close();
+            f.close();
         } catch (IOException i) {
             i.printStackTrace();
         }
@@ -90,7 +93,7 @@ public class MovieGoerUI {
             System.out.print("Incorrect mobile/password ");
             System.out.print("Please Re-enter");
             MovieGoerUI movieGoerUI = new MovieGoerUI();
-            movieGoerUI.login()
+            movieGoerUI.login();
             }
     
         /*String email;
@@ -119,11 +122,10 @@ public class MovieGoerUI {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=====================================");
         System.out.println("Welcome to Movie-Goer Page");
-        boolean isStillrunning = true;
         BookingUI bookingUI = new BookingUI(user,initObj.getMovieManager(),initObj.getCineplexManager(),initObj.getShowtimeManager(),initObj.getBookingManager(),initObj.getTicketPriceManager());
         MovieUI movieUI = new MovieUI(initObj.getMovieManager());
 
-        while (isStillrunning) {
+        while (true) {
             System.out.println("--------------------------------------------------------------------");
             System.out.println("                           Booking Menu                             ");
             System.out.println("--------------------------------------------------------------------");
@@ -177,9 +179,8 @@ public class MovieGoerUI {
                     movieUI.leaveReview();
                     break;
                 case "8":
-                    isStillrunning = false;
                     System.out.println("bye");
-                    break;
+                    return;
             }
         }
     }

@@ -28,7 +28,7 @@ public class SystemSettingUI {
 		System.out.println("How would you like to configure System settings ");
 		System.out.println("|(1) Configure holidays |");
 		System.out.println("|(2) Configure ticket prices |");
-		System.out.println("=============================");
+		System.out.printf("=============================\n");
 		String c2;
 		c2 = sc.nextLine();
 		switch(c2)
