@@ -6,10 +6,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.TreeSet;
 
+/**
+ Represents the Public Holiday Rule for Ticket Condition
+ @author Samuel Ong
+ @version 1.0
+ @since 2022-11-13
+ */
 public class PublicHolidayRule implements PriceRule, Serializable {
     /**
-     * @param ticket
-     * @return
+     * @param ticket Ticket being evaluated
+     * @return Returns whether the ticket showtime date is a Public Holiday based on the HolidayManager
      */
     @Override
     public boolean isValid(Ticket ticket) {
@@ -26,7 +32,9 @@ public class PublicHolidayRule implements PriceRule, Serializable {
         }
         return false;
     }
-
+    /**
+     * @return Return the class in String
+     */
     @Override
     public String toString() {
         return "PublicHolidayRule";

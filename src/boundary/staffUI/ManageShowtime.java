@@ -158,6 +158,7 @@ public class ManageShowtime {
 	{
 		Movie movie = new Movie(null, null, null, 0, null, null, null);
 		DateTimeFormatter DATE_TIME_FORMATTER;
+		ArrayList<Movie> movielist = movieManager.getMovies();
 		System.out.println("Which showtime would you like to update?");
 		printShowTimes(showtimeManager);
 		System.out.println(" Enter the movie title for which you would like to update showtime for :");
@@ -232,6 +233,7 @@ public class ManageShowtime {
 			System.out.println("Showtime does not exist...");
 			return;
 		}
+		printMovies(movielist);
 		System.out.println("Enter the updated movie title :");
 		String newtitle = sc.nextLine();
 		Movie newmovie = movieManager.searchMovie(newtitle);
@@ -240,6 +242,7 @@ public class ManageShowtime {
             System.out.println("Movie does not exist...");
             return;
         }
+		printCinemas(newcineplex);
 		System.out.println(" Enter the  updated cinema code");
 		System.out.println(" Enter in format : Woodlands(WL1) , Jurong(JR1) , Tampines(TM1)");
 		String newcinemacode = sc.nextLine();

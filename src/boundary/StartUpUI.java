@@ -2,16 +2,18 @@ package boundary;
 
 import boundary.movieGoerUI.MovieGoerUI;
 import boundary.staffUI.StaffLoginUI;
+import controller.MovieGoerAuthenticator;
 
 import java.util.Scanner;
-
+/**
+ * Display the options for the user to choose his role
+ */
 public class StartUpUI {
     public void start() {
         String choice;
-        Boolean isRunning = true;
-        while (isRunning) {
+        while (true) {
             System.out.println("=====================================");
-            System.out.println("Welcome to MOLIMA");
+            System.out.println("Welcome to MOBLIMA");
             System.out.println("Are you an Admin or Movie-goer? ");
             System.out.println("1. Admin Module");
             System.out.println("2. Movie-goer Module");
@@ -21,6 +23,7 @@ public class StartUpUI {
 
             Scanner scanner = new Scanner(System.in);
             choice = scanner.nextLine();
+            MovieGoerAuthenticator.user = null;
             switch (choice) {
                 case "1":
                     StaffLoginUI staffLoginUI = new StaffLoginUI();
@@ -39,10 +42,10 @@ public class StartUpUI {
                             movieGoerUI.registerMovieGoer();
                             break;
                     }
-                case "3":
-                    isRunning = false;
-                    System.out.println("bye");
                     break;
+                case "3":
+                    System.out.println("bye");
+                    return;
             }
         }
     }

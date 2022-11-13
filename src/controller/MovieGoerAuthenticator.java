@@ -1,26 +1,34 @@
 package controller;
 
 import entity.booking.MovieGoer;
-import entity.movie.Movie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ Represents the Authentication service in the application
+ @author Samuel Ong
+ @version 1.0
+ @since 2022-11-03
+ */
 public class MovieGoerAuthenticator implements UserAuthenticator {
     /**
-     * Map of Username and Password are stored here
+     * Represents the Map of Username and Password are stored here
      */
     private final Map<String, Map<MovieGoerData, String>> userAccounts;
 
     /**
-     * User
+     * The MovieGoer Object currently logged in
      */
     public static MovieGoer user;
 
+    /**
+     * Constructor for the MovieGoer Authenticator
+     * Reads the textfile for the MovieGoer Accounts
+     */
     public MovieGoerAuthenticator() {
         userAccounts = new HashMap<>();
         try {
@@ -46,6 +54,12 @@ public class MovieGoerAuthenticator implements UserAuthenticator {
         }
     }
 
+    /**
+     * The Method to login. If the MovieGoer is found, it is passed into the user variable
+     * @param mobile Mobile Number to compare against
+     * @param password The password to validate the user
+     * @return Whether the login was a success
+     */
     @Override
     public boolean login(String mobile, String password) {
         if (validateUser(mobile, password)) {
@@ -56,11 +70,20 @@ public class MovieGoerAuthenticator implements UserAuthenticator {
         return false;
     }
 
+    /**
+     * Removes the current User
+     */
     @Override
     public void logout() {
         user = null;
     }
 
+    /**
+     * To check if the mobile and password is correct
+     * @param mobile Mobile Number of the User
+     * @param password Password for the Account
+     * @return The success of the validation
+     */
     private boolean validateUser(String mobile, String password) {
         Map<MovieGoerData, String> data = userAccounts.get(mobile);
         if (data != null) {
@@ -70,7 +93,12 @@ public class MovieGoerAuthenticator implements UserAuthenticator {
         return false;
     }
 }
-
+/**
+ The Enumerator represents the MovieGoerData Format when retrieved from the File
+ @author Samuel Ong
+ @version 1.0
+ @since 2022-11-03
+ */
 enum MovieGoerData {
     NAME,
     PASSWORD,

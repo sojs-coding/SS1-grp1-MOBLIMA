@@ -24,10 +24,10 @@ public class TicketConfigurationUI {
         do
         {
             System.out.println("How would you like to configure ticket pricing rules?");
-            System.out.println("1) Add ticket price: ");
-            System.out.println("2) Delete ticket price:");
-            System.out.println("3) Update ticket price:");
-            System.out.println("0) Exit:");
+            System.out.println("1) Add ticket price");
+            System.out.println("2) Delete ticket price");
+            System.out.println("3) Update ticket price");
+            System.out.println("0) Exit");
             choose = sc.nextLine();
             switch(choose)
             {
@@ -309,6 +309,8 @@ public class TicketConfigurationUI {
                 if (choice == -1) {
                     return false;
                 }
+                TicketRule temp = ticketRules.get(choice);
+                System.out.printf("You have deleted %s\n", temp.toString());
                 ticketRules.remove(choice);
                 return true;
             } catch (NumberFormatException e) {
